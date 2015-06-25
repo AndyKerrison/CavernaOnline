@@ -348,8 +348,6 @@ namespace Assets.UIScripts
         public IEnumerator SetSpaceActive()
         {
             yield return new WaitForSeconds(0.1f);
-            if (_type == ActionSpaceTypes.WoodGathering)
-                Debug.Log("setting " + _type + " active");
             _isActive = true;
         }
 
@@ -399,8 +397,6 @@ namespace Assets.UIScripts
 
         public void SetInactive()
         {
-            if (_type == ActionSpaceTypes.WoodGathering)
-                Debug.Log("setting " + _type + " inactive");
             _isActive = false;
         }
 

@@ -195,10 +195,22 @@ namespace Assets.UIScripts
         private void InitChildTile(string tileType)
         {
             _childTile = (GameObject)Instantiate(Resources.Load("TileUI"));
-            _childTile.transform.position = new Vector2(transform.position.x, transform.position.y);
-            _childTile.GetComponent<TileUIScript>().SetVector(X, Y);
+            _childTile.transform.SetParent(transform, true);
             _childTile.transform.localScale = transform.localScale;
-            _childTile.GetComponent<TileUIScript>().SetType(new List<string> {tileType} );
+            _childTile.transform.position = transform.position;// new Vector2(parentPosition.x + x * boardWidth / 7.4f, parentPosition.y + y * boardHeight / 5.2f);
+
+            //spriteSize.y = (spriteSize.x / _caveTiles[x, y].GetComponent<RectTransform>().sizeDelta.x) *
+            //    _caveTiles[x, y].GetComponent<RectTransform>().sizeDelta.y;
+
+            _childTile.GetComponent<RectTransform>().sizeDelta = gameObject.GetComponent<RectTransform>().sizeDelta*0.9f;
+            //_caveTiles[x, y].GetComponent<RectTransform>().anchoredPosition = new Vector2(horizontalOffset + x * horizontalIncrement, verticalOffset + y * verticalIncrement);
+                    
+
+            //_childTile = (GameObject)Instantiate(Resources.Load("TileUI"));
+            //_childTile.transform.position = new Vector2(transform.position.x, transform.position.y);
+            _childTile.GetComponent<TileUIScript>().SetVector(X, Y);
+            //_childTile.transform.localScale = transform.localScale;
+            _childTile.GetComponent<TileUIScript>().SetClickable(tileType, false);
         }
 
         private bool HasValue()
