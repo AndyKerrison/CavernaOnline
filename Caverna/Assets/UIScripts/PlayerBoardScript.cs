@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.UIScripts
@@ -295,43 +296,48 @@ namespace Assets.UIScripts
                 }
             }
             _dwarves = new List<GameObject>();
-            /*
+            
             Vector2 parentPosition = gameObject.transform.position;
-            float boardHeight = _renderer.bounds.size.y;
-            float boardWidth = _renderer.bounds.size.x;
+            //float boardHeight = _renderer.bounds.size.y;
+            //float boardWidth = _renderer.bounds.size.x;
 
-            float x = parentPosition.x - boardWidth / 2.2f;
-            float y = parentPosition.y - boardHeight / 2.2f;
+            //float x = parentPosition.x - boardWidth / 2.2f;
+            //float y = parentPosition.y - boardHeight / 2.2f;
 
             //float x = gameObject.transform.position.x;
             //float y = gameObject.transform.position.y;
 
+            var cardWidth = transform.GetComponent<RectTransform>().rect.width;
+            var cardHeight = transform.GetComponent<RectTransform>().rect.height;
+            var verticalOffset = transform.GetComponent<RectTransform>().anchoredPosition.y -0.45f * cardHeight;
+            var horizontalOffset = transform.GetComponent<RectTransform>().anchoredPosition.x - 0.45f * cardWidth;
+            var increment = 0.085f*cardWidth;
+
             for (int i = 0; i < dwarfStatus.Count; i++)
             {
-                GameObject dwarfToken = (GameObject)Instantiate(Resources.Load("DwarfToken"));
-                dwarfToken.transform.parent = transform;
-                //DwarfToken.transform.position = new Vector2(x, y);
-                //DwarfToken.SetActive(false);
+                GameObject dwarfToken = (GameObject)Instantiate(Resources.Load("DwarfIconUI"));
+                //_dwarfToken.transform.parent = transform;
+                //_dwarfToken.transform.position = new Vector2(x, y);
+                dwarfToken.transform.SetParent(transform, true);
+                dwarfToken.transform.localScale = transform.localScale;
+                dwarfToken.transform.position = transform.position;
+                var spriteSize = new Vector2(cardWidth / 12f, cardHeight / 12f);
+                dwarfToken.GetComponent<RectTransform>().sizeDelta = spriteSize;
+                dwarfToken.GetComponent<RectTransform>().anchoredPosition = new Vector2(horizontalOffset + i*increment, verticalOffset);
+                //dwarfToken.SetActive(false);
+                //_dwarfToken.GetComponent<DwarfGameObject>().SetActive(false);
 
+                //DwarfGameObject dwarf = dwarfToken.GetComponent<DwarfGameObject>();
+                //dwarf.SetWeaponLevel(dwarfStatus[i].Split(new[] { '_' })[0]);
+                //dwarf.SetUsed(dwarfStatus[i].Split(new[] { '_' })[1]);
 
-
-                //GameObject DwarfToken = (GameObject)Instantiate(Resources.Load("DwarfToken"));
-                //DwarfToken.transform.parent = transform;
-                dwarfToken.transform.localScale = new Vector3(transform.localScale.x * 0.5f, transform.localScale.y * 0.5f, transform.localScale.z * 0.75f);
-                dwarfToken.transform.position = new Vector2(x + i * boardWidth / 12, y);
-                dwarfToken.SetActive(true);
-
-                DwarfGameObject dwarf = dwarfToken.GetComponent<DwarfGameObject>();
-                dwarf.SetWeaponLevel(dwarfStatus[i].Split(new[] { '_' })[0]);
-                dwarf.SetUsed(dwarfStatus[i].Split(new[] { '_' })[1]);
-
-                if (Boolean.Parse(dwarfStatus[i].Split(new[] { '_' })[2]))
-                {
-                    dwarfToken.transform.localScale = new Vector3(dwarfToken.transform.localScale.x * 0.6f,
-                        dwarfToken.transform.localScale.y * 0.6f, dwarfToken.transform.localScale.z * 0.6f);
-                }
+                //if (Boolean.Parse(dwarfStatus[i].Split(new[] { '_' })[2]))
+                //{
+                //    dwarfToken.transform.localScale = new Vector3(dwarfToken.transform.localScale.x * 0.6f,
+                //        dwarfToken.transform.localScale.y * 0.6f, dwarfToken.transform.localScale.z * 0.6f);
+                //}
                 _dwarves.Add(dwarfToken);
-            }*/
+            }
         }
     }
 }
