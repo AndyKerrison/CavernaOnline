@@ -1,0 +1,583 @@
+fileFormatVersion: 2
+guid: a47b8872103653f42a79332c76030f1a
+timeCreated: 1430334261
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: furnishings_0
+    21300002: furnishings_1
+    21300004: furnishings_2
+    21300006: furnishings_3
+    21300008: furnishings_4
+    21300010: furnishings_5
+    21300012: furnishings_6
+    21300014: furnishings_7
+    21300016: furnishings_8
+    21300018: furnishings_9
+    21300020: furnishings_10
+    21300022: furnishings_11
+    21300024: furnishings_12
+    21300026: furnishings_13
+    21300028: furnishings_14
+    21300030: furnishings_15
+    21300032: furnishings_16
+    21300034: furnishings_17
+    21300036: furnishings_18
+    21300038: furnishings_19
+    21300040: furnishings_20
+    21300042: furnishings_21
+    21300044: furnishings_22
+    21300046: furnishings_23
+    21300048: furnishings_24
+    21300050: furnishings_25
+    21300052: furnishings_26
+    21300054: furnishings_27
+    21300056: furnishings_28
+    21300058: furnishings_29
+    21300060: furnishings_30
+    21300062: furnishings_31
+    21300064: furnishings_32
+    21300066: furnishings_33
+    21300068: furnishings_34
+    21300070: furnishings_35
+    21300072: furnishings_36
+    21300074: furnishings_37
+    21300076: furnishings_38
+    21300078: furnishings_39
+    21300080: furnishings_40
+    21300082: furnishings_41
+    21300084: furnishings_42
+    21300086: furnishings_43
+    21300088: furnishings_44
+    21300090: furnishings_45
+    21300092: furnishings_46
+    21300094: furnishings_47
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 150
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: furnishings_0
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 2147
+        width: 234
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_1
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 2147
+        width: 209
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_2
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 2147
+        width: 221
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_3
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 2147
+        width: 228
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_4
+      rect:
+        serializedVersion: 2
+        x: 998
+        y: 2147
+        width: 224
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_5
+      rect:
+        serializedVersion: 2
+        x: 1247
+        y: 2147
+        width: 164
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_6
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 1910
+        width: 234
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_7
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 1910
+        width: 209
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_8
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 1910
+        width: 221
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_9
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 1910
+        width: 228
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_10
+      rect:
+        serializedVersion: 2
+        x: 998
+        y: 1910
+        width: 224
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_11
+      rect:
+        serializedVersion: 2
+        x: 1247
+        y: 1910
+        width: 164
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_12
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 1685
+        width: 233
+        height: 215
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_13
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 1685
+        width: 209
+        height: 215
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_14
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 1685
+        width: 221
+        height: 215
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_15
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 1685
+        width: 227
+        height: 215
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_16
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 1685
+        width: 225
+        height: 215
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_17
+      rect:
+        serializedVersion: 2
+        x: 1250
+        y: 1685
+        width: 164
+        height: 215
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_18
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 1445
+        width: 233
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_19
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 1445
+        width: 209
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_20
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 1445
+        width: 221
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_21
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 1445
+        width: 227
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_22
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 1445
+        width: 225
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_23
+      rect:
+        serializedVersion: 2
+        x: 1250
+        y: 1445
+        width: 164
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_24
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 1192
+        width: 233
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_25
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 1192
+        width: 209
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_26
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 1192
+        width: 221
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_27
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 1192
+        width: 227
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_28
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 1192
+        width: 225
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_29
+      rect:
+        serializedVersion: 2
+        x: 1250
+        y: 1192
+        width: 164
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_30
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 932
+        width: 233
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_31
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 932
+        width: 209
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_32
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 932
+        width: 221
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_33
+      rect:
+        serializedVersion: 2
+        x: 755
+        y: 932
+        width: 227
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_34
+      rect:
+        serializedVersion: 2
+        x: 1004
+        y: 932
+        width: 224
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_35
+      rect:
+        serializedVersion: 2
+        x: 1252
+        y: 932
+        width: 165
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_36
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 677
+        width: 233
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_37
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 677
+        width: 209
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_38
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 677
+        width: 221
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_39
+      rect:
+        serializedVersion: 2
+        x: 755
+        y: 677
+        width: 227
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_40
+      rect:
+        serializedVersion: 2
+        x: 1004
+        y: 677
+        width: 224
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_41
+      rect:
+        serializedVersion: 2
+        x: 1252
+        y: 677
+        width: 165
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_42
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 521
+        width: 233
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_43
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 521
+        width: 209
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_44
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 521
+        width: 221
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_45
+      rect:
+        serializedVersion: 2
+        x: 755
+        y: 521
+        width: 227
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_46
+      rect:
+        serializedVersion: 2
+        x: 1004
+        y: 521
+        width: 224
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: furnishings_47
+      rect:
+        serializedVersion: 2
+        x: 1252
+        y: 521
+        width: 165
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

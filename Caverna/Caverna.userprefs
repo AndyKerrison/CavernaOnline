@@ -1,0 +1,22 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\UIScripts\CavernaGame.cs">
+    <Files>
+      <File FileName="Assets\ServerScripts\CavernaActionSpace.cs" Line="128" Column="25" />
+      <File FileName="Assets\UIScripts\ActionBoard.cs" Line="1" Column="1" />
+      <File FileName="Assets\UIScripts\CavernaGame.cs" Line="43" Column="23" />
+      <File FileName="Assets\ServerScripts\CavernaManager.cs" Line="79" Column="2" />
+      <File FileName="Assets\UIScripts\ResourceIcon.cs" Line="1" Column="1" />
+      <File FileName="Assets\UIScripts\Player.cs" Line="47" Column="1" />
+      <File FileName="Assets\ServerScripts\CavernaPlayer.cs" Line="23" Column="3" />
+      <File FileName="Assets\UIScripts\ActionSpace.cs" Line="173" Column="19" />
+      <File FileName="Assets\UIScripts\ClientSocket.cs" Line="59" Column="93" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="C:\Unity Projects\Caverna\Assets\Scripts\ActionSpace.cs" line="174" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

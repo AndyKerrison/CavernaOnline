@@ -1,0 +1,182 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &130438
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 22440116}
+  - 114: {fileID: 11442942}
+  - 222: {fileID: 22240060}
+  - 114: {fileID: 11476948}
+  - 114: {fileID: 11496798}
+  m_Layer: 0
+  m_Name: ActionCardUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &11442942
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ad29feaa809d24db0cf4211193ae4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionID: 0
+  DriftMining: {fileID: 21300000, guid: 2f8d79f8b060f84439596b7b1b58f708, type: 3}
+  Excavation: {fileID: 21300002, guid: 2f8d79f8b060f84439596b7b1b58f708, type: 3}
+  StartingPlayer: {fileID: 21300004, guid: 2f8d79f8b060f84439596b7b1b58f708, type: 3}
+  Logging: {fileID: 21300008, guid: 2f8d79f8b060f84439596b7b1b58f708, type: 3}
+  Supplies: {fileID: 21300010, guid: 2f8d79f8b060f84439596b7b1b58f708, type: 3}
+  OreMining: {fileID: 21300012, guid: 2f8d79f8b060f84439596b7b1b58f708, type: 3}
+  WoodGathering: {fileID: 21300016, guid: 2f8d79f8b060f84439596b7b1b58f708, type: 3}
+  Clearing: {fileID: 21300018, guid: 2f8d79f8b060f84439596b7b1b58f708, type: 3}
+  Sustenance: {fileID: 21300020, guid: 2f8d79f8b060f84439596b7b1b58f708, type: 3}
+  RubyMining: {fileID: 21300000, guid: 7eca3a0e43e255c47b9569a03023f2ce, type: 3}
+  HouseWork: {fileID: 21300002, guid: 7eca3a0e43e255c47b9569a03023f2ce, type: 3}
+  SlashAndBurn: {fileID: 21300004, guid: 7eca3a0e43e255c47b9569a03023f2ce, type: 3}
+  Blacksmithing: {fileID: 21300000, guid: b0c009c6dcf2d6741a834a7424eac9fe, type: 3}
+  OreMineConstruction: {fileID: 21300002, guid: b0c009c6dcf2d6741a834a7424eac9fe,
+    type: 3}
+  SheepFarming: {fileID: 21300004, guid: b0c009c6dcf2d6741a834a7424eac9fe, type: 3}
+  DonkeyFarming: {fileID: 21300002, guid: a67f21d8033f32d47a72ad82166081b0, type: 3}
+  RubyMine: {fileID: 21300004, guid: f75db53c9e6e21640993962114dbcc55, type: 3}
+  WishForChildren: {fileID: 21300000, guid: a67f21d8033f32d47a72ad82166081b0, type: 3}
+  UrgentWish: {fileID: 21300000, guid: f75db53c9e6e21640993962114dbcc55, type: 3}
+  Exploration: {fileID: 21300002, guid: f75db53c9e6e21640993962114dbcc55, type: 3}
+  FamilyLife: {fileID: 21300008, guid: f75db53c9e6e21640993962114dbcc55, type: 3}
+  OreDelivery: {fileID: 21300006, guid: f75db53c9e6e21640993962114dbcc55, type: 3}
+  Adventure: {fileID: 21300002, guid: 99b08ad9f1ac611418b5b087ddbb02e7, type: 3}
+  OreTrading: {fileID: 21300000, guid: 99b08ad9f1ac611418b5b087ddbb02e7, type: 3}
+  RubyDelivery: {fileID: 21300004, guid: 99b08ad9f1ac611418b5b087ddbb02e7, type: 3}
+  woodSprite: {fileID: 0}
+  _type: 
+--- !u!114 &11476948
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 2f8d79f8b060f84439596b7b1b58f708, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!114 &11496798
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11442942}
+          m_MethodName: OnMouseEnter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+              Culture=neutral, PublicKeyToken=null
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11442942}
+          m_MethodName: OnMouseExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+              Culture=neutral, PublicKeyToken=null
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11442942}
+          m_MethodName: OnMouseDown
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+              Culture=neutral, PublicKeyToken=null
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+--- !u!222 &22240060
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130438}
+--- !u!224 &22440116
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130438}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 80, y: 100}
+  m_Pivot: {x: 0, y: 1}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 130438}
+  m_IsPrefabParent: 1
