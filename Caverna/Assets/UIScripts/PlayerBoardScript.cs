@@ -328,14 +328,14 @@ namespace Assets.UIScripts
                 //_dwarfToken.GetComponent<DwarfGameObject>().SetActive(false);
 
                 //DwarfGameObject dwarf = dwarfToken.GetComponent<DwarfGameObject>();
-                //dwarf.SetWeaponLevel(dwarfStatus[i].Split(new[] { '_' })[0]);
-                //dwarf.SetUsed(dwarfStatus[i].Split(new[] { '_' })[1]);
+                dwarfToken.GetComponent<DwarfIconUIScript>().SetWeaponLevel(dwarfStatus[i].Split(new[] { '_' })[0]);
+                dwarfToken.GetComponent<DwarfIconUIScript>().SetUsed(dwarfStatus[i].Split(new[] { '_' })[1]);
 
-                //if (Boolean.Parse(dwarfStatus[i].Split(new[] { '_' })[2]))
-                //{
-                //    dwarfToken.transform.localScale = new Vector3(dwarfToken.transform.localScale.x * 0.6f,
-                //        dwarfToken.transform.localScale.y * 0.6f, dwarfToken.transform.localScale.z * 0.6f);
-                //}
+                if (Boolean.Parse(dwarfStatus[i].Split(new[] { '_' })[2]))
+                {
+                    dwarfToken.transform.localScale = new Vector3(dwarfToken.transform.localScale.x * 0.6f,
+                        dwarfToken.transform.localScale.y * 0.6f, dwarfToken.transform.localScale.z);
+                }
                 _dwarves.Add(dwarfToken);
             }
         }
