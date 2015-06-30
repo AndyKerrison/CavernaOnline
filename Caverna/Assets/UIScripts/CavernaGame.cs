@@ -11,8 +11,7 @@ namespace Assets.UIScripts
         
         private readonly List<GameObject> _actionSpaces = new List<GameObject>();
 
-        private GameObject _loaderImage;
-        private Text _levelText;
+        public Canvas LoaderCanvas;
 
         public static IClientSocket ClientSocket;
 
@@ -21,6 +20,7 @@ namespace Assets.UIScripts
         private string _actionName;
         private string _helpText;
 
+        public GameObject MainActionsDisplayBoard;
         public Canvas GameBoard;
         public Canvas ActionBoard;
         public GameObject ActionsPanel;
@@ -33,8 +33,8 @@ namespace Assets.UIScripts
 // ReSharper disable once UnusedMember.Local
         void Start () {	
             Instance = gameObject;
-            _loaderImage = GameObject.Find("LoaderImage");
-            _levelText = GameObject.Find("LevelText").GetComponent<Text>();
+            //_loaderImage = GameObject.Find("LoaderImage");
+            //_levelText = GameObject.Find("LevelText").GetComponent<Text>();
             ClientSocket = UIScripts.ClientSocket.Instance;
             ClientSocket.StartGame(1);
             GameBoard.enabled = false;
@@ -61,21 +61,21 @@ namespace Assets.UIScripts
         public void StartGameRound(int gameRound)
         {
             //can't delay this at the mo unless we also delay card updates etc
-            _levelText.text = "Round " + gameRound;
+            //_levelText.text = "Round " + gameRound;
             Invoke("ShowLevelImage", 0);
         }
 
 // ReSharper disable once UnusedMember.Local
         private void ShowLevelImage()
         {
-            _loaderImage.SetActive(true);
+            LoaderCanvas.enabled = true;
             Invoke("HideLevelImage", 2);
         }
 
 // ReSharper disable once UnusedMember.Local
         private void HideLevelImage()
         {
-            _loaderImage.SetActive(false);
+            LoaderCanvas.enabled = false;
         }
 
         #region action spaces
@@ -93,13 +93,14 @@ namespace Assets.UIScripts
 
         private void ResizeActionCards()
         {
-            int padding = 5;
+            int hPadding = 5;
+            int vPadding = 12;
             //int xMaxCards = ((_actionSpaces.Count-1) / 3) + 1;
             int yMaxCards = 3;
 
             RectTransform actionCanvasRect = ActionsPanel.GetComponent<RectTransform>();
             //var availableX = actionCanvasRect.rect.width - (padding * (xMaxCards + 1));
-            var availableY = ActionsPanelView.GetComponent<RectTransform>().rect.height -(padding * (yMaxCards + 1));
+            var availableY = ActionsPanelView.GetComponent<RectTransform>().rect.height -(vPadding * (yMaxCards + 1));
             //var xSizeMax = availableX / xMaxCards;
             var ySizeMax = availableY / yMaxCards;
 
@@ -118,7 +119,11 @@ cardScale = Math.Min(xScale, yScale);
             float cardX = 0;
             //float xScale =0;
             float yScale = 0;
-            
+
+            var maxCards = 24; //for solo game
+            var maxWidth = 0f;
+            Vector2 cardSize = new Vector2();
+
             for(int i=0; i<_actionSpaces.Count; i++)
             {
                 GameObject space = _actionSpaces[i];
@@ -126,15 +131,19 @@ cardScale = Math.Min(xScale, yScale);
                 var cardY = space.GetComponent<RectTransform>().rect.height;
                 //xScale = xSizeMax / cardX;
                 yScale = ySizeMax / cardY;
-                var cardSize = new Vector2(cardX*yScale, cardY*yScale);
+                cardSize = new Vector2(cardX*yScale, cardY*yScale);
                 
                 space.GetComponent<RectTransform>().sizeDelta = cardSize;
-                cardOffsetX = (float)Math.Floor(i / 3f) * (cardSize.x + padding) + padding;
-                float cardOffsetY = -(i % 3) * (cardSize.y + padding) - padding;
+                cardOffsetX = (float)Math.Floor(i / 3f) * (cardSize.x + hPadding) + hPadding;
+                float cardOffsetY = -(i % 3) * (cardSize.y + vPadding) - vPadding;
                 space.GetComponent<RectTransform>().anchoredPosition = new Vector2(cardOffsetX, cardOffsetY);
+
+                maxWidth = (float)Math.Floor(maxCards / 3f) * (cardSize.x + hPadding) + hPadding;
             }
 
-            actionCanvasRect.sizeDelta = new Vector2(cardOffsetX + cardX * yScale, ActionsPanelView.GetComponent<RectTransform>().rect.height);
+            actionCanvasRect.sizeDelta = new Vector2(maxWidth, ActionsPanelView.GetComponent<RectTransform>().rect.height);
+            //MainActionsDisplayBoard.GetComponent<RectTransform>().anchoredPosition = new Vector2(actionCanvasRect.anchoredPosition.x + 2*cardSize.x, MainActionsDisplayBoard.GetComponent<RectTransform>().anchoredPosition.y);
+            MainActionsDisplayBoard.GetComponent<RectTransform>().anchoredPosition = new Vector2(maxWidth - actionCanvasRect.sizeDelta.x + 2*cardSize.x, MainActionsDisplayBoard.GetComponent<RectTransform>().anchoredPosition.y);
         }
 
         public void AddActionSpace(int actionID, string actionName)
@@ -320,8 +329,8 @@ cardScale = Math.Min(xScale, yScale);
 
         public void SetHarvestTokenStatus(List<string> harvestTokenStatus)
         {
-            GameObject p = GameObject.Find("ActionBoard");
-            p.GetComponent<ActionBoardScript>().SetHarvestTokens(harvestTokenStatus);            
+            //GameObject p = GameObject.Find("ActionBoard");
+            //p.GetComponent<ActionBoardScript>().SetHarvestTokens(harvestTokenStatus);            
         }
 
         public void ReplaceActionSpace(int actionID, string newActionName)
