@@ -286,10 +286,11 @@ cardScale = Math.Min(xScale, yScale);
         {
             if (_showModal)
             {
+                int width = 320;
                 int height = _actions.Count*30 + 25;
                 if (_helpText.Length > 0)
                     height += 30;
-                GUI.ModalWindow(1, new Rect(400, 60, 320, height), DoMyWindow, _actionName);
+                GUI.ModalWindow(1, new Rect(Screen.width/2 - width/2, 0.6f*Screen.height/2f, width, height), DoMyWindow, _actionName);
             }
         }
 
