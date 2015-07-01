@@ -62,6 +62,7 @@ namespace Assets.UIScripts
         {
             //can't delay this at the mo unless we also delay card updates etc
             //_levelText.text = "Round " + gameRound;
+            GameObject.Find("RoundMarker").GetComponent<RoundMarkerScript>().SetRound(gameRound);
             Invoke("ShowLevelImage", 0);
         }
 
