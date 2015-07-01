@@ -69,6 +69,14 @@ public static class RubyTrades
     public static string ReorderDwarf = "Pay 1 Ruby to re-order a dwarf";
 }
 
+public static class DiscardActions
+{
+    public const string DiscardAllUnassignedAnimals = "Discard all unassigned animals";
+    public static string DiscardCow = "Discard 1 cow";
+    public static string DiscardPig = "Discard 1 pig";
+    public static string DiscardDonkey = "Discard 1 donkey";
+    public static string DiscardSheep = "Discard 1 sheep";
+}
 
 public static class FoodActions
 {

@@ -21,6 +21,7 @@ namespace Assets.ServerScripts
         private Vector2 _firstPartOfDouble = new Vector2(-1, -1);
         private bool _isPlacingSecondPartOfTile;
         private int _harvestFoodReq;
+        public bool IsBreeding { get; set; }
         private List<string> TilesToPlace { get; set; }
 
         private AnimalManager animalManager;
@@ -132,7 +133,7 @@ namespace Assets.ServerScripts
             {
                 animalManager.Dogs = value;
                 //_serverSocket.SetPlayerResources(ID, ResourceTypes.Dogs, Dogs);
-                AutoArrangeAnimals(false);
+                AutoArrangeAnimals(false, false);
                 CalculatePlayerScore();
             }
         }
@@ -144,7 +145,7 @@ namespace Assets.ServerScripts
             {
                 animalManager.Sheep = value;
                 //_serverSocket.SetPlayerResources(ID, ResourceTypes.Sheep, Sheep);
-                AutoArrangeAnimals(false);
+                AutoArrangeAnimals(false, false);
                 CalculatePlayerScore();
             }
         }
@@ -156,7 +157,7 @@ namespace Assets.ServerScripts
             {
                 animalManager.Donkeys = value;
                 //_serverSocket.SetPlayerResources(ID, ResourceTypes.Donkeys, Donkeys);
-                AutoArrangeAnimals(false);
+                AutoArrangeAnimals(false, false);
                 CalculatePlayerScore();
             }
         }
@@ -168,7 +169,7 @@ namespace Assets.ServerScripts
             {
                 animalManager.Pigs = value;
                 //_serverSocket.SetPlayerResources(ID, ResourceTypes.Pigs, Pigs);
-                AutoArrangeAnimals(false);
+                AutoArrangeAnimals(false, false);
                 CalculatePlayerScore();
             }
         }
@@ -180,7 +181,7 @@ namespace Assets.ServerScripts
             {
                 animalManager.Cows = value;
                 //_serverSocket.SetPlayerResources(ID, ResourceTypes.Cows, Cows);
-                AutoArrangeAnimals(false);
+                AutoArrangeAnimals(false, false);
                 CalculatePlayerScore();
             }
         }
@@ -643,7 +644,7 @@ namespace Assets.ServerScripts
             }
         }
 
-        private void AutoArrangeAnimals(bool triggerChoice)
+        private void AutoArrangeAnimals(bool triggerChoice, bool discardExcess)
         {
             //Entry room holds 2 of same type
             //Pasture holds 2 of same type
@@ -948,6 +949,15 @@ namespace Assets.ServerScripts
 
             _arrangeAnimalsTriggered = true;
 
+            if (discardExcess)
+            {
+                //do not trigger the normal checks with this, use aninal manager to avoid
+                animalManager.Cows -= cowsToAllocate;
+                animalManager.Pigs -= pigsToAllocate;
+                animalManager.Donkeys -= donkeysToAllocate;
+                animalManager.Sheep -= sheepToAllocate;
+            }
+
             if (!triggerChoice)
                 return;
 
@@ -962,18 +972,34 @@ namespace Assets.ServerScripts
                 result += sheepToAllocate + " sheep, ";
 
             List<string> options = new List<string>();
-            options.Add("Discard unassigned animals");
-            if (Cows > 0)
-                options.Add(FoodActions.ConvertCow);
-            if (Pigs > 0)
-                options.Add(FoodActions.ConvertPig);
-            if (Donkeys > 1)
-                options.Add(FoodActions.ConvertDonkeyPair);
-            if (Donkeys > 0)
-                options.Add(FoodActions.ConvertDonkey);
-            if (Sheep > 0)
-                options.Add(FoodActions.ConvertSheep);
-            
+            options.Add(DiscardActions.DiscardAllUnassignedAnimals);
+
+            //are we in the breeding phase?
+            if (IsBreeding)
+            {
+                if (Cows > 0)
+                    options.Add(DiscardActions.DiscardCow);
+                if (Pigs > 0)
+                    options.Add(DiscardActions.DiscardPig);
+                if (Donkeys > 0)
+                    options.Add(DiscardActions.DiscardDonkey);
+                if (Sheep > 0)
+                    options.Add(DiscardActions.DiscardSheep);
+            }
+            else
+            {
+                if (Cows > 0)
+                    options.Add(FoodActions.ConvertCow);
+                if (Pigs > 0)
+                    options.Add(FoodActions.ConvertPig);
+                if (Donkeys > 1)
+                    options.Add(FoodActions.ConvertDonkeyPair);
+                if (Donkeys > 0)
+                    options.Add(FoodActions.ConvertDonkey);
+                if (Sheep > 0)
+                    options.Add(FoodActions.ConvertSheep);
+            }
+
             _serverSocket.GetPlayerChoice("playerID", "Allocate Animals", result, options);
         }
 
@@ -1760,8 +1786,32 @@ namespace Assets.ServerScripts
         public bool RearrangeAnimalsCheck()
         {
             if (_arrangeAnimalsTriggered)
-                AutoArrangeAnimals(true);
+                AutoArrangeAnimals(true, false);
             return _arrangeAnimalsTriggered;
+        }
+
+        public void Discard(string action)
+        {
+            if (action == DiscardActions.DiscardAllUnassignedAnimals)
+            {
+                AutoArrangeAnimals(false, true);
+            }
+            if (action == DiscardActions.DiscardCow)
+            {
+                Cows--;
+            }
+            if (action == DiscardActions.DiscardPig)
+            {
+                Pigs--;
+            }
+            if (action == DiscardActions.DiscardDonkey)
+            {
+                Donkeys--;
+            }
+            if (action == DiscardActions.DiscardSheep)
+            {
+                Sheep--;
+            }
         }
     }
 }

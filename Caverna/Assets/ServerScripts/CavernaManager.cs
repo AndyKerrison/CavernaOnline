@@ -426,11 +426,13 @@ namespace Assets.ServerScripts
                         //breed animals
                         if (!player.HarvestAnimalsComplete)
                         {
+                            player.IsBreeding = true;
                             player.BreedAnimals();
                             if (player.RearrangeAnimalsCheck())
                                 return;
                         }
 
+                        player.IsBreeding = false;
                         player.HarvestComplete = true;
                         break;
                     }
@@ -474,11 +476,13 @@ namespace Assets.ServerScripts
                         //breed animals
                         if (!player.HarvestAnimalsComplete)
                         {
+                            player.IsBreeding = true;
                             player.BreedAnimals();
                             if (player.RearrangeAnimalsCheck())
                                 return;
                         }
 
+                        player.IsBreeding = false;
                         player.HarvestComplete = true;
                         break;
                     }
@@ -940,6 +944,17 @@ namespace Assets.ServerScripts
 
                 NextPlayerAction();
             }
+            else if (IsDiscardAction(action))
+            {
+                _serverSocket.HidePlayerChoice("playerID");
+                player.Discard(action);
+                if (player.RearrangeAnimalsCheck())
+                    return;
+                else if (_isHarvest)
+                    RunHarvest();
+                else if (_activeActionSpaceID > 0)
+                    GetActions("playerID", _activeActionSpaceID);
+            }
             else if (IsFoodConversionAction(action))
             {
                 //TODO food conversion could trigger more animal arranging...
@@ -1221,6 +1236,11 @@ namespace Assets.ServerScripts
         private bool IsActionSpaceAction(string action)
         {
             return Array.Find(typeof (CavernaActions).GetFields(), x => x.GetValue(null).ToString() == action) != null;
+        }
+
+        private bool IsDiscardAction(string action)
+        {
+            return Array.Find(typeof(DiscardActions).GetFields(), x => x.GetValue(null).ToString() == action) != null;
         }
 
         private bool IsFoodConversionAction(string action)
