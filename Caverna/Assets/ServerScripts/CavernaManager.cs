@@ -619,8 +619,11 @@ namespace Assets.ServerScripts
             {
                 _activeActionSpaceID = 0;
                 _serverSocket.SetActionFinished(actionID);
-                _serverSocket.SetActionSpaceActive(actionID);
-                
+                if (actionID > 0)
+                {
+                    _serverSocket.SetActionSpaceActive(actionID);
+                }
+
                 //TODO send by playerID
                 foreach (CavernaActionSpace space in _actionSpaces)
                 {

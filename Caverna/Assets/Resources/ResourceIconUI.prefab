@@ -12,6 +12,7 @@ GameObject:
   - 114: {fileID: 11436630}
   - 114: {fileID: 11443500}
   - 225: {fileID: 22511702}
+  - 114: {fileID: 11445554}
   m_Layer: 5
   m_Name: ResourceIconUI
   m_TagString: Untagged
@@ -83,6 +84,36 @@ MonoBehaviour:
   CowSprite: {fileID: 21300000, guid: d6d697ef48f1c5e46a17160844ad765a, type: 3}
   BeggingSprite: {fileID: 21300000, guid: 6460d214c45042744bfe0ad7ce58d498, type: 3}
   ScoreSprite: {fileID: 21300000, guid: 6a44fc55ee417b14789655910c7bb3f8, type: 3}
+--- !u!114 &11445554
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11443500}
+          m_MethodName: OnMouseDown
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+              Culture=neutral, PublicKeyToken=null
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &11460220
 MonoBehaviour:
   m_ObjectHideFlags: 1

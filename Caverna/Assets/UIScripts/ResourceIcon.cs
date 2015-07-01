@@ -140,9 +140,11 @@ namespace Assets.UIScripts
         {
             _box = new BoxCollider2D();
             gameObject.AddComponent<BoxCollider2D>();
+            gameObject.GetComponent<CanvasGroup>().interactable = true;
+            gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
         }
 
-        void OnMouseDown()
+        public void OnMouseDown()
         {
             //do action if possible
             if (_type == ResourceTypes.Ruby)

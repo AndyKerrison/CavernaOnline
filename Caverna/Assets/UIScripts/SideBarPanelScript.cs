@@ -33,6 +33,7 @@ namespace Assets.UIScripts
             _grainCount = InitIcon(ResourceTypes.Grain, spriteSize);
             _vegCount = InitIcon(ResourceTypes.Veg, spriteSize);
             _rubyCount = InitIcon(ResourceTypes.Ruby, spriteSize);
+            _rubyCount.GetComponent<ResourceIcon>().SetClickable();
             _beggingCount = InitIcon(ResourceTypes.Begging, spriteSize);
             _scoreCount = InitIcon(ResourceTypes.ScoreMarker, spriteSize);
 
