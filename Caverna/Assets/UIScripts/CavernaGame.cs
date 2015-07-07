@@ -147,6 +147,27 @@ cardScale = Math.Min(xScale, yScale);
             MainActionsDisplayBoard.GetComponent<RectTransform>().anchoredPosition = new Vector2(maxWidth - actionCanvasRect.sizeDelta.x + 2*cardSize.x, MainActionsDisplayBoard.GetComponent<RectTransform>().anchoredPosition.y);
         }
 
+        public void ReplaceActionSpace(int actionID, string newActionName)
+        {
+            GameObject instance = ActionSpace.Create(actionID, newActionName);
+            instance.transform.SetParent(ActionsPanel.transform);
+            instance.transform.localScale = ActionsPanel.transform.localScale;
+            instance.transform.position = ActionsPanel.transform.position;
+            //_actionSpaces.Add(card2);
+
+            for (int i = 0; i < _actionSpaces.Count; i++)
+            {
+                ActionSpace oldSpace = _actionSpaces[i].GetComponent<ActionSpace>();
+                if (oldSpace.ActionID == actionID)
+                {
+                    Destroy(oldSpace.gameObject);
+                    _actionSpaces[i] = instance;
+                }
+            }
+
+            ResizeActionCards();
+        }
+
         public void AddActionSpace(int actionID, string actionName)
         {
             GameObject card2 = ActionSpace.Create(actionID, actionName);
@@ -333,25 +354,6 @@ cardScale = Math.Min(xScale, yScale);
         {
             //GameObject p = GameObject.Find("ActionBoard");
             //p.GetComponent<ActionBoardScript>().SetHarvestTokens(harvestTokenStatus);            
-        }
-
-        public void ReplaceActionSpace(int actionID, string newActionName)
-        {
-            ActionSpace space = GetActionSpaceByID(actionID);
-            space.ShowActionSpaceDwarf();
-
-            GameObject instance = ActionSpace.Create(actionID, newActionName);
-            instance.transform.position = space.transform.position;
-
-            for (int i=0; i< _actionSpaces.Count; i++)
-            {
-                ActionSpace oldSpace = _actionSpaces[i].GetComponent<ActionSpace>();
-                if (oldSpace.ActionID == actionID)
-                {
-                    Destroy(oldSpace.gameObject);
-                    _actionSpaces[i] = instance;
-                }
-            }
         }
 
         public void SetDoubleFencedPastures(string playerid, List<Vector2> doubleFencedPastures)

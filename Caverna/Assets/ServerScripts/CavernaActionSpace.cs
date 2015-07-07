@@ -92,7 +92,7 @@ namespace Assets.ServerScripts
 
         public bool IsUsed
         {
-            get { return _actionGroup.IsUsed; }
+            get { return _actionGroup.IsUsed || Type == ActionSpaceTypes.SkipRound; }
         }
 
         public int ID { get; set; }
@@ -400,6 +400,9 @@ namespace Assets.ServerScripts
 
         public void CleanupAndAddResources(IServerSocket serverSocket, bool isSoloGame)
         {
+            if (Type == ActionSpaceTypes.SkipRound)
+                return;
+
             _actionGroup.IsUsed = false;
             
             //accumulating

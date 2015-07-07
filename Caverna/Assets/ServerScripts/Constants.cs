@@ -137,6 +137,7 @@ public static class ActionSpaceTypes
     public static string Clearing = "clearing";
     public static string Sustenance = "sustenance";
     public static string RubyMining = "rubyMining";
+    public const string SkipRound = "skipRound";
 }
 
 public static class TileTypes

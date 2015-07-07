@@ -171,6 +171,8 @@ namespace Assets.ServerScripts
 
             if (IsSoloGame && _gameRound == 9)
             {
+                _actionSpaces.Add(new CavernaActionSpace(_actionSpaces.Count + 1, ActionSpaceTypes.SkipRound));
+                _serverSocket.AddActionSpace(_actionSpaces[_actionSpaces.Count - 1].ID, ActionSpaceTypes.SkipRound);
                 NextRound();
                 return;
             }

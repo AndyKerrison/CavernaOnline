@@ -10,6 +10,8 @@ namespace Assets.UIScripts
 
         public int ActionID;
 
+        public Sprite SkipRound;
+
         public Sprite DriftMining;
         public Sprite Excavation;
         public Sprite StartingPlayer;
@@ -206,6 +208,11 @@ namespace Assets.UIScripts
                 case ActionSpaceTypes.RubyDelivery:
                 {
                     SetSprite(RubyDelivery);
+                    break;
+                }
+                case ActionSpaceTypes.SkipRound:
+                {
+                    SetSprite(SkipRound);
                     break;
                 }
             }
