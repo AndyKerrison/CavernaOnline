@@ -602,10 +602,7 @@ namespace Assets.ServerScripts
             }
             else
             {
-                if (_activeActionSpaceID > 0)
-                {
-                    GetActions("player", _activeActionSpaceID);
-                }    
+                ReturnControlToPlayer(_players[0]);
             }
         }
 
@@ -666,8 +663,7 @@ namespace Assets.ServerScripts
             {
                 _serverSocket.SetActionFinished(actionID); //hide the modal till we check animals etc
                 CollectResources(_players[0], actionID);
-                if (!_players[0].RearrangeAnimalsCheck())
-                    GetActions("player", actionID);
+                ReturnControlToPlayer(_players[0]);
                 return;
             }
 
@@ -953,12 +949,7 @@ namespace Assets.ServerScripts
             {
                 _serverSocket.HidePlayerChoice("playerID");
                 player.Discard(action);
-                if (player.RearrangeAnimalsCheck())
-                    return;
-                else if (_isHarvest)
-                    RunHarvest();
-                else if (_activeActionSpaceID > 0)
-                    GetActions("playerID", _activeActionSpaceID);
+                ReturnControlToPlayer(player);
             }
             else if (IsFoodConversionAction(action))
             {
@@ -966,12 +957,7 @@ namespace Assets.ServerScripts
                 //but here it could trigger two modals at once with the choice/getactions afterwards
                 _serverSocket.HidePlayerChoice("playerID");
                 player.ConvertToFood(action);
-                if (player.RearrangeAnimalsCheck())
-                    return;
-                else if (_isHarvest)
-                    RunHarvest();
-                else if (_activeActionSpaceID > 0)
-                    GetActions("playerID", _activeActionSpaceID);
+                ReturnControlToPlayer(player);
             }
             else if (action == HarvestOptions.SkipBreedingPhase)
             {
@@ -1016,27 +1002,32 @@ namespace Assets.ServerScripts
                 else if (action == RubyTrades.Field)
                 {
                     SetPlayerPlaceTile(_players[0], TileTypes.Field);
+                    return;
                 }
                 else if (action == RubyTrades.Clearing)
                 {
                     SetPlayerPlaceTile(_players[0], TileTypes.Clearing);
+                    return;
                 }
                 else if (action == RubyTrades.Tunnel)
                 {
                     SetPlayerPlaceTile(_players[0], TileTypes.Tunnel);
+                    return;
                 }
                 else if (action == RubyTrades.Cavern)
                 {
                     player.Rubies--;
                     SetPlayerPlaceTile(_players[0], TileTypes.Cavern);
+                    return;
                 }
                 else if (action == RubyTrades.ReorderDwarf)
                 {
                     _serverSocket.GetPlayerChoice("playerID", "Move which Dwarf to the front?", string.Empty,
                         _players[0].GetReorderDwarfs());
+                    return;
                 }
 
-                player.RearrangeAnimalsCheck();
+                ReturnControlToPlayer(_players[0]);
             }
             else if (action.Contains(DwarfText.Unarmed) || action.Contains(DwarfText.WeaponLevel))
             {
@@ -1180,8 +1171,7 @@ namespace Assets.ServerScripts
                     return;
                 }
 
-                if (!_players[0].RearrangeAnimalsCheck())
-                    GetActions("playerID", _activeActionSpaceID);
+                ReturnControlToPlayer(_players[0]);
             }
             else if (Array.Find(typeof (BreedActions).GetFields(), x => x.GetValue(null).ToString() == action) != null)
             {
@@ -1235,6 +1225,24 @@ namespace Assets.ServerScripts
             else
             {
                 throw new NotImplementedException("Action " + action + " is not supported");
+            }
+        }
+
+        private void ReturnControlToPlayer(CavernaPlayer player)
+        {
+            if (player.RearrangeAnimalsCheck())
+                return;
+            else if (_isHarvest)
+                RunHarvest();
+            else if (_activeActionSpaceID > 0)
+                GetActions("playerID", _activeActionSpaceID);
+            else
+            {
+                foreach (CavernaActionSpace space in _actionSpaces)
+                {
+                    if (!space.IsUsed)
+                        _serverSocket.SetActionSpaceActive(space.ID);
+                }
             }
         }
 
