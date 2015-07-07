@@ -497,6 +497,30 @@ namespace Assets.ServerScripts
             }
 
             _isHarvest = false;
+
+            //after any harvests but before the next round, we must check if the player wants to prevent any action spaces from
+            //clearing in the solo game
+            if (IsSoloGame && _players[0].Rubies > 0)
+            {
+                List<string> actionSpacesWhichWillReset = new List<string>();
+                foreach (CavernaActionSpace actionSpace in _actionSpaces)
+                {
+                    if (actionSpace.AccumulatingResourcesTotal >= 6)
+                    {
+                        actionSpacesWhichWillReset.Add(actionSpace.Type);
+                    }
+                }
+
+                if (actionSpacesWhichWillReset.Count > 0)
+                {
+                    actionSpacesWhichWillReset.Add("Finished");
+                    _serverSocket.GetPlayerChoice("playerID", "Prevent Resource Clearing", "1 ruby each to prevent clearing", actionSpacesWhichWillReset);
+                    
+                    return;
+                }
+                
+            }
+            
             NextRound();
         }
 

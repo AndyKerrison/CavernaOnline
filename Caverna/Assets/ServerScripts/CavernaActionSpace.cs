@@ -675,7 +675,7 @@ namespace Assets.ServerScripts
             return actions;
         }
 
-        private int AccumulatingResourcesTotal
+        public int AccumulatingResourcesTotal
         {
             get
             {
