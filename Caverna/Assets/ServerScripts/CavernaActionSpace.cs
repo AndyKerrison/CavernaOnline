@@ -406,7 +406,7 @@ namespace Assets.ServerScripts
             _actionGroup.IsUsed = false;
             
             //accumulating
-            if (AccumulatingResourcesTotal == 0 || (AccumulatingResourcesTotal >=6 && isSoloGame))
+            if (AccumulatingResourcesTotal == 0 || (AccumulatingResourcesTotal >=6 && isSoloGame && !IsClearingPrevented))
             {
                 _woodCurrent = _woodInitial;
                 _stoneCurrent = _stoneInitial;
@@ -434,6 +434,8 @@ namespace Assets.ServerScripts
             serverSocket.SetActionSpaceResources(ID, ResourceTypes.Ruby, _rubyCurrent);
             serverSocket.SetActionSpaceResources(ID, ResourceTypes.Sheep, _sheepCurrent);
             serverSocket.SetActionSpaceResources(ID, ResourceTypes.Donkeys, _donkeysCurrent);
+
+            IsClearingPrevented = false;
         }
 
         public void CollectResources(CavernaPlayer player, IServerSocket serverSocket)
@@ -690,6 +692,8 @@ namespace Assets.ServerScripts
                 return totalResources;
             }
         }
+
+        public bool IsClearingPrevented { get; set; }
 
         public void SetActionUsed(CavernaPlayer player, string actionName)
         {

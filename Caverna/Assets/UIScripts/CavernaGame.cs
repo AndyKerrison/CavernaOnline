@@ -385,5 +385,20 @@ cardScale = Math.Min(xScale, yScale);
         {
             ClientSocket.SendAction(actionID, action);
         }
+
+        public void ClearPlayerTiles(string playerID)
+        {
+            GameObject p = GameObject.Find("GameBoard");
+            p.GetComponent<PlayerBoardScript>().ClearTiles();
+        }
+
+        public void ClearActionSpaces()
+        {
+            while (_actionSpaces.Count > 0)
+            {
+                Destroy(_actionSpaces[0]);
+                _actionSpaces.RemoveAt(0);
+            }
+        }
     }
 }

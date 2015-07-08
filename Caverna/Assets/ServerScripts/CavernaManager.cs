@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Assets.UIScripts;
 using UnityEngine;
 using System.Collections.Generic;
@@ -78,22 +79,26 @@ namespace Assets.ServerScripts
             HarvestTypes.SkipFieldsOrAnimals
         };
 
-        private readonly List<CavernaPlayer> _players;
-        private readonly List<string> _remainingHarvests;       
-        private readonly List<CavernaActionSpace> _actionSpaces;
+        private List<CavernaPlayer> _players;
+        private List<string> _remainingHarvests;       
+        private List<CavernaActionSpace> _actionSpaces;
         private int _gameRound;
-        private readonly int _startPlayerIndex;
+        private int _startPlayerIndex;
         private int _activePlayerIndex;
         private int _activeActionSpaceID;
         private bool _expeditionInProgress;
         private bool _isHarvest;
 
-        public List<BuildingTile> BuildingTiles; 
+        public List<BuildingTile> BuildingTiles;
 
         public CavernaManager(IServerSocket serverSocket, int numPlayers)
         {
             _serverSocket = serverSocket;
+            StartGame(numPlayers);
+        }
 
+        private void StartGame(int numPlayers)
+        {
             //create players
             _players = new List<CavernaPlayer>();
             for (int i = 0; i < numPlayers; i++)
@@ -104,11 +109,14 @@ namespace Assets.ServerScripts
                 else
                     food = Mathf.Min(3, Mathf.Max(1, i)); //1, 1, 2, 3, 3, 3, 3, etc
 
+                _serverSocket.ClearPlayerTiles("playerID");
                 _players.Add(new CavernaPlayer(food, _serverSocket));
             }
             _startPlayerIndex = 0;
+            _gameRound = 0;
 
             //create action board. Depends on the number of players.
+            _serverSocket.ClearActionSpaces();
             _actionSpaces = new List<CavernaActionSpace>();
 
             //solo game
@@ -125,10 +133,11 @@ namespace Assets.ServerScripts
 
             foreach (CavernaActionSpace actionSpace in _actionSpaces)
             {
-                serverSocket.AddActionSpace(actionSpace.ID, actionSpace.Type);
+                _serverSocket.AddActionSpace(actionSpace.ID, actionSpace.Type);
             }
 
             //create building tiles
+            //todo - clear existing buildings panel if any
             BuildingTiles = new List<BuildingTile>();
             BuildingTiles.Add(new BuildingTile(BuildingTypes.Dwelling));
 
@@ -203,19 +212,25 @@ namespace Assets.ServerScripts
             //add a new action card to the game
             if (_gameRound >= 1 && _gameRound <= 3)
             {
-                int index = Random.Range(0, _stage1Actions.Count);
-                if (IsSoloGame)
+                int index;
+                do
                 {
-                    if (_gameRound == 1)
-                        index = _stage1Actions.IndexOf(ActionSpaceTypes.Blacksmithing);
-                    if (_gameRound == 2)
-                        index = _stage1Actions.IndexOf(ActionSpaceTypes.SheepFarming);
-                    if (_gameRound == 3)
-                        index = _stage1Actions.IndexOf(ActionSpaceTypes.OreMineConstruction);
-                }
-                string actionName = _stage1Actions[index];
-                _stage1Actions.RemoveAt(index);
+                    if (IsSoloGame)
+                    {
+                        if (_gameRound == 1)
+                            index = _stage1Actions.IndexOf(ActionSpaceTypes.Blacksmithing);
+                        else if (_gameRound == 2)
+                            index = _stage1Actions.IndexOf(ActionSpaceTypes.SheepFarming);
+                        else //if (_gameRound == 3)
+                            index = _stage1Actions.IndexOf(ActionSpaceTypes.OreMineConstruction);
+                    }
+                    else
+                    {
+                        index = Random.Range(0, _stage1Actions.Count);
+                    }
+                } while (_actionSpaces.Find(x => x.Type == _stage1Actions[index]) != null);
 
+                string actionName = _stage1Actions[index];
 
                 _actionSpaces.Add(new CavernaActionSpace(_actionSpaces.Count + 1, actionName));
                 _serverSocket.AddActionSpace(_actionSpaces[_actionSpaces.Count-1].ID, actionName);
@@ -224,27 +239,29 @@ namespace Assets.ServerScripts
             if (_gameRound >= 4 && _gameRound <= 6)
             {
                 int index = 0;
-                if (_gameRound == 4) //always wish for children in round 4
+                do
                 {
-                    index = _stage2Actions.IndexOf(ActionSpaceTypes.WishForChildren);
-                }
-                else
-                {
-                    if (IsSoloGame)
+                    if (_gameRound == 4) //always wish for children in round 4
                     {
-                        if (_gameRound == 5)
-                            index = _stage2Actions.IndexOf(ActionSpaceTypes.DonkeyFarming);
-                        if (_gameRound == 6)
-                            index = _stage2Actions.IndexOf(ActionSpaceTypes.RubyMine);
+                        index = _stage2Actions.IndexOf(ActionSpaceTypes.WishForChildren);
                     }
                     else
                     {
-                        index = Random.Range(0, _stage2Actions.Count);
+                        if (IsSoloGame)
+                        {
+                            if (_gameRound == 5)
+                                index = _stage2Actions.IndexOf(ActionSpaceTypes.DonkeyFarming);
+                            if (_gameRound == 6)
+                                index = _stage2Actions.IndexOf(ActionSpaceTypes.RubyMine);
+                        }
+                        else
+                        {
+                            index = Random.Range(0, _stage2Actions.Count);
+                        }
                     }
-                }
-            
+                } while (_actionSpaces.Find(x => x.Type == _stage2Actions[index]) != null);
+
                 string actionName = _stage2Actions[index];
-                _stage2Actions.RemoveAt(index);
 
                 _actionSpaces.Add(new CavernaActionSpace(_actionSpaces.Count + 1, actionName));
                 _serverSocket.AddActionSpace(_actionSpaces[_actionSpaces.Count - 1].ID, actionName);
@@ -252,20 +269,23 @@ namespace Assets.ServerScripts
 
             if (_gameRound >= 7 && _gameRound <= 9)
             {
-                int index = Random.Range(0, _stage3Actions.Count);
+                int index;
+                do
+                {
+                    index = Random.Range(0, _stage3Actions.Count);
+
+                    if (IsSoloGame)
+                    {
+                        if (_gameRound == 7)
+                            index = _stage3Actions.IndexOf(ActionSpaceTypes.OreDelivery);
+                        if (_gameRound == 8)
+                            index = _stage3Actions.IndexOf(ActionSpaceTypes.FamilyLife);
+                        if (_gameRound == 9)
+                            throw new Exception("Invalid solo round");
+                    }
+                } while (_actionSpaces.Find(x => x.Type == _stage3Actions[index]) != null);
 
                 string actionName = _stage3Actions[index];
-                _stage3Actions.RemoveAt(index);
-                if (IsSoloGame)
-                {
-                    if (_gameRound == 7)
-                        index = _stage3Actions.IndexOf(ActionSpaceTypes.OreDelivery);
-                    if (_gameRound == 8)
-                        index = _stage3Actions.IndexOf(ActionSpaceTypes.FamilyLife);
-                    if (_gameRound == 9)
-                        throw new Exception("Invalid solo round");
-                }
-
                 _actionSpaces.Add(new CavernaActionSpace(_actionSpaces.Count + 1, actionName));
                 _serverSocket.AddActionSpace(_actionSpaces[_actionSpaces.Count - 1].ID, actionName);
 
@@ -285,27 +305,32 @@ namespace Assets.ServerScripts
 
             if (_gameRound >= 10 && _gameRound <= 12)
             {
-                int index = Random.Range(0, _stage4Actions.Count);
-                if (IsSoloGame)
+                int index;
+                do
                 {
-                    if (_gameRound == 10)
-                        index = _stage4Actions.IndexOf(ActionSpaceTypes.OreTrading);
-                    if (_gameRound == 11)
-                        index = _stage4Actions.IndexOf(ActionSpaceTypes.Adventure);
-                    if (_gameRound == 12)
-                        index = _stage4Actions.IndexOf(ActionSpaceTypes.RubyDelivery);
-                }
+                    index = Random.Range(0, _stage4Actions.Count);
+
+                    if (IsSoloGame)
+                    {
+                        if (_gameRound == 10)
+                            index = _stage4Actions.IndexOf(ActionSpaceTypes.OreTrading);
+                        if (_gameRound == 11)
+                            index = _stage4Actions.IndexOf(ActionSpaceTypes.Adventure);
+                        if (_gameRound == 12)
+                            index = _stage4Actions.IndexOf(ActionSpaceTypes.RubyDelivery);
+                    }
+                } while (_actionSpaces.Find(x => x.Type == _stage4Actions[index]) != null);
 
                 string actionName = _stage4Actions[index];
-                _stage4Actions.RemoveAt(index);
-
+                
                 _actionSpaces.Add(new CavernaActionSpace(_actionSpaces.Count + 1, actionName));
                 _serverSocket.AddActionSpace(_actionSpaces[_actionSpaces.Count - 1].ID, actionName);
             }
 
-            if (_gameRound >12)
+            if (_gameRound >5)
             {
                 //GAME OVER!
+                _serverSocket.GetPlayerChoice("playerID", "Game Over!", "Your score was " + _players[0].PlayerScore, new List<string>() {"Play Again" } );
                 return;
             }
 
@@ -505,7 +530,7 @@ namespace Assets.ServerScripts
                 List<string> actionSpacesWhichWillReset = new List<string>();
                 foreach (CavernaActionSpace actionSpace in _actionSpaces)
                 {
-                    if (actionSpace.AccumulatingResourcesTotal >= 6)
+                    if (actionSpace.AccumulatingResourcesTotal >= 6 && !actionSpace.IsClearingPrevented)
                     {
                         actionSpacesWhichWillReset.Add(actionSpace.Type);
                     }
@@ -513,7 +538,7 @@ namespace Assets.ServerScripts
 
                 if (actionSpacesWhichWillReset.Count > 0)
                 {
-                    actionSpacesWhichWillReset.Add("Finished");
+                    actionSpacesWhichWillReset.Add("Let the spaces reset");
                     _serverSocket.GetPlayerChoice("playerID", "Prevent Resource Clearing", "1 ruby each to prevent clearing", actionSpacesWhichWillReset);
                     
                     return;
@@ -953,10 +978,35 @@ namespace Assets.ServerScripts
 
         public void SetPlayerChoice(string action)
         {
+            if (action == "Play Again")
+            {
+                _serverSocket.HidePlayerChoice("playerID");
+                StartGame(1);
+                return;
+            }
+
             if (IsActionSpaceAction(action))
             {
                 SetSelectedAction(_activeActionSpaceID, action);
                 return;
+            }
+
+            //means it was a ruby payment to prevent clearing
+            if (IsActionCardName(action))
+            {
+                _serverSocket.HidePlayerChoice("playerID");
+                _actionSpaces.Find(x => x.Type == action).IsClearingPrevented = true;
+                _players[0].Rubies--;
+
+                //return control to player? run harvest?
+                RunHarvest();
+
+                return;
+            }
+            else if (action == "Let the spaces reset")
+            {
+                _serverSocket.HidePlayerChoice("playerID");
+                NextRound();
             }
 
             //TODO needs playerID also
@@ -1268,6 +1318,11 @@ namespace Assets.ServerScripts
                         _serverSocket.SetActionSpaceActive(space.ID);
                 }
             }
+        }
+
+        private bool IsActionCardName(string action)
+        {
+            return Array.Find(typeof(ActionSpaceTypes).GetFields(), x => x.GetValue(null).ToString() == action) != null;
         }
 
         private bool IsActionSpaceAction(string action)

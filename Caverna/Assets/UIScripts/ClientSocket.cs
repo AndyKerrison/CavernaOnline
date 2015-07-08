@@ -172,5 +172,15 @@ namespace Assets.UIScripts
         {
             _gameRef.SetTileAnimals(position, isCave, animalType, count);
         }
+
+        public void ClearPlayerTiles(string playerID)
+        {
+            _gameRef.ClearPlayerTiles(playerID);
+        }
+
+        public void ClearActionSpaces()
+        {
+            _gameRef.ClearActionSpaces();
+        }
     }
 }

@@ -37,12 +37,13 @@ namespace Assets.UIScripts
 
         // Use this for initialization
 // ReSharper disable once UnusedMember.Local
-        void Start () {
+        private void Start()
+        {
             _dwarves = new List<GameObject>();
             var parentWidth = transform.GetComponent<RectTransform>().rect.width;
             var parentHeight = transform.GetComponent<RectTransform>().rect.height;
-            var spriteSize = new Vector2(parentWidth / 16f, parentHeight / 16f);
-            var horizontalIncrement = - parentHeight / 12f;
+            var spriteSize = new Vector2(parentWidth/16f, parentHeight/16f);
+            var horizontalIncrement = - parentHeight/12f;
             var verticalOffset = transform.GetComponent<RectTransform>().anchoredPosition.y + 0.000f*parentHeight;
             var horizontalOffset = transform.GetComponent<RectTransform>().anchoredPosition.x - 0.02f*parentWidth;
 
@@ -89,12 +90,20 @@ namespace Assets.UIScripts
                     new Vector2(horizontalOffset + 0*horizontalIncrement, verticalOffset);
             }
 
-            verticalOffset = transform.GetComponent<RectTransform>().anchoredPosition.y + -0.27f * parentHeight;
-            horizontalOffset = transform.GetComponent<RectTransform>().anchoredPosition.x +0.1f * parentWidth;
-            horizontalIncrement = 0.14f*parentWidth;
+            InitTiles();
+        }
+
+        private void InitTiles()
+        {
+            var parentWidth = transform.GetComponent<RectTransform>().rect.width;
+            var parentHeight = transform.GetComponent<RectTransform>().rect.height;
+
+            var verticalOffset = transform.GetComponent<RectTransform>().anchoredPosition.y + -0.27f * parentHeight;
+            var horizontalOffset = transform.GetComponent<RectTransform>().anchoredPosition.x + 0.1f * parentWidth;
+            var horizontalIncrement = 0.14f * parentWidth;
             var verticalIncrement = 0.195f * parentHeight;
-            spriteSize = new Vector2(parentWidth / 7.5f, parentHeight / 7.5f);
-            
+            var spriteSize = new Vector2(parentWidth / 7.5f, parentHeight / 7.5f);
+
             _caveTiles = new GameObject[3, 4];
             for (int x = 0; x < 3; x++)
             {
@@ -338,6 +347,25 @@ namespace Assets.UIScripts
                 }
                 _dwarves.Add(dwarfToken);
             }
+        }
+
+        public void ClearTiles()
+        {
+            if (_caveTiles == null)
+                return;
+
+            for (int x = 0; x < 3; x++)
+            {
+                for (int y = 0; y < 4; y++)
+                {
+                    if (_caveTiles[x,y] != null)
+                        Destroy(_caveTiles[x,y]);
+                    if (_forestTiles[x,y] != null)
+                        Destroy(_forestTiles[x,y]);
+                }
+            }
+
+            InitTiles();
         }
     }
 }

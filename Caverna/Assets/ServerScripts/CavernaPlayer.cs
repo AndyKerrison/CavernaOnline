@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 namespace Assets.ServerScripts
 {
@@ -197,7 +198,16 @@ namespace Assets.ServerScripts
             _serverSocket = serverSocket;
             animalManager = new AnimalManager();
             _playerResources = new PlayerResources();
+            //these will trigger a ui update, in case you started a new game
+            Wood = 0;
+            Ore = 0;
+            Stone = 0;
+            Veg = 0;
+            Grain = 0;
             Food = food;
+            Rubies = 0;
+            Gold = 0;
+            BeggingCards = 0;
             _dwarves.Add(new Dwarf(false, _dwarves.Count+1));
             _dwarves.Add(new Dwarf(false, _dwarves.Count+1));
             CaveSpaces[0, 0] = TileTypes.StartingTile;
@@ -1737,8 +1747,11 @@ namespace Assets.ServerScripts
             score += Gold;
             score -= 3*BeggingCards;
 
+            PlayerScore = score;
             _serverSocket.SetPlayerResources(ID, ResourceTypes.ScoreMarker, score);
         }
+
+        public int PlayerScore { get; private set; }
 
         public List<Vector2> SetTilesToPlace(List<string> inputTiles)
         {

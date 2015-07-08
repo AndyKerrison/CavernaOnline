@@ -29,6 +29,8 @@ namespace Assets.ServerScripts
         void ReplaceActionSpace(int actionID, string newActionName);
         void SetDoubleFencedPastures(string playerid, List<Vector2> doubleFencedPastures);
         void SetTileAnimals(Vector2 position, bool isCave, string animalType, int count);
+        void ClearPlayerTiles(string playerID);
+        void ClearActionSpaces();
     }
 
     public class ServerSocket : IServerSocket
@@ -138,6 +140,16 @@ namespace Assets.ServerScripts
         public void SetTileAnimals(Vector2 position, bool isCave, string animalType, int count)
         {
             _clientSocket.SetTileAnimals(position, isCave, animalType, count);
+        }
+
+        public void ClearPlayerTiles(string playerID)
+        {
+            _clientSocket.ClearPlayerTiles(playerID);
+        }
+
+        public void ClearActionSpaces()
+        {
+            _clientSocket.ClearActionSpaces();
         }
 
         public void HidePlayerChoice(string playerid)
