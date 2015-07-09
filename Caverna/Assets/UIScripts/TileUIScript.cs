@@ -25,6 +25,8 @@ namespace Assets.UIScripts
         private bool _isCave;
         private bool _clickable;
 
+        private Sprite _activeSprite;
+        private Color _activeColor;
         private Sprite _mouseOverSprite;
         private Sprite _mainSprite;
         private GameObject _icon;
@@ -45,11 +47,11 @@ namespace Assets.UIScripts
         void Start()
         {
             _image = GetComponent<Image>();
-            _image.sprite = null;
+            //_activeSprite = null;
 
             //set tile to hidden by default.
             _renderer = GetComponent<Image>().canvasRenderer;
-            _renderer.SetColor(_hiddenColor);
+            //_activeColor = _hiddenColor;
 
             var parentWidth = transform.GetComponent<RectTransform>().rect.width;
             var parentHeight = transform.GetComponent<RectTransform>().rect.height;
@@ -82,26 +84,16 @@ namespace Assets.UIScripts
 
         public void SetType(List<string> tileTypes)
         {
-            //_renderSortingOrder = 2-tileTypes.Count;
+            _clickable = false;
+            //SortingOrder = 2-tileTypes.Count;
 
             string tileType = tileTypes[0];
-            if (tileTypes.Count > 1)
-            {
-                if (_childTile != null)
-                    Destroy(_childTile);
-                InitChildTile(tileTypes[1]);
-                if (_childTile != null)
-                    _childTile.GetComponent<TileUIScript>().SetType(new List<string> { tileTypes[1] });
-            }
 
             _mainSprite = GetSpriteByType(tileType);
 
-            if (_renderer != null)
-            {
-                _image.sprite = _mainSprite;
-                _renderer.SetColor(Color.white);
-            }
-
+            _activeSprite = _mainSprite;
+            _activeColor = Color.white;
+            
             if (_icon != null)
                 _icon.GetComponent<ResourceIcon>().SetValue(0);
             else
@@ -137,6 +129,15 @@ namespace Assets.UIScripts
                 _icon.GetComponent<ResourceIcon>().SetType(ResourceTypes.Veg);
                 _icon.GetComponent<ResourceIcon>().SetValue(1);
             }
+
+            if (tileTypes.Count > 1)
+            {
+                if (_childTile != null)
+                    Destroy(_childTile);
+                InitChildTile(tileTypes[1]);
+                if (_childTile != null)
+                    _childTile.GetComponent<TileUIScript>().SetType(new List<string> { tileTypes[1] });
+            }
         }
 
         public void SetUnclickable()
@@ -161,7 +162,7 @@ namespace Assets.UIScripts
                 InitChildTile(tileType);
                 _childTile.GetComponent<TileUIScript>().SetClickable(tileType, false);
             }
-            if (tileType == BuildingTypes.Dwelling && isParent)
+            else if (tileType == BuildingTypes.Dwelling && isParent)
             {
                 InitChildTile(tileType);
                 _childTile.GetComponent<TileUIScript>().SetClickable(tileType, false);
@@ -218,6 +219,12 @@ namespace Assets.UIScripts
             return _mainSprite != null;
         }
 
+        private void Update()
+        {
+            _image.sprite = _activeSprite;
+            _renderer.SetColor(_activeColor);
+        }
+
         // ReSharper disable once UnusedMember.Local
         public void OnMouseDown()
         {
@@ -234,22 +241,24 @@ namespace Assets.UIScripts
         {
             if (_clickable)
             {
-                _image.sprite = _mouseOverSprite;
-                _renderer.SetColor(new Color(10, 50, 10, 0.5f));
+                _activeSprite = _mouseOverSprite;
+                _activeColor = new Color(10, 50, 10, 0.5f);
             }
         }
 
         public void OnMouseExit()
         {
-            _image.sprite = _mainSprite;
+            _activeSprite = _mainSprite;
             if (_mainSprite == null)
-                _renderer.SetColor(_hiddenColor);
+                _activeColor = _hiddenColor;
             else
-                _renderer.SetColor(Color.white);
+                _activeColor = Color.white;
         }
 
         private Sprite GetSpriteByType(string tileType)
         {
+            gameObject.transform.localScale = new Vector3(1f, 1f);
+
             if (tileType == TileTypes.Tunnel)
             {
                 return Tunnel;
@@ -313,6 +322,7 @@ namespace Assets.UIScripts
 
             if (tileType == TileTypes.Stable)
             {
+                gameObject.transform.localScale = new Vector3(0.5f, 0.5f);//gameObject.GetComponent<RectTransform>().sizeDelta = gameObject.GetComponent<RectTransform>().sizeDelta * 0.5f;
                 return Stable;
             }
 
