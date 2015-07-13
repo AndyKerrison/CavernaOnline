@@ -524,6 +524,7 @@ namespace Assets.ServerScripts
                     _firstPartOfDouble = new Vector2(-1, -1);
                 }
                 _serverSocket.SetPlayerTileType(position, GetTileType(position, isForest), !isForest);
+                AutoArrangeAnimals(false, false);
                 CalculatePlayerScore();
                 return;
             }
@@ -579,6 +580,7 @@ namespace Assets.ServerScripts
 
             _serverSocket.SetPlayerTileType(position, GetTileType(position, isForest), !isForest);
             CalculatePlayerScore();
+            AutoArrangeAnimals(false, false);
         }
 
         public List<string> GetTileType(Vector2 position, bool isForest)
@@ -596,8 +598,8 @@ namespace Assets.ServerScripts
             {
                 tileType.Add(TileTypes.Stable);
             }
-            if (String.IsNullOrEmpty(tileType[0]))
-                tileType.RemoveAt(0);
+            //if (String.IsNullOrEmpty(tileType[0]))
+            //    tileType.RemoveAt(0);
             return tileType;
         }
 

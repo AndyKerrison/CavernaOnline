@@ -92,7 +92,7 @@ namespace Assets.UIScripts
             _mainSprite = GetSpriteByType(tileType);
 
             _activeSprite = _mainSprite;
-            _activeColor = Color.white;
+            _activeColor = _activeSprite != null ? Color.white : _hiddenColor;
             
             if (_icon != null)
                 _icon.GetComponent<ResourceIcon>().SetValue(0);
@@ -185,6 +185,9 @@ namespace Assets.UIScripts
             {
                 _icon.GetComponent<ResourceIcon>().SetType(animalType);
                 _icon.GetComponent<ResourceIcon>().SetValue(count);
+                var parentWidth = transform.GetComponent<RectTransform>().rect.width;
+                var parentHeight = transform.GetComponent<RectTransform>().rect.height;
+                _icon.transform.position = new Vector3(transform.position.x +0.4f*parentWidth / 2f, transform.position.y + 1.6f*parentHeight / 2f);
             }
         }
 
@@ -322,7 +325,7 @@ namespace Assets.UIScripts
 
             if (tileType == TileTypes.Stable)
             {
-                gameObject.transform.localScale = new Vector3(0.5f, 0.5f);//gameObject.GetComponent<RectTransform>().sizeDelta = gameObject.GetComponent<RectTransform>().sizeDelta * 0.5f;
+                gameObject.transform.localScale = new Vector3(0.4f, 0.4f);//gameObject.GetComponent<RectTransform>().sizeDelta = gameObject.GetComponent<RectTransform>().sizeDelta * 0.5f;
                 return Stable;
             }
 

@@ -635,8 +635,6 @@ namespace Assets.ServerScripts
             {
                 _players[0].SetTileAt(position, !isCave);
                 _serverSocket.SetDoubleFencedPastures("playerID", _players[0].GetDoubleFencedPastures());
-
-                //TODO pigs also
             }
             
             //was this the end of an action or was it a double tile?

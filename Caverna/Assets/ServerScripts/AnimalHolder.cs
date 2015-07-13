@@ -102,9 +102,11 @@ namespace Assets.ServerScripts
             if (animalType == ResourceTypes.Dogs)
                 dogs += animalsToAdd;
 
-            if (!isCave)
+            if (!isCave && dogs > 0)
                 sheepCapacity = dogs + 1;
-
+            else
+                sheepCapacity = 0;
+            
             animalsToAllocate -= animalsToAdd;
         }
 
