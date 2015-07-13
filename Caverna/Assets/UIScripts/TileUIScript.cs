@@ -84,7 +84,7 @@ namespace Assets.UIScripts
 
         public void SetType(List<string> tileTypes)
         {
-            _clickable = false;
+            SetUnclickable();
             //SortingOrder = 2-tileTypes.Count;
 
             string tileType = tileTypes[0];
@@ -150,11 +150,15 @@ namespace Assets.UIScripts
                 else
                     _childTile.GetComponent<TileUIScript>().SetUnclickable();
             }
+            gameObject.GetComponent<CanvasGroup>().interactable = false;
+            gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
             //_isClickableBuilding = false;
         }
 
         public void SetClickable(string tileType, bool isParent)
         {
+            gameObject.GetComponent<CanvasGroup>().interactable = true;
+            gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
             //_renderSortingOrder = 5;
 
             if (tileType == TileTypes.Stable && isParent)
