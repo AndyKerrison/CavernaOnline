@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,13 +20,18 @@ namespace Assets.UIScripts
         private List<string> _actions;
         private string _actionName;
         private string _helpText;
+        private GameObject[,] _buildingTiles;
 
         public GameObject MainActionsDisplayBoard;
         public Canvas GameBoard;
         public Canvas ActionBoard;
+        public Canvas BuildingsBoard;
         public GameObject ActionsPanel;
         public GameObject ActionsPanelView;
+        public GameObject BuildingsPanel;
+        public GameObject BuildingsPanelView;
         public Scrollbar ActionPanelScrollbar;
+        public Scrollbar BuildingPanelScrollbar;
         public Canvas MainCanvas;
         public Image Image;
 
@@ -35,27 +41,37 @@ namespace Assets.UIScripts
             Instance = gameObject;
             //_loaderImage = GameObject.Find("LoaderImage");
             //_levelText = GameObject.Find("LevelText").GetComponent<Text>();
-            ClientSocket = UIScripts.ClientSocket.Instance;
-            ClientSocket.StartGame(1);
             GameBoard.enabled = false;
             ActionBoard.enabled = true;
             ActionPanelScrollbar.value = 0;
+            BuildingPanelScrollbar.value = 0;
+            ResizeBuildingPanel();
+            InitBuildingTiles();
+
+            //after everything is set up, THEN start game
+            ClientSocket = UIScripts.ClientSocket.Instance;
+            ClientSocket.StartGame(1);
         }
 
         public void ShowPlayerBoard()
         {
             ActionBoard.enabled = false;
+            BuildingsBoard.enabled = false;
             GameBoard.enabled = true;
-            //foreach (GameObject actionSpace in _actionSpaces)
-            //{
-            //    actionSpace.GetComponent<Renderer>().enabled = false;
-            //}
         }
 
         public void ShowActionBoard()
         {
             GameBoard.enabled = false;
+            BuildingsBoard.enabled = false;
             ActionBoard.enabled = true;
+        }
+
+        public void ShowBuildingsBoard()
+        {
+            GameBoard.enabled = false;
+            BuildingsBoard.enabled = true;
+            ActionBoard.enabled = false;
         }
 
         public void StartGameRound(int gameRound)
@@ -92,10 +108,73 @@ namespace Assets.UIScripts
             return null;
         }
 
+        private void InitBuildingTiles()
+        {
+            var panelWidth = BuildingsPanel.GetComponent<RectTransform>().rect.width;
+            var panelHeight = BuildingsPanel.GetComponent<RectTransform>().rect.height;
+            var tileWidth = 0.075f*panelWidth;
+
+            _buildingTiles = new GameObject[12, 4];
+            
+            for (int x = 0; x < 12; x++)
+            {
+                for (int y = 0; y < 4; y++)
+                {
+                    var xPos = tileWidth / 2 - panelWidth / 2 + x*tileWidth;
+                    var yPos = panelHeight / 2 - tileWidth / 2 - y*tileWidth;
+
+                    if (x >= 3)
+                        xPos += 0.047f*panelWidth;
+                    if (x >= 9)
+                        xPos += 0.047f * panelWidth;
+
+                    GameObject tile = CreateTile(BuildingTypes.Unavailable, tileWidth, xPos, yPos);
+                    _buildingTiles[x, y] = tile;
+                }
+            }
+        }
+
+        private GameObject CreateTile(string type, float tileWidth, float xPos, float yPos)
+        {
+            GameObject tile = (GameObject)Instantiate(Resources.Load("TileUI"));
+            tile.transform.SetParent(BuildingsPanel.transform);
+            tile.transform.localScale = BuildingsPanel.transform.localScale;
+            tile.transform.position = BuildingsPanel.transform.position;
+            tile.GetComponent<RectTransform>().sizeDelta = new Vector2(tileWidth, tileWidth);
+            tile.GetComponent<RectTransform>().anchoredPosition = new Vector2(xPos, yPos);
+            tile.GetComponent<TileUIScript>().SetType(new List<string>() { type });
+            return tile;
+        }
+
+        private void ResizeBuildingPanel()
+        {
+            var maxHeight = BuildingsPanelView.GetComponent<RectTransform>().rect.height;
+
+            RectTransform buildingCanvasRect = BuildingsPanel.GetComponent<RectTransform>();
+            
+            //TODO contents are not sizing correctly...
+            GameObject roomBoard1 = GameObject.Find("RoomBoard1");
+            GameObject roomBoard2 = GameObject.Find("RoomBoard2");
+            var roomX = roomBoard1.GetComponent<RectTransform>().rect.width;
+            var roomY = roomBoard1.GetComponent<RectTransform>().rect.height;
+            
+            var yScale = maxHeight / roomY;
+            Vector2 roomBoardSize = new Vector2(roomX * yScale, roomY * yScale);
+
+            buildingCanvasRect.sizeDelta = new Vector2(roomBoardSize.x * 2, maxHeight);
+            roomBoard1.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+            roomBoard2.GetComponent<RectTransform>().anchoredPosition = new Vector2(roomBoardSize.x, 0);
+            roomBoard1.GetComponent<RectTransform>().sizeDelta = roomBoardSize;
+            roomBoard2.GetComponent<RectTransform>().sizeDelta = roomBoardSize;
+
+            //*/
+            //MainBuildingsDisplayBoard.GetComponent<RectTransform>().anchoredPosition = new Vector2(maxWidth - buildingCanvasRect.sizeDelta.x + 2 * cardSize.x, MainActionsDisplayBoard.GetComponent<RectTransform>().anchoredPosition.y);
+        }
+
         private void ResizeActionCards()
         {
             int hPadding = 5;
-            int vPadding = 12;
+            int vPadding = 5;
             //int xMaxCards = ((_actionSpaces.Count-1) / 3) + 1;
             int yMaxCards = 3;
 
@@ -276,6 +355,10 @@ cardScale = Math.Min(xScale, yScale);
         public void SetTilesUnclickable(string playerID)
         {
             GameObject.Find("GameBoard").GetComponent<PlayerBoardScript>().SetTilesUnclickable();
+            foreach (GameObject buildingTile in _buildingTiles)
+            {
+                buildingTile.GetComponent<TileUIScript>().SetUnclickable();
+            }
         }
 
         public void SetPlayerResources(string playerID, string resourceName, int count)
@@ -398,6 +481,42 @@ cardScale = Math.Min(xScale, yScale);
             {
                 Destroy(_actionSpaces[0]);
                 _actionSpaces.RemoveAt(0);
+            }
+        }
+
+        public void SetBuildingAvailable(string buildingType)
+        {
+            Vector2 buildingLocation = BuildingPanelInfo.GetBuildingTileLocation(buildingType);
+            _buildingTiles[(int)buildingLocation.x, (int)buildingLocation.y].GetComponent<TileUIScript>().SetType(new List<string>() {buildingType});
+        }
+
+        public void ChooseBuildingTile(string playerid, List<string> validBuildings)
+        {
+            //find the valid buildings, set them as clickable
+            for (int x = 0; x <= _buildingTiles.GetUpperBound(0); x++)
+            {
+                for (int y = 0; y <= _buildingTiles.GetUpperBound(1); y++)
+                {
+                    string tileType = _buildingTiles[x, y].GetComponent<TileUIScript>().GetTileType();
+                    if (validBuildings.Contains(tileType))
+                        _buildingTiles[x,y].GetComponent<TileUIScript>().SetClickable(tileType, true, true, true);
+                }
+            }
+
+            ShowBuildingsBoard();
+        }
+
+        public void SetBuildingTaken(string type)
+        {
+            for (int x = 0; x <= _buildingTiles.GetUpperBound(0); x++)
+            {
+                for (int y = 0; y <= _buildingTiles.GetUpperBound(1); y++)
+                {
+                    if (type == _buildingTiles[x, y].GetComponent<TileUIScript>().GetTileType())
+                    {
+                        _buildingTiles[x, y].GetComponent<TileUIScript>().SetTaken();
+                    }
+                }
             }
         }
     }

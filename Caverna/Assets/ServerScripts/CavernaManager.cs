@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using Assets.UIScripts;
 using UnityEngine;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
@@ -140,7 +138,12 @@ namespace Assets.ServerScripts
             //todo - clear existing buildings panel if any
             BuildingTiles = new List<BuildingTile>();
             BuildingTiles.Add(new BuildingTile(BuildingTypes.Dwelling));
-
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.SimpleDwelling1));
+            foreach (BuildingTile buildingTile in BuildingTiles)
+            {
+                _serverSocket.SetBuildingAvailable(buildingTile.BuildingType);
+            }
+            
             //randomize harvest order
             _remainingHarvests = new List<string>();
             _remainingHarvests.Add(string.Empty);
@@ -611,15 +614,26 @@ namespace Assets.ServerScripts
             GetActions(playerID, actionID);
         }
 
-        public void SetTileClicked(string playerID, Vector2 position, bool isCave, bool isBuilding)
+        public void SetTileClicked(string playerID, Vector2 position, string type, bool isCave, bool isBuilding)
         {
             //TODO, check it was this player's turn and they were supposed to click a tile
             _serverSocket.SetTilesUnclickable("player");
 
             //TODO was this a furnish action?
-            if (isBuilding)
+            if (isBuilding & !isCave) //must be a click on the buildings board
             {
-                _players[0].SetBuildingTileAt(position, BuildingTypes.Dwelling);
+                List<Vector2> validSpots = _players[0].GetValidBuildingSpots();
+                _serverSocket.SetPlaceBuildingTile("playerID", type, validSpots);
+                return;
+            }
+            else if (isBuilding) //a building confirmation click on the player board
+            {
+                _players[0].SetBuildingTileAt(position, type);
+                if (!BuildingTiles.Find(x => x.BuildingType == type).IsUnlimited)
+                {
+                    BuildingTiles.RemoveAll(x => x.BuildingType == type);
+                    _serverSocket.SetBuildingTaken(type);
+                }
                 
                 //if this is the dwelling from urgent wish, do FG also
                 if (_actionSpaces.Find(x => x.ID == _activeActionSpaceID).Type == ActionSpaceTypes.UrgentWish)
@@ -631,7 +645,7 @@ namespace Assets.ServerScripts
                 GetActions("player", _activeActionSpaceID);
                 return;
             }
-            else
+            else //a tile placement confirmation somewhere on the player board
             {
                 _players[0].SetTileAt(position, !isCave);
                 _serverSocket.SetDoubleFencedPastures("playerID", _players[0].GetDoubleFencedPastures());
@@ -643,7 +657,7 @@ namespace Assets.ServerScripts
                 //if there is only one option left, click that one next
                 List<Vector2> validSpots = _players[0].GetValidTileSpots();
                 if (validSpots.Count == 1)
-                    SetTileClicked(playerID, validSpots[0], isCave, false);
+                    SetTileClicked(playerID, validSpots[0], _players[0].GetNextTile(), isCave, false);
                 else
                     _serverSocket.SetPlaceTile("playerID", _players[0].GetNextTile(), validSpots, isCave);
             }
@@ -907,8 +921,9 @@ namespace Assets.ServerScripts
                 //TODO handle other building types
                 _serverSocket.SetActionFinished(actionID); //hide the modal till we've placed the dwelling
 
-                List<Vector2> validSpots = _players[0].GetValidBuildingSpots();
-                _serverSocket.SetPlaceBuildingTile("playerID", BuildingTypes.Dwelling, validSpots);
+                FurnishCavern();
+                //List<Vector2> validSpots = _players[0].GetValidBuildingSpots();
+                //_serverSocket.SetPlaceBuildingTile("playerID", BuildingTypes.Dwelling, validSpots);
                 return;
             }
 
@@ -917,8 +932,9 @@ namespace Assets.ServerScripts
                 //TODO handle other building types
                 _serverSocket.SetActionFinished(actionID); //hide the modal till we've placed the dwelling
 
-                List<Vector2> validSpots = _players[0].GetValidBuildingSpots();
-                _serverSocket.SetPlaceBuildingTile("playerID", BuildingTypes.Dwelling, validSpots);
+                FurnishDwelling();
+                //List<Vector2> validSpots = _players[0].GetValidBuildingSpots();
+                //_serverSocket.SetPlaceBuildingTile("playerID", BuildingTypes.Dwelling, validSpots);
                 return;
             }
 
@@ -1160,8 +1176,9 @@ namespace Assets.ServerScripts
                 //LEVEL 7
                 if (action == Expeditions.FurnishCavern)
                 {
-                    List<Vector2> validSpots = _players[0].GetValidBuildingSpots();
-                    _serverSocket.SetPlaceBuildingTile("playerID", BuildingTypes.Dwelling, validSpots);
+                    FurnishCavern();
+                    //List<Vector2> validSpots = _players[0].GetValidBuildingSpots();
+                    //_serverSocket.SetPlaceBuildingTile("playerID", BuildingTypes.Dwelling, validSpots);
                     return;
                 }
 
@@ -1298,6 +1315,28 @@ namespace Assets.ServerScripts
             {
                 throw new NotImplementedException("Action " + action + " is not supported");
             }
+        }
+
+        private void FurnishCavern()
+        {
+            List<string> validBuildings = new List<string>();
+            foreach (BuildingTile tile in BuildingTiles)
+            {
+                if (_players[0].CanBuildTile(tile))
+                    validBuildings.Add(tile.BuildingType);
+            }
+            _serverSocket.ChooseBuildingTile("playerID", validBuildings);
+        }
+
+        private void FurnishDwelling()
+        {
+            List<string> validBuildings = new List<string>();
+            foreach (BuildingTile tile in BuildingTiles)
+            {
+                if (_players[0].CanBuildTile(tile) && tile.IsDwelling)
+                    validBuildings.Add(tile.BuildingType);
+            }
+            _serverSocket.ChooseBuildingTile("playerID", validBuildings);
         }
 
         private void ReturnControlToPlayer(CavernaPlayer player)

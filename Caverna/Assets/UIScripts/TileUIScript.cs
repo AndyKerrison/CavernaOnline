@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,12 +19,16 @@ namespace Assets.UIScripts
         public Sprite BigFence2;
         public Sprite Stable;
         public Sprite Dwelling;
+        public Sprite SimpleDwelling1;
+        public Sprite Unavailable;
         
         public int X;
         public int Y;
 
         private bool _isCave;
         private bool _clickable;
+        private bool _useMouseOverHighlight;
+        private string _tileType;
 
         private Sprite _activeSprite;
         private Color _activeColor;
@@ -87,9 +92,9 @@ namespace Assets.UIScripts
             SetUnclickable();
             //SortingOrder = 2-tileTypes.Count;
 
-            string tileType = tileTypes[0];
+            _tileType = tileTypes[0];
 
-            _mainSprite = GetSpriteByType(tileType);
+            _mainSprite = GetSpriteByType(_tileType);
 
             _activeSprite = _mainSprite;
             _activeColor = _activeSprite != null ? Color.white : _hiddenColor;
@@ -99,31 +104,31 @@ namespace Assets.UIScripts
             else
                 return;
 
-            if (tileType == TileTypes.Field3Grain)
+            if (_tileType == TileTypes.Field3Grain)
             {
                 //will already have field sprite.... draw 3 grain on top
                 _icon.GetComponent<ResourceIcon>().SetType(ResourceTypes.Grain);
                 _icon.GetComponent<ResourceIcon>().SetValue(3);
             }
-            if (tileType == TileTypes.Field2Grain)
+            if (_tileType == TileTypes.Field2Grain)
             {
                 //will already have field sprite.... draw 3 grain on top
                 _icon.GetComponent<ResourceIcon>().SetType(ResourceTypes.Grain);
                 _icon.GetComponent<ResourceIcon>().SetValue(2);
             }
-            if (tileType == TileTypes.Field1Grain)
+            if (_tileType == TileTypes.Field1Grain)
             {
                 //will already have field sprite.... draw 3 grain on top
                 _icon.GetComponent<ResourceIcon>().SetType(ResourceTypes.Grain);
                 _icon.GetComponent<ResourceIcon>().SetValue(1);
             }
-            if (tileType == TileTypes.Field2Veg)
+            if (_tileType == TileTypes.Field2Veg)
             {
                 //will already have field sprite.... draw 3 grain on top
                 _icon.GetComponent<ResourceIcon>().SetType(ResourceTypes.Veg);
                 _icon.GetComponent<ResourceIcon>().SetValue(2);
             }
-            if (tileType == TileTypes.Field1Veg)
+            if (_tileType == TileTypes.Field1Veg)
             {
                 //will already have field sprite.... draw 3 grain on top
                 _icon.GetComponent<ResourceIcon>().SetType(ResourceTypes.Veg);
@@ -155,8 +160,10 @@ namespace Assets.UIScripts
             //_isClickableBuilding = false;
         }
 
-        public void SetClickable(string tileType, bool isParent)
+        public void SetClickable(string tileType, bool isParent, bool isOnBuildingsBoard, bool useMouseOverHighlight)
         {
+            _tileType = tileType;
+            _useMouseOverHighlight = useMouseOverHighlight;
             gameObject.GetComponent<CanvasGroup>().interactable = true;
             gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
             //_renderSortingOrder = 5;
@@ -164,18 +171,23 @@ namespace Assets.UIScripts
             if (tileType == TileTypes.Stable && isParent)
             {
                 InitChildTile(tileType);
-                _childTile.GetComponent<TileUIScript>().SetClickable(tileType, false);
+                _childTile.GetComponent<TileUIScript>().SetClickable(tileType, false, isOnBuildingsBoard, useMouseOverHighlight);
             }
-            else if (tileType == BuildingTypes.Dwelling && isParent)
+            else if (IsBuildingTile(tileType) && isParent && !isOnBuildingsBoard)
             {
                 InitChildTile(tileType);
-                _childTile.GetComponent<TileUIScript>().SetClickable(tileType, false);
+                _childTile.GetComponent<TileUIScript>().SetClickable(tileType, false, isOnBuildingsBoard, useMouseOverHighlight);
             }
             else
             {
                 _clickable = true;
                 _mouseOverSprite = GetSpriteByType(tileType);
             }
+        }
+
+        private bool IsBuildingTile(string tileType)
+        {
+            return Array.Find(typeof(BuildingTypes).GetFields(), x => x.GetValue(null).ToString() == tileType) != null;
         }
 
         public void SetResources(string animalType, int count)
@@ -218,7 +230,9 @@ namespace Assets.UIScripts
             //_childTile.transform.position = new Vector2(transform.position.x, transform.position.y);
             _childTile.GetComponent<TileUIScript>().SetVector(X, Y);
             //_childTile.transform.localScale = transform.localScale;
-            _childTile.GetComponent<TileUIScript>().SetClickable(tileType, false);
+            _childTile.GetComponent<TileUIScript>().SetClickable(tileType, false, false, false);
+            if (_isCave)
+                _childTile.GetComponent<TileUIScript>().SetIsCave();
         }
 
         private bool HasValue()
@@ -238,8 +252,7 @@ namespace Assets.UIScripts
             //do action if possible
             if (_clickable)
             {
-                bool isBuilding = _mouseOverSprite == Dwelling;
-                ClientSocket.Instance.SetTileClicked("Player", new Vector2(X, Y), _isCave, isBuilding);
+                ClientSocket.Instance.SetTileClicked("Player", new Vector2(X, Y), _tileType, _isCave, IsBuildingTile(_tileType));
             }
         }
 
@@ -249,7 +262,10 @@ namespace Assets.UIScripts
             if (_clickable)
             {
                 _activeSprite = _mouseOverSprite;
-                _activeColor = new Color(10, 50, 10, 0.5f);
+                if (_useMouseOverHighlight)
+                    _activeColor = Color.green;
+                else
+                    _activeColor = new Color(10, 50, 10, 0.5f);
             }
         }
 
@@ -337,8 +353,35 @@ namespace Assets.UIScripts
             {
                 return Dwelling;
             }
+            if (tileType == BuildingTypes.SimpleDwelling1)
+            {
+                return SimpleDwelling1;
+            }
+
+            if (tileType == BuildingTypes.Unavailable)
+            {
+                return Unavailable;
+            }
 
             return null;
+        }
+
+        public string GetTileType()
+        {
+            return _tileType;
+        }
+
+        public void SetTaken()
+        {
+            //draw a dwarf icon on it
+            GameObject dwarfToken = (GameObject)Instantiate(Resources.Load("DwarfIconUI"));
+            dwarfToken.transform.SetParent(transform, true);
+            dwarfToken.transform.localScale = transform.localScale;
+            dwarfToken.transform.position = transform.position;
+            var tileSize = transform.GetComponent<RectTransform>().rect.width;
+            var spriteSize = new Vector2(0.5f*tileSize, 0.5f*tileSize);
+            dwarfToken.GetComponent<RectTransform>().sizeDelta = spriteSize;
+            dwarfToken.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Assets.UIScripts
         void StartGame(int numPlayers);
         void SendAction(int actionID, string action);
         void SetChosenActionSpace(string player, int actionID);
-        void SetTileClicked(string player, Vector2 position, bool isCave, bool isBuilding);
+        void SetTileClicked(string player, Vector2 position, string type, bool isCave, bool isBuilding);
         void SendPlayerChoice(string action);
         void GetRubyActions(string playerID);
     }
@@ -108,9 +108,9 @@ namespace Assets.UIScripts
             _gameRef.SetPlaceTile(playerid, tileType, validSpots, isCave);
         }
 
-        public void SetTileClicked(string playerID, Vector2 position, bool isCave, bool isBuilding)
+        public void SetTileClicked(string playerID, Vector2 position, string type, bool isCave, bool isBuilding)
         {
-            _serverSocket.SetTileClicked(playerID, position, isCave, isBuilding);
+            _serverSocket.SetTileClicked(playerID, position, type, isCave, isBuilding);
         }
 
         void IClientSocket.SendPlayerChoice(string action)
@@ -181,6 +181,21 @@ namespace Assets.UIScripts
         public void ClearActionSpaces()
         {
             _gameRef.ClearActionSpaces();
+        }
+
+        public void SetBuildingAvailable(string buildingType)
+        {
+            _gameRef.SetBuildingAvailable(buildingType);
+        }
+
+        public void ChooseBuildingTile(string playerid, List<string> validBuildings)
+        {
+            _gameRef.ChooseBuildingTile(playerid, validBuildings);
+        }
+
+        public void SetBuildingTaken(string type)
+        {
+            _gameRef.SetBuildingTaken(type);
         }
     }
 }

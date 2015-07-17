@@ -43,6 +43,8 @@ MonoBehaviour:
   BigFence2: {fileID: 21300002, guid: 16b47e9f095a9cb4e8886ebb2f1fac90, type: 3}
   Stable: {fileID: 21300000, guid: 9022249cf7b725647ab97570453c9ccb, type: 3}
   Dwelling: {fileID: 21300000, guid: a47b8872103653f42a79332c76030f1a, type: 3}
+  SimpleDwelling1: {fileID: 21300002, guid: a47b8872103653f42a79332c76030f1a, type: 3}
+  Unavailable: {fileID: 21300000, guid: f5f4ee35771199e4c9509d40e1cd9d80, type: 3}
   X: 0
   Y: 0
 --- !u!114 &11444238

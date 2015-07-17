@@ -229,14 +229,14 @@ namespace Assets.UIScripts
         public void SetClickableTile(Vector2 validSpot, string tileType, bool isCave)
         {
             if (isCave)
-                _caveTiles[(int)validSpot.x, (int)validSpot.y].GetComponent<TileUIScript>().SetClickable(tileType, true);
+                _caveTiles[(int)validSpot.x, (int)validSpot.y].GetComponent<TileUIScript>().SetClickable(tileType, true, false, false);
             else
-                _forestTiles[(int)validSpot.x, (int)validSpot.y].GetComponent<TileUIScript>().SetClickable(tileType, true);
+                _forestTiles[(int)validSpot.x, (int)validSpot.y].GetComponent<TileUIScript>().SetClickable(tileType, true, false, false);
         }
 
         public void SetClickableBuildingTile(Vector2 validSpot, string buildingType)
         {
-            _caveTiles[(int)validSpot.x, (int)validSpot.y].GetComponent<TileUIScript>().SetClickable(buildingType, true);
+            _caveTiles[(int)validSpot.x, (int)validSpot.y].GetComponent<TileUIScript>().SetClickable(buildingType, true, false, false);
         }
 
         public void SetTileAnimals(Vector2 position, bool isCave, string animalType, int count)

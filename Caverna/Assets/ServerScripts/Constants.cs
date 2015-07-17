@@ -1,4 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+public static class BuildingPanelInfo
+{
+    //coords count from top left
+    public static string[,] BuildingPanelLocations = 
+    {
+        {BuildingTypes.Dwelling, BuildingTypes.MixedDwelling, BuildingTypes.Carpenter, BuildingTypes.Miner},
+        {BuildingTypes.SimpleDwelling1, BuildingTypes.CoupleDwelling, BuildingTypes.StoneCarver, BuildingTypes.Builder},
+    };
+
+    public static Vector2 GetBuildingTileLocation(string buildingType)
+    {
+        for (int x = 0; x <= BuildingPanelLocations.GetUpperBound(0); x++)
+        {
+            for (int y = 0; y <= BuildingPanelLocations.GetUpperBound(1); y++)
+            {
+                if (BuildingPanelLocations[x, y] == buildingType)
+                    return new Vector2(x, y);
+            }
+        }
+        throw new Exception("Invalid building type : " + buildingType);
+    }
+}
 
 public static class BreedActions
 {
@@ -108,6 +133,14 @@ public static class HarvestTypes
 public static class BuildingTypes
 {
     public const string Dwelling = "dwelling";
+    public static string Unavailable = "unavailable";
+    public static string MixedDwelling = "mixedDwelling";
+    public static string Carpenter = "carpenter";
+    public static string Miner = "miner";
+    public static string SimpleDwelling1 = "simpleDwelling1";
+    public static string CoupleDwelling = "coupleDwelling";
+    public static string StoneCarver = "stoneCarver";
+    public static string Builder = "builder";
 }
 
 public static class ActionSpaceTypes

@@ -226,6 +226,7 @@ namespace Assets.ServerScripts
         {
             int capacity = 2;
             capacity += GetTileCount(BuildingTypes.Dwelling);
+            capacity += GetTileCount(BuildingTypes.SimpleDwelling1);
             if (capacity > 5)
                 capacity = 5;
             return capacity;
@@ -1054,6 +1055,9 @@ namespace Assets.ServerScripts
 
         public void SetBuildingTileAt(Vector2 position, string buildingType)
         {
+            Wood -= new BuildingTile(buildingType).WoodCost;
+            Stone -= new BuildingTile(buildingType).StoneCost;
+
             CaveSpaces[(int) position.x, (int) position.y] = buildingType;
             _serverSocket.SetPlayerTileType(position, GetTileType(position, false), true);
             CalculatePlayerScore();

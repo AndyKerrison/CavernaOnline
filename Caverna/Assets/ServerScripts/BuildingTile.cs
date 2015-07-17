@@ -5,17 +5,27 @@
         public int StoneCost { get; private set; }
         public bool IsDwelling { get; set; }
         public int VP { get; private set; }
-
-        private bool _isUnlimited;
+        public string BuildingType { get; private set; }
+        public bool IsUnlimited { get; private set; }
 
         public BuildingTile(string buildingType)
         {
+            BuildingType = buildingType;
+
             if (buildingType == BuildingTypes.Dwelling)
             {
                 VP = 3;
                 WoodCost = 4;
                 StoneCost = 3;
-                _isUnlimited = true;
+                IsUnlimited = true;
+                IsDwelling = true;
+            }
+            if (buildingType == BuildingTypes.SimpleDwelling1)
+            {
+                VP = 0;
+                WoodCost = 4;
+                StoneCost = 2;
+                IsUnlimited = false;
                 IsDwelling = true;
             }
         }

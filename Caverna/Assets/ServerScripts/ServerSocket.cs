@@ -31,6 +31,9 @@ namespace Assets.ServerScripts
         void SetTileAnimals(Vector2 position, bool isCave, string animalType, int count);
         void ClearPlayerTiles(string playerID);
         void ClearActionSpaces();
+        void SetBuildingAvailable(string buildingType);
+        void ChooseBuildingTile(string playerid, List<string> validBuildings);
+        void SetBuildingTaken(string type);
     }
 
     public class ServerSocket : IServerSocket
@@ -152,6 +155,21 @@ namespace Assets.ServerScripts
             _clientSocket.ClearActionSpaces();
         }
 
+        public void SetBuildingAvailable(string buildingType)
+        {
+            _clientSocket.SetBuildingAvailable(buildingType);
+        }
+
+        public void ChooseBuildingTile(string playerid, List<string> validBuildings)
+        {
+            _clientSocket.ChooseBuildingTile(playerid, validBuildings);
+        }
+
+        public void SetBuildingTaken(string type)
+        {
+            _clientSocket.SetBuildingTaken(type);
+        }
+
         public void HidePlayerChoice(string playerid)
         {
             _clientSocket.HidePlayerChoice(playerid);
@@ -177,9 +195,9 @@ namespace Assets.ServerScripts
             CavernaManager.Instance.SetChosenActionSpace(playerID, actionID);
         }
 
-        public void SetTileClicked(string playerID, Vector2 position, bool isCave, bool isBuilding)
+        public void SetTileClicked(string playerID, Vector2 position, string type, bool isCave, bool isBuilding)
         {
-            CavernaManager.Instance.SetTileClicked(playerID, position, isCave, isBuilding);
+            CavernaManager.Instance.SetTileClicked(playerID, position, type, isCave, isBuilding);
         }
 
         public void SendPlayerChoice(string action)
