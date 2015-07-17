@@ -9,6 +9,16 @@ public static class BuildingPanelInfo
     {
         {BuildingTypes.Dwelling, BuildingTypes.MixedDwelling, BuildingTypes.Carpenter, BuildingTypes.Miner},
         {BuildingTypes.SimpleDwelling1, BuildingTypes.CoupleDwelling, BuildingTypes.StoneCarver, BuildingTypes.Builder},
+        {BuildingTypes.SimpleDwelling2, BuildingTypes.AdditionalDwelling, BuildingTypes.Blacksmith, BuildingTypes.Trader},
+        {BuildingTypes.CuddleRoom, BuildingTypes.WorkRoom, BuildingTypes.WoodSupplier, BuildingTypes.DogSchool},
+        {BuildingTypes.BreakfastRoom, BuildingTypes.GuestRoom, BuildingTypes.StoneSupplier, BuildingTypes.Quarry},
+        {BuildingTypes.StubbleRoom, BuildingTypes.OfficeRoom, BuildingTypes.RubySupplier, BuildingTypes.Seam},
+        {BuildingTypes.SlaughteringCave, BuildingTypes.MiningCave, BuildingTypes.StoneStorage, BuildingTypes.MainStorage},
+        {BuildingTypes.CookingCave, BuildingTypes.BreedingCave, BuildingTypes.OreStorage, BuildingTypes.WeaponStorage},
+        {BuildingTypes.WorkingCave, BuildingTypes.PeacefulCave, BuildingTypes.SparePartStorage, BuildingTypes.SuppliesStorage},
+        {BuildingTypes.WeavingParlour, BuildingTypes.HuntingParlour, BuildingTypes.BroomChamber, BuildingTypes.PrayerChamber},
+        {BuildingTypes.MilkingParlour, BuildingTypes.BeerParlour, BuildingTypes.TreasureChamber, BuildingTypes.WritingChamber},
+        {BuildingTypes.StateParlour, BuildingTypes.BlacksmithingParlour, BuildingTypes.FoodChamber, BuildingTypes.FodderChamber},
     };
 
     public static Vector2 GetBuildingTileLocation(string buildingType)
@@ -141,6 +151,46 @@ public static class BuildingTypes
     public static string CoupleDwelling = "coupleDwelling";
     public static string StoneCarver = "stoneCarver";
     public static string Builder = "builder";
+    public static string AdditionalDwelling = "additionalDwelling";
+    public static string Blacksmith = "blacksmith";
+    public static string Trader = "trader";
+    public static string SimpleDwelling2 = "simpleDwelling2";
+    public static string CuddleRoom = "cuddleRoom";
+    public static string WorkRoom = "workRoom";
+    public static string WoodSupplier = "woodSupplier";
+    public static string DogSchool = "dogSchool";
+    public static string BreakfastRoom = "breakfastRoom";
+    public static string GuestRoom = "guestRoom";
+    public static string StoneSupplier = "stoneSupplier";
+    public static string Quarry = "quarry";
+    public static string StubbleRoom = "stubbleRoom";
+    public static string OfficeRoom = "officeRoom";
+    public static string RubySupplier = "rubySupplier";
+    public static string Seam = "seam";
+    public static string SlaughteringCave = "slaughteringCave";
+    public static string MiningCave = "miningCave";
+    public static string StoneStorage = "stoneStorage";
+    public static string MainStorage = "mainStorage";
+    public static string CookingCave = "cookingCave";
+    public static string BreedingCave = "breedingCave";
+    public static string OreStorage = "oreStorage";
+    public static string WeaponStorage = "weaponStorage";
+    public static string WorkingCave = "workingCave";
+    public static string PeacefulCave = "peacefulCave";
+    public static string SparePartStorage = "sparePartStorage";
+    public static string SuppliesStorage = "suppliesStorage";
+    public static string WeavingParlour = "weavingParlour";
+    public static string HuntingParlour = "huntingParlour";
+    public static string BroomChamber = "broomChamber";
+    public static string PrayerChamber = "prayerChamber";
+    public static string MilkingParlour = "milkingParlour";
+    public static string BeerParlour = "beerParlour";
+    public static string TreasureChamber = "treasureChamber";
+    public static string WritingChamber = "writingChamber";
+    public static string StateParlour = "stateParlour";
+    public static string BlacksmithingParlour = "blacksmithingParlour";
+    public static string FoodChamber = "foodChamber";
+    public static string FodderChamber = "fodderChamber";
 }
 
 public static class ActionSpaceTypes

@@ -1033,7 +1033,9 @@ namespace Assets.ServerScripts
 
         public bool CanBuildTile(BuildingTile buildingTile)
         {
-            return (Wood >= buildingTile.WoodCost && Stone >= buildingTile.StoneCost &&
+            return (Wood >= buildingTile.WoodCost &&
+                Stone >= buildingTile.StoneCost &&
+                Veg >= buildingTile.VegCost &&
                     GetTileCount(TileTypes.Cavern) > 0);
         }
 
@@ -1057,6 +1059,7 @@ namespace Assets.ServerScripts
         {
             Wood -= new BuildingTile(buildingType).WoodCost;
             Stone -= new BuildingTile(buildingType).StoneCost;
+            Veg -= new BuildingTile(buildingType).VegCost;
 
             CaveSpaces[(int) position.x, (int) position.y] = buildingType;
             _serverSocket.SetPlayerTileType(position, GetTileType(position, false), true);
@@ -1747,6 +1750,19 @@ namespace Assets.ServerScripts
             //The scoring pad has multiple lines for Bonus points. You can use one line per Furnishing tile that you get Bonus
             //points for. (Details on the Furnishing tiles can be found on page A3 of the appendix.)
             //TODO
+            if (GetTileCount(BuildingTypes.TreasureChamber) > 0)
+                score += Rubies;
+            if (GetTileCount(BuildingTypes.FoodChamber) > 0)
+                score += 2*Math.Min(Veg, Grain);
+            if (GetTileCount(BuildingTypes.PrayerChamber) > 0 && !_dwarves.Exists(x => x.WeaponLevel > 0))
+                score += 8;
+            if (GetTileCount(BuildingTypes.BroomChamber) > 0)
+            {
+                if (_dwarves.Count == 5)
+                    score += 5;
+                if (_dwarves.Count >=6)
+                    score += 10;
+            }
 
             //Gold coins and Begging markers: Add up the values on your Gold coins and subtract 3 Gold points from that for
             //each Begging marker you have.

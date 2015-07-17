@@ -20,6 +20,52 @@ namespace Assets.UIScripts
         public Sprite Stable;
         public Sprite Dwelling;
         public Sprite SimpleDwelling1;
+        public Sprite SimpleDwelling2;
+        public Sprite MixedDwelling;
+        public Sprite CoupleDwelling;
+        public Sprite AdditionalDwelling;
+        public Sprite Carpenter;
+        public Sprite StoneCarver;
+        public Sprite Miner;
+        public Sprite Builder;
+        public Sprite Blacksmith;
+        public Sprite Trader;
+        public Sprite CuddleRoom;
+        public Sprite WorkRoom;
+        public Sprite WoodSupplier;
+        public Sprite DogSchool;
+        public Sprite BreakfastRoom;
+        public Sprite GuestRoom;
+        public Sprite StoneSupplier;
+        public Sprite Quarry;
+        public Sprite StubbleRoom;
+        public Sprite OfficeRoom;
+        public Sprite RubySupplier;
+        public Sprite Seam;
+        public Sprite SlaughteringCave;
+        public Sprite MiningCave;
+        public Sprite StoneStorage;
+        public Sprite MainStorage;
+        public Sprite CookingCave;
+        public Sprite BreedingCave;
+        public Sprite OreStorage;
+        public Sprite WeaponStorage;
+        public Sprite WorkingCave;
+        public Sprite PeacefulCave;
+        public Sprite SparePartStorage;
+        public Sprite SuppliesStorage;
+        public Sprite WeavingParlour;
+        public Sprite HuntingParlour;
+        public Sprite BroomChamber;
+        public Sprite PrayerChamber;
+        public Sprite MilkingParlour;
+        public Sprite BeerParlour;
+        public Sprite TreasureChamber;
+        public Sprite WritingChamber;
+        public Sprite StateParlour;
+        public Sprite BlacksmithingParlour;
+        public Sprite FoodChamber;
+        public Sprite FodderChamber;
         public Sprite Unavailable;
         
         public int X;
@@ -350,14 +396,100 @@ namespace Assets.UIScripts
             }
 
             if (tileType == BuildingTypes.Dwelling)
-            {
                 return Dwelling;
-            }
+            if (tileType == BuildingTypes.MixedDwelling)
+                return MixedDwelling;
+            if (tileType == BuildingTypes.Carpenter)
+                return Carpenter;
+            if (tileType == BuildingTypes.Miner)
+                return Miner;
             if (tileType == BuildingTypes.SimpleDwelling1)
-            {
                 return SimpleDwelling1;
-            }
-
+            if (tileType == BuildingTypes.CoupleDwelling)
+                return CoupleDwelling;
+            if (tileType == BuildingTypes.StoneCarver)
+                return StoneCarver;
+            if (tileType == BuildingTypes.Builder)
+                return Builder;
+            if (tileType == BuildingTypes.SimpleDwelling2)
+                return SimpleDwelling2;
+            if (tileType == BuildingTypes.AdditionalDwelling)
+                return AdditionalDwelling;
+            if (tileType == BuildingTypes.Blacksmith)
+                return Blacksmith;
+            if (tileType == BuildingTypes.Trader)
+                return Trader;
+            if (tileType == BuildingTypes.CuddleRoom)
+                return CuddleRoom;
+            if (tileType == BuildingTypes.WorkRoom)
+                return WorkRoom;
+            if (tileType == BuildingTypes.WoodSupplier)
+                return WoodSupplier;
+            if (tileType == BuildingTypes.DogSchool)
+                return DogSchool;
+            if (tileType == BuildingTypes.BreakfastRoom)
+                return BreakfastRoom;
+            if (tileType == BuildingTypes.GuestRoom)
+                return StoneSupplier;
+            if (tileType == BuildingTypes.Quarry)
+                return Quarry;
+            if (tileType == BuildingTypes.StubbleRoom)
+                return StubbleRoom;
+            if (tileType == BuildingTypes.OfficeRoom)
+                return OfficeRoom;
+            if (tileType == BuildingTypes.RubySupplier)
+                return RubySupplier;
+            if (tileType == BuildingTypes.Seam)
+                return Seam;
+            if (tileType == BuildingTypes.SlaughteringCave)
+                return SlaughteringCave;
+            if (tileType == BuildingTypes.MiningCave)
+                return MiningCave;
+            if (tileType == BuildingTypes.StoneStorage)
+                return StoneStorage;
+            if (tileType == BuildingTypes.MainStorage)
+                return MainStorage;
+            if (tileType == BuildingTypes.CookingCave)
+                return CookingCave;
+            if (tileType == BuildingTypes.BreedingCave)
+                return BreedingCave;
+            if (tileType == BuildingTypes.OreStorage)
+                return OreStorage;
+            if (tileType == BuildingTypes.WeaponStorage)
+                return WeaponStorage;
+            if (tileType == BuildingTypes.WorkingCave)
+                return WorkingCave;
+            if (tileType == BuildingTypes.PeacefulCave)
+                return PeacefulCave;
+            if (tileType == BuildingTypes.SparePartStorage)
+                return SparePartStorage;
+            if (tileType == BuildingTypes.SuppliesStorage)
+                return SuppliesStorage;
+            if (tileType == BuildingTypes.WeavingParlour)
+                return WeavingParlour;
+            if (tileType == BuildingTypes.HuntingParlour)
+                return HuntingParlour;
+            if (tileType == BuildingTypes.BroomChamber)
+                return BroomChamber;
+            if (tileType == BuildingTypes.PrayerChamber)
+                return PrayerChamber;
+            if (tileType == BuildingTypes.MilkingParlour)
+                return MilkingParlour;
+            if (tileType == BuildingTypes.BeerParlour)
+                return BeerParlour;
+            if (tileType == BuildingTypes.TreasureChamber)
+                return TreasureChamber;
+            if (tileType == BuildingTypes.WritingChamber)
+                return WritingChamber;
+            if (tileType == BuildingTypes.StateParlour)
+                return StateParlour;
+            if (tileType == BuildingTypes.BlacksmithingParlour)
+                return BlacksmithingParlour;
+            if (tileType == BuildingTypes.FoodChamber)
+                return FoodChamber;
+            if (tileType == BuildingTypes.FodderChamber)
+                return FodderChamber;
+            
             if (tileType == BuildingTypes.Unavailable)
             {
                 return Unavailable;
