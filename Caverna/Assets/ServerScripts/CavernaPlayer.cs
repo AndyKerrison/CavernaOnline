@@ -1036,6 +1036,9 @@ namespace Assets.ServerScripts
             return (Wood >= buildingTile.WoodCost &&
                 Stone >= buildingTile.StoneCost &&
                 Veg >= buildingTile.VegCost &&
+                Grain >= buildingTile.GrainCost &&
+                Ore >= buildingTile.OreCost &&
+                Food >= buildingTile.FoodCost &&
                     GetTileCount(TileTypes.Cavern) > 0);
         }
 
@@ -1060,6 +1063,9 @@ namespace Assets.ServerScripts
             Wood -= new BuildingTile(buildingType).WoodCost;
             Stone -= new BuildingTile(buildingType).StoneCost;
             Veg -= new BuildingTile(buildingType).VegCost;
+            Grain -= new BuildingTile(buildingType).GrainCost;
+            Ore -= new BuildingTile(buildingType).OreCost;
+            Food -= new BuildingTile(buildingType).FoodCost;
 
             CaveSpaces[(int) position.x, (int) position.y] = buildingType;
             _serverSocket.SetPlayerTileType(position, GetTileType(position, false), true);
@@ -1662,6 +1668,7 @@ namespace Assets.ServerScripts
 
         public void CalculatePlayerScore()
         {
+            int negativePoints = 0;
             int score = 0;
             
             //1 Gold per Farm animal and Dog: Each animal is worth 1 Gold point at the end of the
@@ -1679,13 +1686,13 @@ namespace Assets.ServerScripts
             //Dogs.)
 
             if (Sheep == 0)
-                score -=2;
+                negativePoints += 2;
             if (Donkeys == 0)
-                score -=2;
+                negativePoints += 2;
             if (Pigs == 0)
-                score -=2;
+                negativePoints += 2;
             if (Cows == 0)
-                score -=2;
+                negativePoints += 2;
 
             //½ Gold per Grain (rounded up): Count all of your Grain tokens – both those in your
             //supply and those still left on Fields. Divide this number by 2 and round it up. This is the
@@ -1719,9 +1726,9 @@ namespace Assets.ServerScripts
                 for (int y = 0; y < TileAreaHeight; y++)
                 {
                     if (ForestSpaces[x, y] == null && StableSpaces[x, y] == null)
-                        score--;
+                        negativePoints++;
                     if (CaveSpaces[x, y] == null)
-                        score--;
+                        negativePoints++;
                 }
             }
             
@@ -1763,6 +1770,47 @@ namespace Assets.ServerScripts
                 if (_dwarves.Count >=6)
                     score += 10;
             }
+            if (GetTileCount(BuildingTypes.FodderChamber) > 0)
+            {
+                int totalAnimals = Sheep + Cows + Donkeys + Pigs;
+                score += (int)Math.Floor(totalAnimals/3f);
+            }
+            if (GetTileCount(BuildingTypes.WritingChamber) > 0)
+            {
+                negativePoints -= 7;
+                if (negativePoints < 0)
+                    negativePoints = 0;
+            }
+            if (GetTileCount(BuildingTypes.StoneStorage) > 0)
+            {
+                score += Stone;
+            }
+            if (GetTileCount(BuildingTypes.OreStorage) > 0)
+            {
+                score += (int)Math.Floor(Ore/2f);
+            }
+            if (GetTileCount(BuildingTypes.WeaponStorage) > 0)
+            {
+                score += 3*_dwarves.FindAll(x => x.WeaponLevel > 0).Count;
+            }
+            if (GetTileCount(BuildingTypes.SuppliesStorage) > 0)
+            {
+                if (!_dwarves.Exists(x => x.WeaponLevel == 0)) //no unarmed dwarves
+                    score += 8;
+            }
+            if (GetTileCount(BuildingTypes.MainStorage) > 0)
+            {
+                //2 points per scoring tile, including this one
+                for (int x = 0; x < TileAreaWidth; x++)
+                {
+                    for (int y = 0; y < TileAreaHeight; y++)
+                    {
+                        if (new BuildingTile(CaveSpaces[x, y]).BuildingGroup == BuildingTile.BuildingGroups.Scoring)
+                            score +=2;
+                    }
+                }
+            }
+            score -= negativePoints;
 
             //Gold coins and Begging markers: Add up the values on your Gold coins and subtract 3 Gold points from that for
             //each Begging marker you have.

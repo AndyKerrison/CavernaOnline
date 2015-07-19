@@ -163,16 +163,16 @@ namespace Assets.ServerScripts
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.Seam));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.SlaughteringCave));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.MiningCave));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.StoneStorage));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.MainStorage));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.StoneStorage));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.MainStorage));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.CookingCave));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.BreedingCave));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.OreStorage));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.WeaponStorage));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.OreStorage));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.WeaponStorage));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.WorkingCave));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.PeacefulCave));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.SparePartStorage));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.SuppliesStorage));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.SuppliesStorage));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.WeavingParlour));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.HuntingParlour));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.BroomChamber));
@@ -180,11 +180,11 @@ namespace Assets.ServerScripts
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.MilkingParlour));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.BeerParlour));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.TreasureChamber));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.WritingChamber));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.WritingChamber));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.StateParlour));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.BlacksmithingParlour));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.FoodChamber));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.FodderChamber));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.FodderChamber));
             foreach (BuildingTile buildingTile in BuildingTiles)
             {
                 _serverSocket.SetBuildingAvailable(buildingTile.BuildingType);
@@ -1379,7 +1379,7 @@ namespace Assets.ServerScripts
             List<string> validBuildings = new List<string>();
             foreach (BuildingTile tile in BuildingTiles)
             {
-                if (_players[0].CanBuildTile(tile) && tile.IsDwelling)
+                if (_players[0].CanBuildTile(tile) && tile.BuildingGroup == BuildingTile.BuildingGroups.Dwelling)
                     validBuildings.Add(tile.BuildingType);
             }
             _serverSocket.ChooseBuildingTile("playerID", validBuildings);

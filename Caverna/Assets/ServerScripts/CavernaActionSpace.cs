@@ -583,7 +583,7 @@ namespace Assets.ServerScripts
                 {
                     //return false IFieldInfo we can't BuildingTypes a dwelling, 
                     //or if we can't grow afterwards
-                    if (!CavernaManager.Instance.BuildingTiles.Exists(x => player.CanBuildTile(x) && x.IsDwelling))
+                    if (!CavernaManager.Instance.BuildingTiles.Exists(x => player.CanBuildTile(x) && x.BuildingGroup == BuildingTile.BuildingGroups.Dwelling))
                         return actions;
                     if (player.GetDwarfCapacity() > 4)
                         return actions;
