@@ -53,6 +53,7 @@
      <Compile Include="Assets\ServerScripts\CavernaActionSpace.cs" />
      <Compile Include="Assets\ServerScripts\CavernaManager.cs" />
      <Compile Include="Assets\ServerScripts\CavernaPlayer.cs" />
+     <Compile Include="Assets\ServerScripts\CavernaPlayerTilesManager.cs" />
      <Compile Include="Assets\ServerScripts\Constants.cs" />
      <Compile Include="Assets\ServerScripts\Dwarf.cs" />
      <Compile Include="Assets\ServerScripts\PlayerResources.cs" />

@@ -7,14 +7,16 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F354A7DF-DA67-E440-5E9A-08091E98F597}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>WebGL:20</UnityBuildTarget>
     <UnityVersion>5.1.2f1</UnityVersion>
@@ -78,6 +80,7 @@
     <Compile Include="Assets\ServerScripts\CavernaActionSpace.cs" />
     <Compile Include="Assets\ServerScripts\CavernaManager.cs" />
     <Compile Include="Assets\ServerScripts\CavernaPlayer.cs" />
+    <Compile Include="Assets\ServerScripts\CavernaPlayerTilesManager.cs" />
     <Compile Include="Assets\ServerScripts\Constants.cs" />
     <Compile Include="Assets\ServerScripts\Dwarf.cs" />
     <Compile Include="Assets\ServerScripts\PlayerResources.cs" />

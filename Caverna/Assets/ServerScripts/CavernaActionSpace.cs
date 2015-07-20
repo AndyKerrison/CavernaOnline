@@ -515,34 +515,34 @@ namespace Assets.ServerScripts
                 //also need to check if you can actually perform this action (e.g have grain to sow, space to build, etc)
                 if (group.ActionName == CavernaActions.AddTunnelCaveDualTile) //cave cave & cave/tunnel are either/or
                 {
-                    if (!player.CanBuildTiles(TileLists.TunnelCaveDualTile))
+                    if (!player.HasSpaceForTiles(TileLists.TunnelCaveDualTile))
                         return actions;
                 }
                 if (group.ActionName == CavernaActions.AddCaveCaveDualTile)
                 {
-                    if (!player.CanBuildTiles(TileLists.CaveCaveDualTile))
+                    if (!player.HasSpaceForTiles(TileLists.CaveCaveDualTile))
                         return actions;
                 }
                 if (group.ActionName == CavernaActions.AddFieldClearingTile)
                 {
-                    if (!player.CanBuildTiles(TileLists.FieldClearingDualTile))
+                    if (!player.HasSpaceForTiles(TileLists.FieldClearingDualTile))
                         return actions;
                 }
                 if (group.ActionName == CavernaActions.AddOreMineDeepTunnelDualTile)
                 {
-                    if (!player.CanBuildTiles(TileLists.OreMineDeepTunnelDualTile))
+                    if (!player.HasSpaceForTiles(TileLists.OreMineDeepTunnelDualTile))
                         return actions;
                 }
                 if (group.ActionName == CavernaActions.AddRubyMineTile)
                 {
-                    if (!player.CanBuildTiles(TileTypes.RubyMine))
+                    if (!player.HasSpaceForTile(TileTypes.RubyMine))
                         return actions;
                 }
                 if (group.ActionName == CavernaActions.BuyStable)
                 {
                     if (player.Stone == 0)
                         return actions;
-                    if (!player.CanBuildTiles(TileTypes.Stable))
+                    if (!player.HasSpaceForTile(TileTypes.Stable))
                         return actions;
                 }
 
@@ -560,7 +560,7 @@ namespace Assets.ServerScripts
 
                 if (group.ActionName == CavernaActions.SowBake)
                 {
-                    if (player.GetFieldCount() == 0 || (player.Grain + player.Veg) == 0)
+                    if (player.GetTileCount(TileTypes.Field) == 0 || (player.Grain + player.Veg) == 0)
                         return actions;
                 }
                 if (group.ActionName == CavernaActions.Trade2Ore)
@@ -576,14 +576,14 @@ namespace Assets.ServerScripts
                 if (group.ActionName == CavernaActions.FurnishCavern)
                 {
                     //are there any tiles this player can build?
-                    if (!CavernaManager.Instance.BuildingTiles.Exists(player.CanBuildTile))
+                    if (!CavernaManager.Instance.BuildingTiles.Exists(player.CanAffordAndPlaceBuilding))
                         return actions;
                 }
                 if (group.ActionName == CavernaActions.FurnishDwellingThenGrow)
                 {
                     //return false IFieldInfo we can't BuildingTypes a dwelling, 
                     //or if we can't grow afterwards
-                    if (!CavernaManager.Instance.BuildingTiles.Exists(x => player.CanBuildTile(x) && x.BuildingGroup == BuildingTile.BuildingGroups.Dwelling))
+                    if (!CavernaManager.Instance.BuildingTiles.Exists(x => player.CanAffordAndPlaceBuilding(x) && x.BuildingGroup == BuildingTile.BuildingGroups.Dwelling))
                         return actions;
                     if (player.GetDwarfCapacity() > 4)
                         return actions;
@@ -640,7 +640,7 @@ namespace Assets.ServerScripts
         {
             List<string> actions = new List<string>();
 
-            int fields = player.GetFieldCount();
+            int fields = player.GetTileCount(TileTypes.Field);
             
             if (fields >=4 && player.Grain >= 2 && player.Veg >= 2)
             {

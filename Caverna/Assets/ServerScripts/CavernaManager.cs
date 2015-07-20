@@ -968,8 +968,6 @@ namespace Assets.ServerScripts
                 _serverSocket.SetActionFinished(actionID); //hide the modal till we've placed the dwelling
 
                 FurnishCavern();
-                //List<Vector2> validSpots = _players[0].GetValidBuildingSpots();
-                //_serverSocket.SetPlaceBuildingTile("playerID", BuildingTypes.Dwelling, validSpots);
                 return;
             }
 
@@ -979,8 +977,6 @@ namespace Assets.ServerScripts
                 _serverSocket.SetActionFinished(actionID); //hide the modal till we've placed the dwelling
 
                 FurnishDwelling();
-                //List<Vector2> validSpots = _players[0].GetValidBuildingSpots();
-                //_serverSocket.SetPlaceBuildingTile("playerID", BuildingTypes.Dwelling, validSpots);
                 return;
             }
 
@@ -1157,7 +1153,7 @@ namespace Assets.ServerScripts
                 else if (action == RubyTrades.ReorderDwarf)
                 {
                     _serverSocket.GetPlayerChoice("playerID", "Move which Dwarf to the front?", string.Empty,
-                        _players[0].GetReorderDwarfs());
+                        _players[0].GetReorderDwarfOptions());
                     return;
                 }
 
@@ -1223,8 +1219,6 @@ namespace Assets.ServerScripts
                 if (action == Expeditions.FurnishCavern)
                 {
                     FurnishCavern();
-                    //List<Vector2> validSpots = _players[0].GetValidBuildingSpots();
-                    //_serverSocket.SetPlaceBuildingTile("playerID", BuildingTypes.Dwelling, validSpots);
                     return;
                 }
 
@@ -1368,7 +1362,7 @@ namespace Assets.ServerScripts
             List<string> validBuildings = new List<string>();
             foreach (BuildingTile tile in BuildingTiles)
             {
-                if (_players[0].CanBuildTile(tile))
+                if (_players[0].CanAffordAndPlaceBuilding(tile))
                     validBuildings.Add(tile.BuildingType);
             }
             _serverSocket.ChooseBuildingTile("playerID", validBuildings);
@@ -1379,7 +1373,7 @@ namespace Assets.ServerScripts
             List<string> validBuildings = new List<string>();
             foreach (BuildingTile tile in BuildingTiles)
             {
-                if (_players[0].CanBuildTile(tile) && tile.BuildingGroup == BuildingTile.BuildingGroups.Dwelling)
+                if (_players[0].CanAffordAndPlaceBuilding(tile) && tile.BuildingGroup == BuildingTile.BuildingGroups.Dwelling)
                     validBuildings.Add(tile.BuildingType);
             }
             _serverSocket.ChooseBuildingTile("playerID", validBuildings);
