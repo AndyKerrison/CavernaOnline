@@ -197,5 +197,10 @@ namespace Assets.UIScripts
         {
             _gameRef.SetBuildingTaken(type);
         }
+
+        public void ResetBuildingTiles(string playerid)
+        {
+            _gameRef.ResetBuildingTiles();
+        }
     }
 }

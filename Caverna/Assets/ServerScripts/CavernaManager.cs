@@ -11,16 +11,16 @@ namespace Assets.ServerScripts
 
         private readonly IServerSocket _serverSocket;
 
-        private readonly List<string> _soloActions = new List<string>
+        private readonly List<string> _mainActions1_3 = new List<string>
         {
             ActionSpaceTypes.DriftMining,
-            ActionSpaceTypes.Excavation,
-            ActionSpaceTypes.StartingPlayer,
             ActionSpaceTypes.Logging,
-            ActionSpaceTypes.Supplies,
-            ActionSpaceTypes.OreMining,
             ActionSpaceTypes.WoodGathering,
+            ActionSpaceTypes.Excavation,
+            ActionSpaceTypes.Supplies,
             ActionSpaceTypes.Clearing,
+            ActionSpaceTypes.StartingPlayer,
+            ActionSpaceTypes.OreMining,
             ActionSpaceTypes.Sustenance
         };
 
@@ -108,6 +108,7 @@ namespace Assets.ServerScripts
                     food = Mathf.Min(3, Mathf.Max(1, i)); //1, 1, 2, 3, 3, 3, 3, etc
 
                 _serverSocket.ClearPlayerTiles("playerID");
+                _serverSocket.ResetBuildingTiles("playerID");
                 _players.Add(new CavernaPlayer(food, _serverSocket));
             }
             _startPlayerIndex = 0;
@@ -118,9 +119,20 @@ namespace Assets.ServerScripts
             _actionSpaces = new List<CavernaActionSpace>();
 
             //solo game
-            foreach (string actionName in _soloActions)
+            foreach (string actionName in _mainActions1_3)
             {
-                _actionSpaces.Add(new CavernaActionSpace(_actionSpaces.Count + 1, actionName));
+                if (IsSoloGame && actionName == ActionSpaceTypes.DriftMining)
+                    _actionSpaces.Add(new CavernaActionSpace(_actionSpaces.Count + 1, ActionSpaceTypes.SkipRound));
+                else if (IsSoloGame && actionName == ActionSpaceTypes.StartingPlayer)
+                    _actionSpaces.Add(new CavernaActionSpace(_actionSpaces.Count + 1, ActionSpaceTypes.SkipRound));
+                else if (IsSoloGame && actionName == ActionSpaceTypes.Supplies)
+                    _actionSpaces.Add(new CavernaActionSpace(_actionSpaces.Count + 1, ActionSpaceTypes.SkipRound));
+                else if (IsSoloGame && actionName == ActionSpaceTypes.Clearing)
+                    _actionSpaces.Add(new CavernaActionSpace(_actionSpaces.Count + 1, ActionSpaceTypes.SkipRound));
+                else
+                {
+                    _actionSpaces.Add(new CavernaActionSpace(_actionSpaces.Count + 1, actionName));
+                }
             }
 
             //standard actions
@@ -376,7 +388,7 @@ namespace Assets.ServerScripts
                 _serverSocket.AddActionSpace(_actionSpaces[_actionSpaces.Count - 1].ID, actionName);
             }
 
-            if (_gameRound >5)
+            if (_gameRound >12)
             {
                 //GAME OVER!
                 _serverSocket.GetPlayerChoice("playerID", "Game Over!", "Your score was " + _players[0].PlayerScore, new List<string>() {"Play Again" } );

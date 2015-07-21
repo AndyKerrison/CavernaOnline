@@ -62,7 +62,7 @@ public static class Expeditions
     public static string Ore = "2 Ore";
     public static string Pig = "1 Pig";
     public static string Gold = "2 Gold";
-    public static string FurnishCavern = "Furnish a Cavern";
+    public static string FurnishCavern = "Furnish 1 Cavern";
     public static string Stable = "1 Stable (free)";
     public static string Tunnel = "1 Tunnel";
     public static string SmallFence = "Fence a single pasture for 1 wood";

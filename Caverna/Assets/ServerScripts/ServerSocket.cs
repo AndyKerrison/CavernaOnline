@@ -34,6 +34,7 @@ namespace Assets.ServerScripts
         void SetBuildingAvailable(string buildingType);
         void ChooseBuildingTile(string playerid, List<string> validBuildings);
         void SetBuildingTaken(string type);
+        void ResetBuildingTiles(string playerid);
     }
 
     public class ServerSocket : IServerSocket
@@ -168,6 +169,11 @@ namespace Assets.ServerScripts
         public void SetBuildingTaken(string type)
         {
             _clientSocket.SetBuildingTaken(type);
+        }
+
+        public void ResetBuildingTiles(string playerid)
+        {
+            _clientSocket.ResetBuildingTiles(playerid);
         }
 
         public void HidePlayerChoice(string playerid)

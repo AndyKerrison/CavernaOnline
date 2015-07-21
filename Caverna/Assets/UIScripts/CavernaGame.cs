@@ -519,5 +519,18 @@ cardScale = Math.Min(xScale, yScale);
                 }
             }
         }
+
+        public void ResetBuildingTiles()
+        {
+                        
+            for (int x = 0; x < 12; x++)
+            {
+                for (int y = 0; y < 4; y++)
+                {
+                    Destroy(_buildingTiles[x, y]);
+                }
+            }
+            InitBuildingTiles();
+        }
     }
 }
