@@ -11,6 +11,7 @@ namespace Assets.ServerScripts
         public int donkeyCapacity;
         public int pigCapacity;
         public int sheepCapacity;
+        public int cowCapacity;
 
         private int dogs;
         private int sheep;
@@ -24,7 +25,7 @@ namespace Assets.ServerScripts
             {
                 if (sheep > 0 || pigs > 0 || donkeys > 0)
                     return 0;
-                return genericCapacity - cows;
+                return Math.Max(genericCapacity, cowCapacity) - cows;
             }
         }
 
@@ -46,6 +47,11 @@ namespace Assets.ServerScripts
                     return 0;
                 return Math.Max(genericCapacity, sheepCapacity) - sheep;
             }
+        }
+
+        public bool IsUnfilledCowHolder
+        {
+            get { return cowCapacity > cows; }
         }
 
         public bool IsUnfilledPigHolder

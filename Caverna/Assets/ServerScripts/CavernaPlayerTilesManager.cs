@@ -7,6 +7,8 @@ namespace Assets.ServerScripts
 {
     class CavernaPlayerTilesManager
     {
+        private CavernaPlayer _player;
+
         private const int TileAreaWidth = 3;
         private const int TileAreaHeight = 4;
 
@@ -20,8 +22,9 @@ namespace Assets.ServerScripts
         private Vector2 _firstPartOfDouble = new Vector2(-1, -1);
         private bool _isPlacingSecondPartOfTile;
 
-        public CavernaPlayerTilesManager()
+        public CavernaPlayerTilesManager(CavernaPlayer player)
         {
+            _player = player;
             _doubleFencedPastures = new List<Vector2>();
             TilesToPlace = new List<string>();
 
@@ -338,8 +341,11 @@ namespace Assets.ServerScripts
             capacity += GetTileCount(BuildingTypes.Dwelling);
             capacity += GetTileCount(BuildingTypes.SimpleDwelling1);
             capacity += GetTileCount(BuildingTypes.SimpleDwelling2);
+            capacity += 2*GetTileCount(BuildingTypes.CoupleDwelling);
             if (capacity > 5)
                 capacity = 5;
+            if (capacity == 5 && HasTile(BuildingTypes.AdditionalDwelling))
+                capacity = 6;
             return capacity;
         }
 
@@ -720,6 +726,38 @@ namespace Assets.ServerScripts
                 animalsHolders.Add(holder);
             }
 
+            //add special buildings
+            List<Vector2> mixedDwellingPositions = GetMatchingCaveTileSpaces(BuildingTypes.MixedDwelling);
+            foreach (Vector2 position in mixedDwellingPositions)
+            {
+                AnimalHolder holder = new AnimalHolder();
+                holder.TileType = BuildingTypes.MixedDwelling;
+                holder.isCave = true;
+                holder.genericCapacity = 2;
+                holder.position = position;
+                animalsHolders.Add(holder);
+            }
+            List<Vector2> breakfastRoomPositions = GetMatchingCaveTileSpaces(BuildingTypes.BreakfastRoom);
+            foreach (Vector2 position in breakfastRoomPositions)
+            {
+                AnimalHolder holder = new AnimalHolder();
+                holder.TileType = BuildingTypes.BreakfastRoom;
+                holder.isCave = true;
+                holder.cowCapacity = 3;
+                holder.position = position;
+                animalsHolders.Add(holder);
+            }
+            List<Vector2> cuddleRoomPositions = GetMatchingCaveTileSpaces(BuildingTypes.CuddleRoom);
+            foreach (Vector2 position in cuddleRoomPositions)
+            {
+                AnimalHolder holder = new AnimalHolder();
+                holder.TileType = BuildingTypes.CuddleRoom;
+                holder.isCave = true;
+                holder.sheepCapacity = _player.GetDwarfStatus().Count;
+                holder.position = position;
+                animalsHolders.Add(holder);
+            }
+
             //add whatever the dogs are doing
 
             int cowsToAllocate = animalManager.Cows;
@@ -771,6 +809,20 @@ namespace Assets.ServerScripts
             }
 
             //FIRST PASS - areas only for specific animals
+
+            while (cowsToAllocate > 0)
+            {
+                //first find spaces that only hold cows
+                List<AnimalHolder> cowHolders = animalsHolders.FindAll(x => x.IsUnfilledCowHolder);
+                if (cowHolders.Count > 0)
+                {
+                    cowHolders[0].FillAnimals(ResourceTypes.Cows, ref cowsToAllocate);
+                    continue;
+                }
+
+                //nowhere to put them!
+                break;
+            }
 
             while (pigsToAllocate > 0)
             {

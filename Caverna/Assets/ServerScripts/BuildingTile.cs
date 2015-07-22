@@ -50,6 +50,30 @@ namespace Assets.ServerScripts
                 IsUnlimited = false;
                 BuildingGroup = BuildingGroups.Dwelling;
             }
+            if (buildingType == BuildingTypes.CoupleDwelling)
+            {
+                VP = 5;
+                WoodCost = 8;
+                StoneCost = 6;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Dwelling;
+            }
+            if (buildingType == BuildingTypes.AdditionalDwelling)
+            {
+                VP = 5;
+                WoodCost = 4;
+                StoneCost = 3;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Dwelling;
+            }
+            if (buildingType == BuildingTypes.MixedDwelling)
+            {
+                VP = 4;
+                WoodCost = 5;
+                StoneCost = 4;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Dwelling;
+            }
             if (buildingType == BuildingTypes.TreasureChamber)
             {
                 VP = 0;
@@ -134,6 +158,82 @@ namespace Assets.ServerScripts
                 StoneCost = 1;
                 IsUnlimited = false;
                 BuildingGroup = BuildingGroups.Scoring;
+            }
+            if (buildingType == BuildingTypes.WeavingParlour)
+            {
+                VP = 0;
+                WoodCost = 2;
+                StoneCost = 1;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Scoring;
+            }
+            if (buildingType == BuildingTypes.MilkingParlour)
+            {
+                VP = 0;
+                WoodCost = 2;
+                StoneCost = 2;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Scoring;
+            }
+
+
+            if (buildingType == BuildingTypes.SlaughteringCave)
+            {
+                VP = 2;
+                WoodCost = 2;
+                StoneCost = 2;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Working;
+            }
+            if (buildingType == BuildingTypes.BreedingCave)
+            {
+                VP = 2;
+                GrainCost = 1;
+                StoneCost = 1;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Working;
+            }
+            if (buildingType == BuildingTypes.DogSchool)
+            {
+                VP = 0;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Working;
+            }
+            if (buildingType == BuildingTypes.BreakfastRoom)
+            {
+                VP = 0;
+                WoodCost = 1;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Working;
+            }
+            if (buildingType == BuildingTypes.CuddleRoom)
+            {
+                VP = 0;
+                WoodCost = 1;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Working;
+            }
+            if (buildingType == BuildingTypes.Quarry)
+            {
+                VP = 2;
+                WoodCost = 1;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Working;
+            }
+            if (buildingType == BuildingTypes.Seam)
+            {
+                VP = 1;
+                WoodCost = 2;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Working;
+            }
+            if (buildingType == BuildingTypes.Blacksmith)
+            {
+                VP = 3;
+                WoodCost = 1;
+                StoneCost = 2;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Working;
             }
         }
     }

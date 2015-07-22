@@ -10,7 +10,8 @@ namespace Assets.ServerScripts
         {
             Exclusive,
             Optional,
-            OrderedOptional
+            OrderedOptional,
+            Ordered
         }
 
         public ActionGroup(string actionName, bool isSingleAction, int order): this(actionName, isSingleAction)
@@ -378,14 +379,20 @@ namespace Assets.ServerScripts
                     _actionGroup = new ActionGroup(string.Empty, false);
                     _actionGroup.Type = ActionGroup.ActionGroupTypes.Exclusive;
                     _actionGroup.Actions.Add(new ActionGroup(CavernaActions.FamilyGrowth, true));
-                    _actionGroup.Actions.Add(new ActionGroup(CavernaActions.FurnishCavern, true));
+                    _actionGroup.Actions.Add(new ActionGroup(CavernaActions.FurnishDwelling, true));
                     break;
                 }
                 case ActionSpaceTypes.UrgentWish:
                 {
                     _actionGroup = new ActionGroup(string.Empty, false);
                     _actionGroup.Type = ActionGroup.ActionGroupTypes.Exclusive;
-                    _actionGroup.Actions.Add(new ActionGroup(CavernaActions.FurnishDwellingThenGrow, true));
+
+                    ActionGroup subGroup = new ActionGroup(string.Empty, false);
+                    subGroup.Type = ActionGroup.ActionGroupTypes.Ordered;
+                    subGroup.Actions.Add(new ActionGroup(CavernaActions.FurnishDwellingThenGrow, true, 1));
+                    subGroup.Actions.Add(new ActionGroup(CavernaActions.FamilyGrowth, true, 2));
+
+                    _actionGroup.Actions.Add(subGroup);
                     _actionGroup.Actions.Add(new ActionGroup(CavernaActions.CollectResources, true));
                     _goldStatic = 3;
                     break;
@@ -579,13 +586,10 @@ namespace Assets.ServerScripts
                     if (!CavernaManager.Instance.BuildingTiles.Exists(player.CanAffordAndPlaceBuilding))
                         return actions;
                 }
-                if (group.ActionName == CavernaActions.FurnishDwellingThenGrow)
+                if (group.ActionName == CavernaActions.FurnishDwellingThenGrow || group.ActionName == CavernaActions.FurnishDwelling)
                 {
-                    //return false IFieldInfo we can't BuildingTypes a dwelling, 
-                    //or if we can't grow afterwards
+                    //return false if we can't Build a dwelling, 
                     if (!CavernaManager.Instance.BuildingTiles.Exists(x => player.CanAffordAndPlaceBuilding(x) && x.BuildingGroup == BuildingTile.BuildingGroups.Dwelling))
-                        return actions;
-                    if (player.GetDwarfCapacity() > 4)
                         return actions;
                 }
                 if (group.ActionName == CavernaActions.Blacksmithing)
@@ -604,15 +608,23 @@ namespace Assets.ServerScripts
                 actions.Add(group.ActionName);
             }
             else
-            {
-                //if this is an exclusive subgroup, one being used means all are used
-                if (group.Type == ActionGroup.ActionGroupTypes.Exclusive && group.Actions.Exists(x => x.IsUsed))
-                    return new List<string>();
-
+            {                   
                 foreach (ActionGroup subGroup in group.Actions)
                 {
-                    //if this is an ordered subgroup, you can only add if no later one has been used
+                    //if this is an exclusive subgroup, you can only add one if none of the others has been used
+                    if (group.Type == ActionGroup.ActionGroupTypes.Exclusive && group.Actions.Exists(x => x.IsUsed && x.ActionName != subGroup.ActionName))
+                    {
+                        continue;
+                    }
+
+                    //if this is an ordered optional subgroup, you can only add if no later one has been used
                     if (group.Type == ActionGroup.ActionGroupTypes.OrderedOptional && group.Actions.Exists(x => x.IsUsed && x.Order > subGroup.Order))
+                    {
+                        continue;
+                    }
+
+                    //if this is an ordered subgroup, you can only add it if all previous actions have been used
+                    if (group.Type == ActionGroup.ActionGroupTypes.Ordered && group.Actions.Exists(x => !x.IsUsed && x.Order < subGroup.Order))
                     {
                         continue;
                     }

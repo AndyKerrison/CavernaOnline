@@ -150,30 +150,30 @@ namespace Assets.ServerScripts
             //todo - clear existing buildings panel if any
             BuildingTiles = new List<BuildingTile>();
             BuildingTiles.Add(new BuildingTile(BuildingTypes.Dwelling));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.MixedDwelling));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.MixedDwelling));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.Carpenter));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.Miner));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.SimpleDwelling1));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.CoupleDwelling));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.CoupleDwelling));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.StoneCarver));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.Builder));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.SimpleDwelling2));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.AdditionalDwelling));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.Blacksmith));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.AdditionalDwelling));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.Blacksmith));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.Trader));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.CuddleRoom));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.CuddleRoom));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.WorkRoom));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.WoodSupplier));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.DogSchool));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.BreakfastRoom));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.DogSchool));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.BreakfastRoom));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.GuestRoom));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.StoneSupplier));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.Quarry));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.Quarry));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.StubbleRoom));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.OfficeRoom));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.RubySupplier));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.Seam));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.SlaughteringCave));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.Seam));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.SlaughteringCave));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.MiningCave));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.StoneStorage));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.MainStorage));
@@ -185,11 +185,11 @@ namespace Assets.ServerScripts
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.PeacefulCave));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.SparePartStorage));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.SuppliesStorage));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.WeavingParlour));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.WeavingParlour));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.HuntingParlour));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.BroomChamber));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.PrayerChamber));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.MilkingParlour));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.MilkingParlour));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.BeerParlour));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.TreasureChamber));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.WritingChamber));
@@ -694,11 +694,12 @@ namespace Assets.ServerScripts
                 }
                 
                 //if this is the dwelling from urgent wish, do FG also
-                if (_actionSpaces.Find(x => x.ID == _activeActionSpaceID).Type == ActionSpaceTypes.UrgentWish)
-                {
-                    _players[0].FamilyGrowth();
-                    _serverSocket.SetPlayerDwarves(_players[0].GetDwarfStatus());
-                }
+                // (_actionSpaces.Find(x => x.ID == _activeActionSpaceID).Type == ActionSpaceTypes.UrgentWish)
+                //{
+                //    if (_players[0])
+                //    _players[0].FamilyGrowth();
+                //    _serverSocket.SetPlayerDwarves(_players[0].GetDwarfStatus());
+                //}
 
                 GetActions("player", _activeActionSpaceID);
                 return;
@@ -983,7 +984,7 @@ namespace Assets.ServerScripts
                 return;
             }
 
-            if (actionName == CavernaActions.FurnishDwellingThenGrow)
+            if (actionName == CavernaActions.FurnishDwellingThenGrow || actionName == CavernaActions.FurnishDwelling)
             {
                 //TODO handle other building types
                 _serverSocket.SetActionFinished(actionID); //hide the modal till we've placed the dwelling
@@ -1008,23 +1009,6 @@ namespace Assets.ServerScripts
                 actionName == CavernaActions.Level2Weapon ||
                 actionName == CavernaActions.Level1Weapon)
             {
-                if (actionName == CavernaActions.Level8Weapon)
-                    _players[0].Ore -= 8;
-                if (actionName == CavernaActions.Level7Weapon)
-                    _players[0].Ore -= 7;
-                if (actionName == CavernaActions.Level6Weapon)
-                    _players[0].Ore -= 6;
-                if (actionName == CavernaActions.Level5Weapon)
-                    _players[0].Ore -= 5;
-                if (actionName == CavernaActions.Level4Weapon)
-                    _players[0].Ore -= 4;
-                if (actionName == CavernaActions.Level3Weapon)
-                    _players[0].Ore -= 3;
-                if (actionName == CavernaActions.Level2Weapon)
-                    _players[0].Ore -= 2;
-                if (actionName == CavernaActions.Level1Weapon)
-                    _players[0].Ore -= 1;
-
                 _players[0].ArmActiveDwarf(actionName);
                 _serverSocket.SetPlayerDwarves(_players[0].GetDwarfStatus());
                 GetActions("playerID", actionID);

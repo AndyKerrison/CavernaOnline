@@ -335,4 +335,5 @@ public static class CavernaActions
     public static string Trade2Ore = "Trade 2 Ore for 2 Gold and 1 Food";
     public static string FamilyGrowth = "Family Growth";
     public static string FurnishDwellingThenGrow = "Furnish a dwelling, then Family Growth";
+    public static string FurnishDwelling = "Furnish a Dwelling";
 }

@@ -12,7 +12,7 @@ namespace Assets.ServerScripts
         private readonly IServerSocket _serverSocket;
         private List<Dwarf> _dwarves = new List<Dwarf>();
         private readonly AnimalManager animalManager;
-        private readonly CavernaPlayerTilesManager tilesManager = new CavernaPlayerTilesManager();
+        private readonly CavernaPlayerTilesManager tilesManager;
         private readonly PlayerResources _playerResources;
         
         //temporary variables to hold action status
@@ -60,6 +60,10 @@ namespace Assets.ServerScripts
             get { return _playerResources.Stone; }
             set
             {
+                if (tilesManager.HasTile(BuildingTypes.Seam) && value > _playerResources.Stone)
+                {
+                    Ore += value - _playerResources.Stone;
+                }
                 _playerResources.Stone = value;
                 _serverSocket.SetPlayerResources(ID, ResourceTypes.Stone, Stone);
                 CalculatePlayerScore();
@@ -137,6 +141,10 @@ namespace Assets.ServerScripts
             get { return animalManager.Dogs; }
             set
             {
+                if (value > animalManager.Dogs && tilesManager.HasTile(BuildingTypes.DogSchool))
+                {
+                    Wood += value - animalManager.Dogs;
+                }
                 animalManager.Dogs = value;
                 AutoArrangeAnimals(false, false);
                 CalculatePlayerScore();
@@ -190,6 +198,7 @@ namespace Assets.ServerScripts
         public CavernaPlayer(int food, IServerSocket serverSocket)
         {
             _serverSocket = serverSocket;
+            tilesManager = new CavernaPlayerTilesManager(this);
             animalManager = new AnimalManager();
             _playerResources = new PlayerResources();
             //these will trigger a ui update, in case you started a new game
@@ -279,28 +288,54 @@ namespace Assets.ServerScripts
         public List<string> GetBlacksmithActions()
         {
             List<string> actions = new List<string>();
+            int blacksmithModifier = 0;
+            if (tilesManager.HasTile(BuildingTypes.Blacksmith))
+                blacksmithModifier = 2;
 
-            if (Ore >= 8)
+            if (Ore + blacksmithModifier >= 8)
                 actions.Add(CavernaActions.Level8Weapon);
-            if (Ore >= 7)
+            if (Ore + blacksmithModifier >= 7)
                 actions.Add(CavernaActions.Level7Weapon);
-            if (Ore >= 6)
+            if (Ore + blacksmithModifier >= 6)
                 actions.Add(CavernaActions.Level6Weapon);
-            if (Ore >= 5)
+            if (Ore + blacksmithModifier >= 5)
                 actions.Add(CavernaActions.Level5Weapon);
-            if (Ore >= 4)
+            if (Ore + blacksmithModifier >= 4)
                 actions.Add(CavernaActions.Level4Weapon);
-            if (Ore >= 3)
+            if (Ore + blacksmithModifier >= 3)
                 actions.Add(CavernaActions.Level3Weapon);
-            if (Ore >= 2)
+            if (Ore + blacksmithModifier >= 2)
                 actions.Add(CavernaActions.Level2Weapon);
-            if (Ore >= 1)
+            if (Ore + blacksmithModifier >= 1)
                 actions.Add(CavernaActions.Level1Weapon);
             return actions;
         }
 
         public void ArmActiveDwarf(string actionName)
         {
+            int oreCost = 0;
+            if (actionName == CavernaActions.Level8Weapon)
+                oreCost = 8;
+            if (actionName == CavernaActions.Level7Weapon)
+                oreCost = 7;
+            if (actionName == CavernaActions.Level6Weapon)
+                oreCost = 6;
+            if (actionName == CavernaActions.Level5Weapon)
+                oreCost = 5;
+            if (actionName == CavernaActions.Level4Weapon)
+                oreCost = 4;
+            if (actionName == CavernaActions.Level3Weapon)
+                oreCost = 3;
+            if (actionName == CavernaActions.Level2Weapon)
+                oreCost = 2;
+            if (actionName == CavernaActions.Level1Weapon)
+                oreCost = 1;
+
+            if (tilesManager.HasTile(BuildingTypes.Blacksmith))
+                oreCost -= 2;
+            if (oreCost <= 0)
+                oreCost = 0;
+            Ore -= oreCost;
             _dwarves[_activeDwarfIndex].AddWeapon(actionName);
             CalculatePlayerScore();
         }
@@ -355,7 +390,11 @@ namespace Assets.ServerScripts
         public void BreedDonkeys()
         {
             if (Donkeys >= 2)
+            {
                 Donkeys++;
+                if (tilesManager.HasTile(BuildingTypes.Quarry))
+                    Stone++;
+            }
             CalculatePlayerScore();
         }
 
@@ -493,6 +532,26 @@ namespace Assets.ServerScripts
                 {
                     throw new NotImplementedException("Unimplemented food action: " + action);
                 }
+            }
+
+            if (tilesManager.HasTile(BuildingTypes.SlaughteringCave))
+            {
+                switch (action)
+                {
+                    case (FoodActions.ConvertDonkey):
+                    case (FoodActions.ConvertCow):
+                    case (FoodActions.ConvertPig):
+                    case (FoodActions.ConvertSheep):
+                        {
+                            Food++;
+                            break;
+                        }
+                    case (FoodActions.ConvertDonkeyPair):
+                        {
+                            Food += 2;
+                            break;
+                        }
+                }   
             }
             CalculatePlayerScore();
         }
@@ -886,6 +945,14 @@ namespace Assets.ServerScripts
             {
                 score += (int)Math.Floor(Ore/2f);
             }
+            if (tilesManager.HasTile(BuildingTypes.WeavingParlour))
+            {
+                score += (int)Math.Floor(Sheep / 2f);
+            }
+            if (tilesManager.HasTile(BuildingTypes.MilkingParlour))
+            {
+                score += Cows;
+            }
             if (tilesManager.HasTile(BuildingTypes.WeaponStorage))
             {
                 score += 3*_dwarves.FindAll(x => x.WeaponLevel > 0).Count;
@@ -976,6 +1043,18 @@ namespace Assets.ServerScripts
             Grain -= new BuildingTile(buildingType).GrainCost;
             Ore -= new BuildingTile(buildingType).OreCost;
             Food -= new BuildingTile(buildingType).FoodCost;
+            if (buildingType == BuildingTypes.WeavingParlour)
+            {
+                Food += Sheep;
+            }
+            if (buildingType == BuildingTypes.MilkingParlour)
+            {
+                Food += Cows;
+            }
+            if (buildingType == BuildingTypes.Blacksmith)
+            {
+                Ore += 2;
+            }
 
             tilesManager.SetBuildingTileAt(_serverSocket, position, buildingType);
 
