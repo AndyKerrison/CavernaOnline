@@ -151,11 +151,11 @@ namespace Assets.ServerScripts
             BuildingTiles = new List<BuildingTile>();
             BuildingTiles.Add(new BuildingTile(BuildingTypes.Dwelling));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.MixedDwelling));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.Carpenter));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.Carpenter));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.Miner));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.SimpleDwelling1));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.CoupleDwelling));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.StoneCarver));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.StoneCarver));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.Builder));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.SimpleDwelling2));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.AdditionalDwelling));
@@ -174,7 +174,7 @@ namespace Assets.ServerScripts
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.RubySupplier));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.Seam));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.SlaughteringCave));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.MiningCave));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.MiningCave));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.StoneStorage));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.MainStorage));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.CookingCave));
@@ -1241,6 +1241,12 @@ namespace Assets.ServerScripts
                     return;
                 }
 
+                if (action == Expeditions.SmallFenceDiscount)
+                {
+                    SetPlayerPlaceTile(_players[0], TileTypes.SmallFence);
+                    return;
+                }
+
 
                 //LEVEL 10
                 if (action == Expeditions.Cow)
@@ -1250,6 +1256,13 @@ namespace Assets.ServerScripts
                 if (action == Expeditions.BigFence)
                 {
                     player.Wood-=2;
+                    SetPlayerPlaceTiles(_players[0], TileLists.BigFence);
+                    return;
+                }
+
+                if (action == Expeditions.BigFenceDiscount)
+                {
+                    player.Wood -= 1;
                     SetPlayerPlaceTiles(_players[0], TileLists.BigFence);
                     return;
                 }

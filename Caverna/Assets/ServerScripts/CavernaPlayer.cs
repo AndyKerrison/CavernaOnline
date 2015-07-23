@@ -271,8 +271,16 @@ namespace Assets.ServerScripts
 
         public bool CanAffordAndPlaceBuilding(BuildingTile buildingTile)
         {
-            return (Wood >= buildingTile.WoodCost &&
-                    Stone >= buildingTile.StoneCost &&
+            int stoneCost = buildingTile.StoneCost;
+            if (tilesManager.HasTile(BuildingTypes.StoneCarver) && stoneCost > 0)
+                stoneCost--;
+
+            int woodCost = buildingTile.WoodCost;
+            if (tilesManager.HasTile(BuildingTypes.Carpenter) && woodCost > 0)
+                woodCost--;
+
+            return (Wood >= woodCost &&
+                    Stone >= stoneCost &&
                     Veg >= buildingTile.VegCost &&
                     Grain >= buildingTile.GrainCost &&
                     Ore >= buildingTile.OreCost &&
@@ -422,6 +430,11 @@ namespace Assets.ServerScripts
             else
             {
                 _harvestFoodReq = _dwarves.Count*2 - _dwarves.Count(x => x.IsChild);
+                int mineCount = tilesManager.GetTileCount(TileTypes.OreMine) +
+                                tilesManager.GetTileCount(TileTypes.RubyMine);
+                _harvestFoodReq -= Math.Min(mineCount, Donkeys);
+                if (_harvestFoodReq <= 0)
+                    _harvestFoodReq = 0;
             }
             if (Food >= _harvestFoodReq)
             {
@@ -730,8 +743,14 @@ namespace Assets.ServerScripts
 
                 if (!_usedExpeditionActions.Contains(Expeditions.SmallFence) &&
                     tilesManager.HasSpaceForTile(TileTypes.SmallFence) &&
+                    !tilesManager.HasTile(BuildingTypes.Carpenter) &&
                     Wood >=1)
                     actions.Add(Expeditions.SmallFence);
+
+                if (!_usedExpeditionActions.Contains(Expeditions.SmallFence) &&
+                    tilesManager.HasSpaceForTile(TileTypes.SmallFence) &&
+                    tilesManager.HasTile(BuildingTypes.Carpenter))
+                    actions.Add(Expeditions.SmallFenceDiscount);
             }
 
             if (weaponLevel >= 10)
@@ -741,8 +760,15 @@ namespace Assets.ServerScripts
 
                 if (!_usedExpeditionActions.Contains(Expeditions.BigFence) &&
                     tilesManager.HasSpaceForTiles(TileLists.BigFence) &&
+                    !tilesManager.HasTile(BuildingTypes.Carpenter) &&
                     Wood >=2)
                     actions.Add(Expeditions.BigFence);
+
+                if (!_usedExpeditionActions.Contains(Expeditions.BigFence) &&
+                    tilesManager.HasSpaceForTiles(TileLists.BigFence) &&
+                    tilesManager.HasTile(BuildingTypes.Carpenter) &&
+                    Wood >= 1)
+                    actions.Add(Expeditions.BigFenceDiscount);
             }
 
             if (weaponLevel >= 11)
@@ -1037,8 +1063,16 @@ namespace Assets.ServerScripts
 
         public void SetBuildingTileAt(Vector2 position, string buildingType)
         {
-            Wood -= new BuildingTile(buildingType).WoodCost;
-            Stone -= new BuildingTile(buildingType).StoneCost;
+            int stoneCost = new BuildingTile(buildingType).StoneCost;
+            if (tilesManager.HasTile(BuildingTypes.StoneCarver) && stoneCost > 0)
+                stoneCost--;
+
+            int woodCost = new BuildingTile(buildingType).WoodCost;
+            if (tilesManager.HasTile(BuildingTypes.Carpenter) && woodCost > 0)
+                woodCost--;
+              
+            Wood -= woodCost;
+            Stone -= stoneCost;
             Veg -= new BuildingTile(buildingType).VegCost;
             Grain -= new BuildingTile(buildingType).GrainCost;
             Ore -= new BuildingTile(buildingType).OreCost;
@@ -1054,6 +1088,10 @@ namespace Assets.ServerScripts
             if (buildingType == BuildingTypes.Blacksmith)
             {
                 Ore += 2;
+            }
+            if (buildingType == BuildingTypes.StoneCarver)
+            {
+                Stone += 2;
             }
 
             tilesManager.SetBuildingTileAt(_serverSocket, position, buildingType);
@@ -1099,6 +1137,32 @@ namespace Assets.ServerScripts
         public bool CanBuildDoubleFence()
         {
             return tilesManager.CanBuildDoubleFence();
+        }
+
+        public bool CanBuildStable()
+        {
+            int stoneCost = 1;
+            if (tilesManager.HasTile(BuildingTypes.StoneCarver))
+            {
+                stoneCost--;
+            }
+            if (stoneCost > Stone || !HasSpaceForTile(TileTypes.Stable))
+                return false;
+            return true;
+        }
+
+        public bool CanBuyDoubleFence(int woodCost)
+        {
+            if (woodCost > 0 && tilesManager.HasTile(BuildingTypes.Carpenter))
+                woodCost--;
+            return Wood >= woodCost && CanBuildDoubleFence();
+        }
+
+        public bool CanBuySingleFence(int woodCost)
+        {
+            if (woodCost > 0 && tilesManager.HasTile(BuildingTypes.Carpenter))
+                woodCost--;
+            return Wood >= woodCost && GetTileCount(TileTypes.Clearing) > 0;
         }
     }
 }

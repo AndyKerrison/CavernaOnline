@@ -235,6 +235,28 @@ namespace Assets.ServerScripts
                 IsUnlimited = false;
                 BuildingGroup = BuildingGroups.Working;
             }
+            if (buildingType == BuildingTypes.MiningCave)
+            {
+                VP = 2;
+                WoodCost = 3;
+                StoneCost = 2;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Working;
+            }
+            if (buildingType == BuildingTypes.StoneCarver)
+            {
+                VP = 1;
+                WoodCost = 1;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Working;
+            }
+            if (buildingType == BuildingTypes.Carpenter)
+            {
+                VP = 0;
+                StoneCost = 1;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Working;
+            }
         }
     }
 }

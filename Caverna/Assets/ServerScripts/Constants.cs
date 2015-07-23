@@ -66,8 +66,10 @@ public static class Expeditions
     public static string Stable = "1 Stable (free)";
     public static string Tunnel = "1 Tunnel";
     public static string SmallFence = "Fence a single pasture for 1 wood";
+    public static string SmallFenceDiscount = "Fence a single pasture for 0 wood";
     public static string Cow = "1 Cow";
     public static string BigFence = "Fence a double pasture for 2 wood";
+    public static string BigFenceDiscount = "Fence a double pasture for 1 wood";
     public static string Clearing = "1 Pasture";
     public static string Dwelling = "Build a Dwelling for 2 wood & 2 stone";
     public static string Field = "1 Field";

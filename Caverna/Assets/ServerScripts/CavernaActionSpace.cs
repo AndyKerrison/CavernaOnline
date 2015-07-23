@@ -547,21 +547,19 @@ namespace Assets.ServerScripts
                 }
                 if (group.ActionName == CavernaActions.BuyStable)
                 {
-                    if (player.Stone == 0)
-                        return actions;
-                    if (!player.HasSpaceForTile(TileTypes.Stable))
+                    if (!player.CanBuildStable())
                         return actions;
                 }
 
                 if (group.ActionName == CavernaActions.BigFence)
                 {
-                    if (player.Wood < 4 || !player.CanBuildDoubleFence())
+                    if (!player.CanBuyDoubleFence(4))
                         return actions;
                 }
 
                 if (group.ActionName == CavernaActions.SmallFence)
                 {
-                    if (player.Wood < 2 || player.GetTileCount(TileTypes.Clearing) < 1)
+                    if (!player.CanBuySingleFence(2))
                         return actions;
                 }
 
