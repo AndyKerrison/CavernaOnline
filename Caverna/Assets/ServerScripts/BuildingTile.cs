@@ -257,6 +257,36 @@ namespace Assets.ServerScripts
                 IsUnlimited = false;
                 BuildingGroup = BuildingGroups.Working;
             }
+            if (buildingType == BuildingTypes.WoodSupplier)
+            {
+                VP = 2;
+                StoneCost = 1;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Working;
+            }
+            if (buildingType == BuildingTypes.StoneSupplier)
+            {
+                VP = 1;
+                WoodCost = 1;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Working;
+            }
+            if (buildingType == BuildingTypes.RubySupplier)
+            {
+                VP = 2;
+                WoodCost = 2;
+                StoneCost = 2;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Working;
+            }
+            if (buildingType == BuildingTypes.Miner)
+            {
+                VP = 3;
+                WoodCost = 1;
+                StoneCost = 1;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Working;
+            }
         }
     }
 }

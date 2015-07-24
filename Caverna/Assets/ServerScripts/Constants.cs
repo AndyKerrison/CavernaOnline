@@ -86,7 +86,13 @@ public static class HarvestOptions
     public const string SkipFieldPhase = "Skip Field Phase";
     public const string SkipBreedingPhase = "Skip Breeding Phase";
 }
-
+public static class RoundBonusTypes
+{
+    public const string Wood = "wood";
+    public static string Stone = "stone";
+    public static string Ruby = "ruby";
+    public static string DonkeyOre = "donkeyOre";
+}
 public static class RubyTrades
 {
     public static string Cancel = "Cancel";

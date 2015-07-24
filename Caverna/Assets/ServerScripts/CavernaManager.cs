@@ -152,7 +152,7 @@ namespace Assets.ServerScripts
             BuildingTiles.Add(new BuildingTile(BuildingTypes.Dwelling));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.MixedDwelling));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.Carpenter));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.Miner));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.Miner));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.SimpleDwelling1));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.CoupleDwelling));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.StoneCarver));
@@ -163,15 +163,15 @@ namespace Assets.ServerScripts
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.Trader));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.CuddleRoom));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.WorkRoom));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.WoodSupplier));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.WoodSupplier));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.DogSchool));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.BreakfastRoom));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.GuestRoom));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.StoneSupplier));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.StoneSupplier));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.Quarry));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.StubbleRoom));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.OfficeRoom));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.RubySupplier));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.RubySupplier));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.Seam));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.SlaughteringCave));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.MiningCave));
@@ -253,6 +253,7 @@ namespace Assets.ServerScripts
             _players.ForEach(x => x.HarvestFeedingComplete = false);
             _players.ForEach(x => x.HarvestAnimalsComplete = false);
             _players.ForEach(x => x.ResetDwarves());
+            _players.ForEach(x => x.ApplyNewRoundBonus());
 
             _serverSocket.SetPlayerDwarves(_players[0].GetDwarfStatus());
 

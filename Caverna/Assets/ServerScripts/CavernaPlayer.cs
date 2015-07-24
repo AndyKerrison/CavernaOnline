@@ -14,6 +14,7 @@ namespace Assets.ServerScripts
         private readonly AnimalManager animalManager;
         private readonly CavernaPlayerTilesManager tilesManager;
         private readonly PlayerResources _playerResources;
+        private readonly List<List<string>> _newRoundBonuses; 
         
         //temporary variables to hold action status
         private int _activeDwarfIndex;
@@ -201,6 +202,7 @@ namespace Assets.ServerScripts
             tilesManager = new CavernaPlayerTilesManager(this);
             animalManager = new AnimalManager();
             _playerResources = new PlayerResources();
+            _newRoundBonuses = new List<List<string>>();
             //these will trigger a ui update, in case you started a new game
             Wood = 0;
             Ore = 0;
@@ -1093,10 +1095,36 @@ namespace Assets.ServerScripts
             {
                 Stone += 2;
             }
+            if (buildingType == BuildingTypes.WoodSupplier)
+            {
+                AddRoundBonuses(RoundBonusTypes.Wood, 7);
+            }
+            if (buildingType == BuildingTypes.StoneSupplier)
+            {
+                AddRoundBonuses(RoundBonusTypes.Stone, 5);
+            }
+            if (buildingType == BuildingTypes.RubySupplier)
+            {
+                AddRoundBonuses(RoundBonusTypes.Ruby, 4);
+            }
+            if (buildingType == BuildingTypes.Miner)
+            {
+                AddRoundBonuses(RoundBonusTypes.DonkeyOre, 11);
+            }
 
             tilesManager.SetBuildingTileAt(_serverSocket, position, buildingType);
 
             CalculatePlayerScore();
+        }
+
+        private void AddRoundBonuses(string bonusType, int numRound)
+        {
+            for (int i = 0; i < numRound; i++)
+            {
+                if (_newRoundBonuses.Count <= i)
+                    _newRoundBonuses.Add(new List<string>());
+                _newRoundBonuses[i].Add(bonusType);
+            }
         }
 
         public void SetTileAt(Vector2 position, bool isForest)
@@ -1163,6 +1191,27 @@ namespace Assets.ServerScripts
             if (woodCost > 0 && tilesManager.HasTile(BuildingTypes.Carpenter))
                 woodCost--;
             return Wood >= woodCost && GetTileCount(TileTypes.Clearing) > 0;
+        }
+
+        public void ApplyNewRoundBonus()
+        {
+            if (_newRoundBonuses.Count == 0)
+                return;
+
+            List<string> roundBonuses = _newRoundBonuses.First();
+            _newRoundBonuses.RemoveAt(0);
+            foreach (string bonus in roundBonuses)
+            {
+                //apply the bonus
+                if (bonus == RoundBonusTypes.Wood)
+                    Wood++;
+                if (bonus == RoundBonusTypes.Stone)
+                    Stone++;
+                if (bonus == RoundBonusTypes.Ruby)
+                    Rubies++;
+                if (bonus == RoundBonusTypes.DonkeyOre)
+                    Ore += Math.Min(Donkeys, tilesManager.GetTileCount(TileTypes.OreMine));
+            }
         }
     }
 }

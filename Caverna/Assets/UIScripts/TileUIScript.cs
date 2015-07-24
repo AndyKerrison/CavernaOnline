@@ -425,6 +425,8 @@ namespace Assets.UIScripts
                 return WorkRoom;
             if (tileType == BuildingTypes.WoodSupplier)
                 return WoodSupplier;
+            if (tileType == BuildingTypes.StoneSupplier)
+                return StoneSupplier;
             if (tileType == BuildingTypes.DogSchool)
                 return DogSchool;
             if (tileType == BuildingTypes.BreakfastRoom)
