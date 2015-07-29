@@ -35,6 +35,7 @@ namespace Assets.ServerScripts
         void ChooseBuildingTile(string playerid, List<string> validBuildings);
         void SetBuildingTaken(string type);
         void ResetBuildingTiles(string playerid);
+        void SetPlayerTileActive(string playerID, Vector2 position);
     }
 
     public class ServerSocket : IServerSocket
@@ -176,6 +177,11 @@ namespace Assets.ServerScripts
             _clientSocket.ResetBuildingTiles(playerid);
         }
 
+        public void SetPlayerTileActive(string playerID, Vector2 position)
+        {
+            _clientSocket.SetPlayerBuildingActive(playerID, position);
+        }
+
         public void HidePlayerChoice(string playerid)
         {
             _clientSocket.HidePlayerChoice(playerid);
@@ -214,6 +220,11 @@ namespace Assets.ServerScripts
         public void GetRubyActions(string playerID)
         {
             CavernaManager.Instance.GetRubyActions(playerID);
+        }
+
+        public void GetTileAction(string playerID, Vector2 position, string tileType)
+        {
+            CavernaManager.Instance.GetTileAction(playerID, position, tileType);
         }
     }
 }

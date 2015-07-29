@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting;
 using UnityEngine;
 
 namespace Assets.ServerScripts
@@ -1015,6 +1016,47 @@ namespace Assets.ServerScripts
             }
 
             serverSocket.GetPlayerChoice("playerID", "Allocate Animals", result, options);
+        }
+
+        public List<string> GetTileActions(Vector2 position, string tileType)
+        {
+            List<string> options = new List<string>();
+
+            if (CaveSpaces[(int)position.x, (int)position.y] != tileType)
+                return new List<string>() { BuildingTileActions.Invalid };
+
+            if (tileType == BuildingTypes.BlacksmithingParlour && _player.Ore > 0 && _player.Rubies > 0)
+                options.Add(BuildingTileActions.Trade1RubyAnd1OreFor2GoldAnd1Food);
+
+            if (tileType == BuildingTypes.BeerParlour && _player.Grain >= 2)
+            {
+                options.Add(BuildingTileActions.Trade2GrainFor3Gold);
+                options.Add(BuildingTileActions.Trade2GrainFor4Food);
+            }
+
+            if (tileType == BuildingTypes.HuntingParlour && _player.Pigs >= 2)
+            {
+                options.Add(BuildingTileActions.Trade2PigsFor2GoldAnd2Food);
+            }
+
+            if (tileType == BuildingTypes.SparePartStorage && _player.Wood >= 1 && _player.Stone >=1 && _player.Ore >=1)
+            {
+                options.Add(BuildingTileActions.Trade1Stone1Wood1OreFor2Gold);
+            }
+
+            if (tileType == BuildingTypes.CookingCave && _player.Grain >= 1 && _player.Veg >=1)
+            {
+                options.Add(BuildingTileActions.Trade1Veg1GrainFor5Food);
+            }
+
+            if (tileType == BuildingTypes.Trader && _player.Gold >= 2)
+            {
+                options.Add(BuildingTileActions.Trade2GoldFor1Wood1Stone1Ore);
+            }
+
+            options.Add(BuildingTileActions.Cancel);
+
+            return options;
         }
     }
 }

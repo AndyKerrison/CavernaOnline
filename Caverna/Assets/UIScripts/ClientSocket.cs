@@ -12,6 +12,7 @@ namespace Assets.UIScripts
         void SetTileClicked(string player, Vector2 position, string type, bool isCave, bool isBuilding);
         void SendPlayerChoice(string action);
         void GetRubyActions(string playerID);
+        void GetTileAction(string player, Vector2 position, string tileType);
     }
 
     public class ClientSocket : IClientSocket
@@ -123,6 +124,11 @@ namespace Assets.UIScripts
             _serverSocket.GetRubyActions(playerID);
         }
 
+        public void GetTileAction(string player, Vector2 position, string tileType)
+        {
+            _serverSocket.GetTileAction(player, position, tileType);
+        }
+
         public void SetPlayerTileType(Vector2 position, List<string> tileType, bool isCave)
         {
             _gameRef.SetPlayerTileType(position, tileType, isCave);
@@ -201,6 +207,11 @@ namespace Assets.UIScripts
         public void ResetBuildingTiles(string playerid)
         {
             _gameRef.ResetBuildingTiles();
+        }
+
+        public void SetPlayerBuildingActive(string playerID, Vector2 position)
+        {
+            _gameRef.SetPlayerBuildingActive(playerID, position);
         }
     }
 }

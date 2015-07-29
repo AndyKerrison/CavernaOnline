@@ -160,7 +160,7 @@ namespace Assets.ServerScripts
             BuildingTiles.Add(new BuildingTile(BuildingTypes.SimpleDwelling2));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.AdditionalDwelling));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.Blacksmith));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.Trader));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.Trader));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.CuddleRoom));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.WorkRoom));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.WoodSupplier));
@@ -177,24 +177,24 @@ namespace Assets.ServerScripts
             BuildingTiles.Add(new BuildingTile(BuildingTypes.MiningCave));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.StoneStorage));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.MainStorage));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.CookingCave));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.CookingCave));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.BreedingCave));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.OreStorage));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.WeaponStorage));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.WorkingCave));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.PeacefulCave));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.SparePartStorage));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.SparePartStorage));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.SuppliesStorage));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.WeavingParlour));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.HuntingParlour));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.HuntingParlour));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.BroomChamber));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.PrayerChamber));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.MilkingParlour));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.BeerParlour));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.BeerParlour));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.TreasureChamber));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.WritingChamber));
             //BuildingTiles.Add(new BuildingTile(BuildingTypes.StateParlour));
-            //BuildingTiles.Add(new BuildingTile(BuildingTypes.BlacksmithingParlour));
+            BuildingTiles.Add(new BuildingTile(BuildingTypes.BlacksmithingParlour));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.FoodChamber));
             BuildingTiles.Add(new BuildingTile(BuildingTypes.FodderChamber));
             foreach (BuildingTile buildingTile in BuildingTiles)
@@ -1096,13 +1096,66 @@ namespace Assets.ServerScripts
                 player.HarvestFieldsComplete = true;
                 NextPlayerAction();
             }
-            else if (Array.Find(typeof(RubyTrades).GetFields(), x => x.GetValue(null).ToString() == action) != null)
+            else if (Array.Find(typeof (BuildingTileActions).GetFields(), x => x.GetValue(null).ToString() == action) != null)
+            {
+                _serverSocket.HidePlayerChoice("playerID");
+
+                if (action == BuildingTileActions.Cancel)
+                    return;
+
+                if (action == BuildingTileActions.Trade1RubyAnd1OreFor2GoldAnd1Food)
+                {
+                    player.Ore--;
+                    player.Rubies--;
+                    player.Gold += 2;
+                    player.Food++;
+                }
+                if (action == BuildingTileActions.Trade2GrainFor3Gold)
+                {
+                    player.Grain -= 2;
+                    player.Gold += 3;
+                }
+                if (action == BuildingTileActions.Trade2GrainFor4Food)
+                {
+                    player.Grain -= 2;
+                    player.Food += 4;
+                }
+                if (action == BuildingTileActions.Trade2PigsFor2GoldAnd2Food)
+                {
+                    player.Pigs -= 2;
+                    player.Gold += 2;
+                    player.Food += 2;
+                }
+                if (action == BuildingTileActions.Trade1Stone1Wood1OreFor2Gold)
+                {
+                    player.Wood--;
+                    player.Stone--;
+                    player.Ore--;
+                    player.Gold += 2;
+                }
+                if (action == BuildingTileActions.Trade1Veg1GrainFor5Food)
+                {
+                    player.Veg--;
+                    player.Grain--;
+                    player.Food += 5;
+                }
+                if (action == BuildingTileActions.Trade2GoldFor1Wood1Stone1Ore)
+                {
+                    player.Gold -= 2;
+                    player.Wood++;
+                    player.Ore++;
+                    player.Stone++;
+                }
+
+                ReturnControlToPlayer(_players[0]);
+            }
+            else if (Array.Find(typeof (RubyTrades).GetFields(), x => x.GetValue(null).ToString() == action) != null)
             {
                 _serverSocket.HidePlayerChoice("playerID");
 
                 if (action == RubyTrades.Cancel)
                     return;
-                
+
                 player.Rubies--;
 
                 if (action == RubyTrades.Wood)
@@ -1189,7 +1242,7 @@ namespace Assets.ServerScripts
                 //LEVEL 3
                 if (action == Expeditions.Stone)
                     player.Stone++;
-                
+
                 if (action == Expeditions.Donkey)
                     player.Donkeys++;
 
@@ -1199,8 +1252,8 @@ namespace Assets.ServerScripts
                     player.Veg++;
 
                 if (action == Expeditions.Ore)
-                    player.Ore+=2;
-                
+                    player.Ore += 2;
+
 
                 //LEVEL 5
                 if (action == Expeditions.Pig)
@@ -1209,9 +1262,9 @@ namespace Assets.ServerScripts
 
                 //LEVEL 6
                 if (action == Expeditions.Gold)
-                    player.Gold+=2;
-                
-                
+                    player.Gold += 2;
+
+
                 //LEVEL 7
                 if (action == Expeditions.FurnishCavern)
                 {
@@ -1232,7 +1285,7 @@ namespace Assets.ServerScripts
                 if (action == Expeditions.Tunnel)
                 {
                     SetPlayerPlaceTile(_players[0], TileTypes.Tunnel);
-                    return;                    
+                    return;
                 }
 
                 if (action == Expeditions.SmallFence)
@@ -1256,7 +1309,7 @@ namespace Assets.ServerScripts
 
                 if (action == Expeditions.BigFence)
                 {
-                    player.Wood-=2;
+                    player.Wood -= 2;
                     SetPlayerPlaceTiles(_players[0], TileLists.BigFence);
                     return;
                 }
@@ -1296,7 +1349,8 @@ namespace Assets.ServerScripts
 
                 if (action == Expeditions.Sow)
                 {
-                    List<string> sowActions = _actionSpaces.Find(x => x.ID == _activeActionSpaceID).GetSowActions(_players[0]);
+                    List<string> sowActions =
+                        _actionSpaces.Find(x => x.ID == _activeActionSpaceID).GetSowActions(_players[0]);
                     _serverSocket.SendActions(_activeActionSpaceID, sowActions);
                     return;
                 }
@@ -1314,7 +1368,7 @@ namespace Assets.ServerScripts
             }
             else if (Array.Find(typeof (BreedActions).GetFields(), x => x.GetValue(null).ToString() == action) != null)
             {
-                if (action == BreedActions.SheepOnly || 
+                if (action == BreedActions.SheepOnly ||
                     action == BreedActions.SheepAndDonkeys ||
                     action == BreedActions.SheepAndPigs ||
                     action == BreedActions.SheepAndCows)
@@ -1447,6 +1501,13 @@ namespace Assets.ServerScripts
         public void GetRubyActions(string playerID)
         {
             _serverSocket.GetPlayerChoice("playerID", "Ruby Conversion", string.Empty, _players[0].GetRubyTradeOptions());
+        }
+
+        public void GetTileAction(string playerID, Vector2 position, string tileType)
+        {
+            List<string> options = _players[0].GetTileActions(position, tileType);
+
+            _serverSocket.GetPlayerChoice("playerID", tileType, string.Empty, options);
         }
     }
 }

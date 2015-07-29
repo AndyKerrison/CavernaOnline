@@ -532,5 +532,10 @@ cardScale = Math.Min(xScale, yScale);
             }
             InitBuildingTiles();
         }
+
+        public void SetPlayerBuildingActive(string playerID, Vector2 position)
+        {
+            GameObject.Find("GameBoard").GetComponent<PlayerBoardScript>().SetTileActionActive(position);
+        }
     }
 }

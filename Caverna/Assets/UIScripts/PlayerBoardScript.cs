@@ -226,6 +226,11 @@ namespace Assets.UIScripts
                 _forestTiles[(int)position.x, (int)position.y].GetComponent<TileUIScript>().SetType(tileType);
         }
 
+        public void SetTileActionActive(Vector2 position)
+        {
+            _caveTiles[(int)position.x, (int)position.y].GetComponent<TileUIScript>().SetActionActive();
+        }
+
         public void SetClickableTile(Vector2 validSpot, string tileType, bool isCave)
         {
             if (isCave)

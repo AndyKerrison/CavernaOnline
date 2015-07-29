@@ -1065,20 +1065,22 @@ namespace Assets.ServerScripts
 
         public void SetBuildingTileAt(Vector2 position, string buildingType)
         {
-            int stoneCost = new BuildingTile(buildingType).StoneCost;
+            BuildingTile building = new BuildingTile(buildingType);
+
+            int stoneCost = building.StoneCost;
             if (tilesManager.HasTile(BuildingTypes.StoneCarver) && stoneCost > 0)
                 stoneCost--;
 
-            int woodCost = new BuildingTile(buildingType).WoodCost;
+            int woodCost = building.WoodCost;
             if (tilesManager.HasTile(BuildingTypes.Carpenter) && woodCost > 0)
                 woodCost--;
               
             Wood -= woodCost;
             Stone -= stoneCost;
-            Veg -= new BuildingTile(buildingType).VegCost;
-            Grain -= new BuildingTile(buildingType).GrainCost;
-            Ore -= new BuildingTile(buildingType).OreCost;
-            Food -= new BuildingTile(buildingType).FoodCost;
+            Veg -= building.VegCost;
+            Grain -= building.GrainCost;
+            Ore -= building.OreCost;
+            Food -= building.FoodCost;
             if (buildingType == BuildingTypes.WeavingParlour)
             {
                 Food += Sheep;
@@ -1113,8 +1115,11 @@ namespace Assets.ServerScripts
             }
 
             tilesManager.SetBuildingTileAt(_serverSocket, position, buildingType);
-
+            
             CalculatePlayerScore();
+
+            if (building.HasAction)
+                _serverSocket.SetPlayerTileActive(ID, position);
         }
 
         private void AddRoundBonuses(string bonusType, int numRound)
@@ -1212,6 +1217,11 @@ namespace Assets.ServerScripts
                 if (bonus == RoundBonusTypes.DonkeyOre)
                     Ore += Math.Min(Donkeys, tilesManager.GetTileCount(TileTypes.OreMine));
             }
+        }
+
+        public List<string> GetTileActions(Vector2 position, string tileType)
+        {
+            return tilesManager.GetTileActions(position, tileType);
         }
     }
 }

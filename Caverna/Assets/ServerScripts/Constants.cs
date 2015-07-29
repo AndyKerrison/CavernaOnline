@@ -93,6 +93,19 @@ public static class RoundBonusTypes
     public static string Ruby = "ruby";
     public static string DonkeyOre = "donkeyOre";
 }
+
+public static class BuildingTileActions
+{
+    public static string Cancel = "Cancel";
+    public static string Trade1RubyAnd1OreFor2GoldAnd1Food = "1 Ore and 1 Ruby for 2 Gold and 1 Food";
+    public static string Invalid = "ERROR: Invalid tile action";
+    public static string Trade2GrainFor3Gold = "Trade 2 Grain for 3 Gold";
+    public static string Trade2GrainFor4Food = "Trade 2 Grain for 4 Food";
+    public static string Trade2PigsFor2GoldAnd2Food = "Trade 2 Pigs for 2 Gold and 2 Food";
+    public static string Trade1Stone1Wood1OreFor2Gold = "Trade 1 Wood, 1 Stone, and 1 Ore for 2 Gold";
+    public static string Trade1Veg1GrainFor5Food = "Trade 1 Veg and 1 Grain for 5 Food";
+    public static string Trade2GoldFor1Wood1Stone1Ore = "Trade 2 Gold for 1 Wood, 1 Stone, and 1 Ore";
+}
 public static class RubyTrades
 {
     public static string Cancel = "Cancel";

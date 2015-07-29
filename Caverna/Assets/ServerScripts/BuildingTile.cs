@@ -21,6 +21,7 @@ namespace Assets.ServerScripts
         public bool IsUnlimited { get; private set; }
         public int OreCost { get; set; }
         public int FoodCost { get; set; }
+        public bool HasAction { get; set; }
 
         public BuildingTile(string buildingType)
         {
@@ -73,6 +74,40 @@ namespace Assets.ServerScripts
                 StoneCost = 4;
                 IsUnlimited = false;
                 BuildingGroup = BuildingGroups.Dwelling;
+            }
+
+
+            if (buildingType == BuildingTypes.SparePartStorage)
+            {
+                VP = 0;
+                WoodCost = 2;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Scoring;
+                HasAction = true;
+            }
+            if (buildingType == BuildingTypes.HuntingParlour)
+            {
+                VP = 1;
+                WoodCost = 2;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Scoring;
+                HasAction = true;
+            }
+            if (buildingType == BuildingTypes.BlacksmithingParlour)
+            {
+                VP = 2;
+                OreCost = 3;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Scoring;
+                HasAction = true;
+            }
+            if (buildingType == BuildingTypes.BeerParlour)
+            {
+                VP = 3;
+                WoodCost = 3;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Scoring;
+                HasAction = true;
             }
             if (buildingType == BuildingTypes.TreasureChamber)
             {
@@ -177,6 +212,22 @@ namespace Assets.ServerScripts
             }
 
 
+            if (buildingType == BuildingTypes.Trader)
+            {
+                VP = 2;
+                WoodCost = 1;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Working;
+                HasAction = true;
+            }
+            if (buildingType == BuildingTypes.CookingCave)
+            {
+                VP = 2;
+                StoneCost = 2;
+                IsUnlimited = false;
+                BuildingGroup = BuildingGroups.Working;
+                HasAction = true;
+            }
             if (buildingType == BuildingTypes.SlaughteringCave)
             {
                 VP = 2;

@@ -73,6 +73,7 @@ namespace Assets.UIScripts
 
         private bool _isCave;
         private bool _clickable;
+        private bool _actionEnabled;
         private bool _useMouseOverHighlight;
         private string _tileType;
 
@@ -191,6 +192,13 @@ namespace Assets.UIScripts
             }
         }
 
+        public void SetActionActive()
+        {
+            gameObject.GetComponent<CanvasGroup>().interactable = true;
+            gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
+            _actionEnabled = true;
+        }
+
         public void SetUnclickable()
         {
             _clickable = false;
@@ -201,8 +209,11 @@ namespace Assets.UIScripts
                 else
                     _childTile.GetComponent<TileUIScript>().SetUnclickable();
             }
-            gameObject.GetComponent<CanvasGroup>().interactable = false;
-            gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            if (!_actionEnabled)
+            {
+                gameObject.GetComponent<CanvasGroup>().interactable = false;
+                gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            }
             //_isClickableBuilding = false;
         }
 
@@ -299,6 +310,10 @@ namespace Assets.UIScripts
             if (_clickable)
             {
                 ClientSocket.Instance.SetTileClicked("Player", new Vector2(X, Y), _tileType, _isCave, IsBuildingTile(_tileType));
+            }
+            if (_actionEnabled)
+            {
+                ClientSocket.Instance.GetTileAction("Player", new Vector2(X, Y), _tileType);
             }
         }
 
