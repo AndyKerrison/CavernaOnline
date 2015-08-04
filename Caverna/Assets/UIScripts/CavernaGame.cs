@@ -17,6 +17,10 @@ namespace Assets.UIScripts
         public static IClientSocket ClientSocket;
 
         private bool _showModal;
+        private int _currentActionPage;
+        private int _firstActionIndex;
+        private int _lastActionIndex;
+        private int _maxPages;
         private List<string> _actions;
         private string _actionName;
         private string _helpText;
@@ -387,15 +391,81 @@ cardScale = Math.Min(xScale, yScale);
         }
 
 // ReSharper disable once UnusedMember.Local
+
+        private void NextPage()
+        {
+            _currentActionPage++;
+            SetModalVars();
+        }
+
+        private void PrevPage()
+        {
+            _currentActionPage--;
+            SetModalVars();
+        }
+
+        private void SetModalVars()
+        {
+            float modalY = 0.4f * Screen.height / 2f;
+            float screenHeight = Screen.height;
+            int maxOptionsOnScreen = (int)(screenHeight - modalY) / 30 - 1;
+            maxOptionsOnScreen = Math.Min(maxOptionsOnScreen, _actions.Count);
+
+            _maxPages = 0;
+            int remainingActions = _actions.Count;
+            while (remainingActions > 0)
+            {
+                if (remainingActions <= maxOptionsOnScreen && _maxPages == 0) //all fit on first page
+                {
+                    _maxPages++;
+                    remainingActions -= maxOptionsOnScreen;
+                }
+                else if (_maxPages == 0) //first page, but doesn't all fit
+                {
+                    _maxPages++;
+                    remainingActions -= (maxOptionsOnScreen - 1); //allow space for 'more' button
+                }
+                else //2nd or later page
+                {
+                    _maxPages++;
+                    remainingActions -= (maxOptionsOnScreen - 2); //allow for 'more' and 'back' buttons
+                    if (remainingActions == 1) //unless there's only one more action, in which case replace 'more' with the action
+                        remainingActions--;
+                }
+            }
+            
+            _firstActionIndex = _currentActionPage * (maxOptionsOnScreen - 2);
+            if (_firstActionIndex > 0)
+                _firstActionIndex++; //because there is no 'Back' option on the first page
+
+            _lastActionIndex = _firstActionIndex + (maxOptionsOnScreen-1);
+            if (_currentActionPage > 0)
+                _lastActionIndex--; //leave room for 'Back' option
+            if (_currentActionPage < (_maxPages - 1) )
+                _lastActionIndex--; //leave room for 'More' option
+            if (_lastActionIndex > _actions.Count-1)
+                _lastActionIndex = _actions.Count-1;
+        }
+
         void OnGUI()
         {
             if (_showModal)
             {
+                float modalY = 0.4f*Screen.height/2f;
+                float screenHeight = Screen.height;
+                int maxOptionsOnScreen = (int)(screenHeight - modalY)/30 - 1;
+                int numActionsToShow = _lastActionIndex - _firstActionIndex + 1;
+                if (_currentActionPage > 0)
+                    numActionsToShow++;
+                if (_currentActionPage < _maxPages - 1)
+                    numActionsToShow++;
+                maxOptionsOnScreen = Math.Min(maxOptionsOnScreen, numActionsToShow);
+                
                 int width = 320;
-                int height = _actions.Count*30 + 25;
+                int height = maxOptionsOnScreen*30 + 25;
                 if (_helpText.Length > 0)
                     height += 30;
-                GUI.ModalWindow(1, new Rect(Screen.width/2 - width/2, 0.6f*Screen.height/2f, width, height), DoMyWindow, _actionName);
+                GUI.ModalWindow(1, new Rect(Screen.width/2 - width/2, modalY, width, height), DoMyWindow, _actionName);
             }
         }
 
@@ -406,14 +476,32 @@ cardScale = Math.Min(xScale, yScale);
             {
                 GUI.Label(new Rect(10, y, 300, 20), _helpText);
                 y += 30;
-            }
-            foreach (var action in _actions)
+            }    
+
+            if (_currentActionPage > 0)
             {
-                if (GUI.Button(new Rect(10, y, 300, 20), action))
+                if (GUI.Button(new Rect(10, y, 300, 20), "Back..."))
                 {
-                    ClientSocket.SendPlayerChoice(action);
+                    PrevPage();
                 }
                 y += 30;
+            }
+
+            for (int i=_firstActionIndex; i <= _lastActionIndex; i++)
+            {
+                if (GUI.Button(new Rect(10, y, 300, 20), _actions[i]))
+                {
+                    ClientSocket.SendPlayerChoice(_actions[i]);
+                }
+                y += 30;
+            }
+
+            if (_currentActionPage < _maxPages-1)
+            {
+                if (GUI.Button(new Rect(10, y, 300, 20), "More..."))
+                {
+                    NextPage();
+                }
             }
         }
 
@@ -429,8 +517,10 @@ cardScale = Math.Min(xScale, yScale);
             if (!string.IsNullOrEmpty(actionName))
                 _actionName = actionName;
             _showModal = true;
+            _currentActionPage = 0;
             _actions = options;
             _helpText = text;
+            SetModalVars();
         }
 
         public void SetHarvestTokenStatus(List<string> harvestTokenStatus)
