@@ -149,6 +149,12 @@ public static class FoodActions
     public const string Convert2Gold = "Convert 2 gold to 1 food";
     public const string Convert3Gold = "Convert 3 gold to 2 food";
     public const string Convert4Gold = "Convert 4 gold to 3 food";
+
+    public const string SlaughteringCaveConvertSheep = "Convert 1 sheep to 2 food";
+    public const string SlaughteringCaveConvertPig = "Convert 1 pig to 3 food";
+    public const string SlaughteringCaveConvertDonkey = "Convert 1 donkey to 2 food";
+    public const string SlaughteringCaveConvertDonkeyPair = "Convert 2 donkeys to 5 food";
+    public const string SlaughteringCaveConvertCow = "Convert 1 cow to 4 food";
 }
 
 public static class HarvestTypes

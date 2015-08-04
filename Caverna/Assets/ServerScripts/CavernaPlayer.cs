@@ -422,22 +422,31 @@ namespace Assets.ServerScripts
             CalculatePlayerScore();
         }
 
+        public void SetHarvestFoodRequirement()
+        {
+            if (IsOneFoodPerDwarf)
+                _harvestFoodReq = _dwarves.Count;
+            else
+            {
+                _harvestFoodReq = _dwarves.Count * 2 - _dwarves.Count(x => x.IsChild);
+
+                if (tilesManager.HasTile(BuildingTypes.MiningCave))
+                {
+                    int mineCount = tilesManager.GetTileCount(TileTypes.OreMine) +
+                                    tilesManager.GetTileCount(TileTypes.RubyMine);
+                    _harvestFoodReq -= Math.Min(mineCount, Donkeys);
+                }
+
+                if (_harvestFoodReq <= 0)
+                    _harvestFoodReq = 0;
+            }
+        }
+
         public List<string> GetFoodOptions()
         {
             //return a list of all the feeding options. 'Feed' or 'begging cards' first
             List<string> foodActions = new List<string>();
 
-            if (IsOneFoodPerDwarf)
-                _harvestFoodReq = _dwarves.Count;
-            else
-            {
-                _harvestFoodReq = _dwarves.Count*2 - _dwarves.Count(x => x.IsChild);
-                int mineCount = tilesManager.GetTileCount(TileTypes.OreMine) +
-                                tilesManager.GetTileCount(TileTypes.RubyMine);
-                _harvestFoodReq -= Math.Min(mineCount, Donkeys);
-                if (_harvestFoodReq <= 0)
-                    _harvestFoodReq = 0;
-            }
             if (Food >= _harvestFoodReq)
             {
                 foodActions.Add(FoodActions.FeedAllDwarves);
@@ -447,16 +456,34 @@ namespace Assets.ServerScripts
                 foodActions.Add(FoodActions.FeedAndTakeBeggingCards);
             }
 
-            if (Sheep > 0)
-                foodActions.Add(FoodActions.ConvertSheep);
-            if (Pigs > 0)
-                foodActions.Add(FoodActions.ConvertPig);
-            if (Donkeys > 0)
-                foodActions.Add(FoodActions.ConvertDonkey);
-            if (Donkeys > 1)
-                foodActions.Add(FoodActions.ConvertDonkeyPair);
-            if (Cows > 0)
-                foodActions.Add(FoodActions.ConvertCow);
+            bool slaughteringCave = tilesManager.HasTile(BuildingTypes.SlaughteringCave);
+
+            if (slaughteringCave)
+            {
+                if (Sheep > 0)
+                    foodActions.Add(FoodActions.SlaughteringCaveConvertSheep);
+                if (Pigs > 0)
+                    foodActions.Add(FoodActions.SlaughteringCaveConvertPig);
+                if (Donkeys > 0)
+                    foodActions.Add(FoodActions.SlaughteringCaveConvertDonkey);
+                if (Donkeys > 1)
+                    foodActions.Add(FoodActions.SlaughteringCaveConvertDonkeyPair);
+                if (Cows > 0)
+                    foodActions.Add(FoodActions.SlaughteringCaveConvertCow);
+            }
+            else
+            {
+                if (Sheep > 0)
+                    foodActions.Add(FoodActions.ConvertSheep);
+                if (Pigs > 0)
+                    foodActions.Add(FoodActions.ConvertPig);
+                if (Donkeys > 0)
+                    foodActions.Add(FoodActions.ConvertDonkey);
+                if (Donkeys > 1)
+                    foodActions.Add(FoodActions.ConvertDonkeyPair);
+                if (Cows > 0)
+                    foodActions.Add(FoodActions.ConvertCow);                
+            }
             if (Grain > 0)
                 foodActions.Add(FoodActions.ConvertGrain);
             if (Veg > 0)
@@ -543,31 +570,43 @@ namespace Assets.ServerScripts
                     Veg -= 1;
                     break;
                 }
+                case (FoodActions.SlaughteringCaveConvertCow):
+                {
+                    Food += 4;
+                    Cows -= 1;
+                    break;
+                }
+                case (FoodActions.SlaughteringCaveConvertDonkey):
+                {
+                    Food += 2;
+                    Donkeys -= 1;
+                    break;
+                }
+                case (FoodActions.SlaughteringCaveConvertDonkeyPair):
+                {
+                    Food += 5;
+                    Donkeys -= 2;
+                    break;
+                }
+                case (FoodActions.SlaughteringCaveConvertPig):
+                {
+                    Food += 3;
+                    Pigs -= 1;
+                    break;
+                }
+                case (FoodActions.SlaughteringCaveConvertSheep):
+                {
+                    Food += 2;
+                    Sheep -= 1;
+                    break;
+                }
+
                 default:
                 {
                     throw new NotImplementedException("Unimplemented food action: " + action);
                 }
             }
 
-            if (tilesManager.HasTile(BuildingTypes.SlaughteringCave))
-            {
-                switch (action)
-                {
-                    case (FoodActions.ConvertDonkey):
-                    case (FoodActions.ConvertCow):
-                    case (FoodActions.ConvertPig):
-                    case (FoodActions.ConvertSheep):
-                        {
-                            Food++;
-                            break;
-                        }
-                    case (FoodActions.ConvertDonkeyPair):
-                        {
-                            Food += 2;
-                            break;
-                        }
-                }   
-            }
             CalculatePlayerScore();
         }
 
@@ -739,7 +778,7 @@ namespace Assets.ServerScripts
 
             if (weaponLevel >= 9)
             {
-                if (!_usedExpeditionActions.Contains(Expeditions.Stable) &&
+                if (!_usedExpeditionActions.Contains(Expeditions.Tunnel) &&
                     tilesManager.HasSpaceForTile(TileTypes.Tunnel))
                     actions.Add(Expeditions.Tunnel);
 
@@ -749,7 +788,7 @@ namespace Assets.ServerScripts
                     Wood >=1)
                     actions.Add(Expeditions.SmallFence);
 
-                if (!_usedExpeditionActions.Contains(Expeditions.SmallFence) &&
+                if (!_usedExpeditionActions.Contains(Expeditions.SmallFenceDiscount) &&
                     tilesManager.HasSpaceForTile(TileTypes.SmallFence) &&
                     tilesManager.HasTile(BuildingTypes.Carpenter))
                     actions.Add(Expeditions.SmallFenceDiscount);
@@ -766,7 +805,7 @@ namespace Assets.ServerScripts
                     Wood >=2)
                     actions.Add(Expeditions.BigFence);
 
-                if (!_usedExpeditionActions.Contains(Expeditions.BigFence) &&
+                if (!_usedExpeditionActions.Contains(Expeditions.BigFenceDiscount) &&
                     tilesManager.HasSpaceForTiles(TileLists.BigFence) &&
                     tilesManager.HasTile(BuildingTypes.Carpenter) &&
                     Wood >= 1)
@@ -1132,12 +1171,12 @@ namespace Assets.ServerScripts
             }
         }
 
-        public void SetTileAt(Vector2 position, bool isForest)
+        public void SetTileAt(Vector2 position, bool isForest, bool isExpedition)
         {
             int foodGain;
             int rubyGain;
             int pigsGain;
-            tilesManager.SetTileAt(_serverSocket, position, isForest, out foodGain, out pigsGain, out rubyGain);
+            tilesManager.SetTileAt(_serverSocket, position, isForest, isExpedition, out foodGain, out pigsGain, out rubyGain);
 
             Food += foodGain;
             Pigs += pigsGain;
@@ -1222,6 +1261,11 @@ namespace Assets.ServerScripts
         public List<string> GetTileActions(Vector2 position, string tileType)
         {
             return tilesManager.GetTileActions(position, tileType);
+        }
+
+        public string GetHarvestMessage()
+        {
+            return "You have " + Food + " of " + _harvestFoodReq + " food required.";
         }
     }
 }

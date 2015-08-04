@@ -508,7 +508,8 @@ namespace Assets.ServerScripts
                         if (!player.HarvestFeedingComplete)
                         {
                             player.IsOneFoodPerDwarf = false;
-                            _serverSocket.GetPlayerChoice("playerID", "Harvest Feeding", string.Empty, player.GetFoodOptions());
+                            player.SetHarvestFoodRequirement();
+                            _serverSocket.GetPlayerChoice("playerID", "Harvest Feeding", player.GetHarvestMessage(), player.GetFoodOptions());
                             return;
                         }
 
@@ -530,7 +531,8 @@ namespace Assets.ServerScripts
                         if (!player.HarvestFeedingComplete)
                         {
                             player.IsOneFoodPerDwarf = true;
-                            _serverSocket.GetPlayerChoice("playerID", "Feeding - 1 food per dwarf", string.Empty, player.GetFoodOptions());
+                            player.SetHarvestFoodRequirement();
+                            _serverSocket.GetPlayerChoice("playerID", "Feeding - 1 food per dwarf", player.GetHarvestMessage(), player.GetFoodOptions());
                             return;
                         }
 
@@ -558,7 +560,8 @@ namespace Assets.ServerScripts
                         if (!player.HarvestFeedingComplete)
                         {
                             player.IsOneFoodPerDwarf = false;
-                            _serverSocket.GetPlayerChoice("playerID", "Harvest Feeding", string.Empty, player.GetFoodOptions());
+                            player.SetHarvestFoodRequirement();
+                            _serverSocket.GetPlayerChoice("playerID", "Harvest Feeding", player.GetHarvestMessage(), player.GetFoodOptions());
                             return;
                         }
 
@@ -707,7 +710,7 @@ namespace Assets.ServerScripts
             }
             else //a tile placement confirmation somewhere on the player board
             {
-                _players[0].SetTileAt(position, !isCave);
+                _players[0].SetTileAt(position, !isCave, _expeditionInProgress);
                 _serverSocket.SetDoubleFencedPastures("playerID", _players[0].GetDoubleFencedPastures());
             }
             
@@ -1478,24 +1481,7 @@ namespace Assets.ServerScripts
 
         private bool IsFoodConversionAction(string action)
         {
-            switch (action)
-            {
-                case FoodActions.Convert2Gold:
-                case FoodActions.Convert3Gold:
-                case FoodActions.Convert4Gold:
-                case FoodActions.ConvertCow:
-                case FoodActions.ConvertDonkey:
-                case FoodActions.ConvertDonkeyPair:
-                case FoodActions.ConvertGrain:
-                case FoodActions.ConvertPig:
-                case FoodActions.ConvertRuby:
-                case FoodActions.ConvertSheep:
-                case FoodActions.ConvertVeg:
-                {
-                    return true;
-                }
-            }
-            return false;
+            return Array.Find(typeof(FoodActions).GetFields(), x => x.GetValue(null).ToString() == action) != null;
         }
 
         public void GetRubyActions(string playerID)

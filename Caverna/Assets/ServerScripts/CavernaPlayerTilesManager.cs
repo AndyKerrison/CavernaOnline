@@ -387,14 +387,52 @@ namespace Assets.ServerScripts
             return tileCount;
         }
 
-        public void SetTileAt(IServerSocket serverSocket, Vector2 position, bool isForest, out int foodGain, out int pigsGain, out int rubyGain)
+        public void SetTileAt(IServerSocket serverSocket, Vector2 position, bool isForest, bool isExpedition, out int foodGain, out int pigsGain, out int rubyGain)
         {
             foodGain = 0;
             pigsGain = 0;
             rubyGain = 0;
 
+            if (TilesToPlace.First() == TileTypes.SmallFence)
+            {
+                if (isExpedition)
+                {
+                    //already paid for
+                }
+                else
+                {
+                    int woodCost = 2;
+                    if (HasTile(BuildingTypes.Carpenter))
+                    {
+                        woodCost --;
+                    }
+                    _player.Wood -= woodCost;
+                }
+            }
+            if (TilesToPlace.First() == TileTypes.BigFence1)
+            {
+                if (isExpedition)
+                {
+                    //already paid for
+                }
+                else
+                {
+                    int woodCost = 4;
+                    if (HasTile(BuildingTypes.Carpenter))
+                    {
+                        woodCost--;
+                    }
+                    _player.Wood -= woodCost;
+                }
+            }
             if (TilesToPlace.First() == TileTypes.Stable)
             {
+                //pay for the stable
+                if (!HasTile(BuildingTypes.StoneCarver) && !isExpedition)
+                {
+                    _player.Stone--;
+                }
+
                 int x = (int)position.x;
                 int y = (int)position.y;
                 StableSpaces[x, y] = TileTypes.Stable;
@@ -1003,16 +1041,32 @@ namespace Assets.ServerScripts
             }
             else
             {
-                if (animalManager.Cows > 0)
-                    options.Add(FoodActions.ConvertCow);
-                if (animalManager.Pigs > 0)
-                    options.Add(FoodActions.ConvertPig);
-                if (animalManager.Donkeys > 1)
-                    options.Add(FoodActions.ConvertDonkeyPair);
-                if (animalManager.Donkeys > 0)
-                    options.Add(FoodActions.ConvertDonkey);
-                if (animalManager.Sheep > 0)
-                    options.Add(FoodActions.ConvertSheep);
+                if (HasTile(BuildingTypes.SlaughteringCave))
+                {
+                    if (animalManager.Cows > 0)
+                        options.Add(FoodActions.SlaughteringCaveConvertCow);
+                    if (animalManager.Pigs > 0)
+                        options.Add(FoodActions.SlaughteringCaveConvertPig);
+                    if (animalManager.Donkeys > 1)
+                        options.Add(FoodActions.SlaughteringCaveConvertDonkeyPair);
+                    if (animalManager.Donkeys > 0)
+                        options.Add(FoodActions.SlaughteringCaveConvertDonkey);
+                    if (animalManager.Sheep > 0)
+                        options.Add(FoodActions.SlaughteringCaveConvertSheep);
+                }
+                else
+                {
+                    if (animalManager.Cows > 0)
+                        options.Add(FoodActions.ConvertCow);
+                    if (animalManager.Pigs > 0)
+                        options.Add(FoodActions.ConvertPig);
+                    if (animalManager.Donkeys > 1)
+                        options.Add(FoodActions.ConvertDonkeyPair);
+                    if (animalManager.Donkeys > 0)
+                        options.Add(FoodActions.ConvertDonkey);
+                    if (animalManager.Sheep > 0)
+                        options.Add(FoodActions.ConvertSheep);
+                }
             }
 
             serverSocket.GetPlayerChoice("playerID", "Allocate Animals", result, options);
