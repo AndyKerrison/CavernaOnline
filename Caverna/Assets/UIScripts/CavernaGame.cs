@@ -15,6 +15,7 @@ namespace Assets.UIScripts
         public Canvas LoaderCanvas;
 
         public static IClientSocket ClientSocket;
+        public bool ModalExecuting;
 
         private bool _showModal;
         private int _currentActionPage;
@@ -23,7 +24,7 @@ namespace Assets.UIScripts
         private int _maxPages;
         private List<string> _actions;
         private string _actionName;
-        private string _helpText;
+        private string _helpText = string.Empty;
         private GameObject[,] _buildingTiles;
 
         public GameObject MainActionsDisplayBoard;
@@ -445,28 +446,38 @@ cardScale = Math.Min(xScale, yScale);
                 _lastActionIndex--; //leave room for 'More' option
             if (_lastActionIndex > _actions.Count-1)
                 _lastActionIndex = _actions.Count-1;
+
+            maxOptionsOnScreen = (int)(screenHeight - modalY) / 30 - 1;
+            int numActionsToShow = _lastActionIndex - _firstActionIndex + 1;
+            if (_currentActionPage > 0)
+                numActionsToShow++;
+            if (_currentActionPage < _maxPages - 1)
+                numActionsToShow++;
+            maxOptionsOnScreen = Math.Min(maxOptionsOnScreen, numActionsToShow);
+
+            int width = 320;
+            int height = maxOptionsOnScreen * 30 + 25;
+            if (_helpText.Length > 0)
+                height += 30;
+            windowRect3 = new Rect(Screen.width / 2 - width / 2, modalY, width, height);
         }
+
+        public Rect windowRect2 = new Rect(20, 20, 210, 450);
+        public Rect windowRect3 = new Rect(20, 20, 210, 450);
 
         void OnGUI()
         {
             if (_showModal)
             {
-                float modalY = 0.4f*Screen.height/2f;
-                float screenHeight = Screen.height;
-                int maxOptionsOnScreen = (int)(screenHeight - modalY)/30 - 1;
-                int numActionsToShow = _lastActionIndex - _firstActionIndex + 1;
-                if (_currentActionPage > 0)
-                    numActionsToShow++;
-                if (_currentActionPage < _maxPages - 1)
-                    numActionsToShow++;
-                maxOptionsOnScreen = Math.Min(maxOptionsOnScreen, numActionsToShow);
-                
-                int width = 320;
-                int height = maxOptionsOnScreen*30 + 25;
-                if (_helpText.Length > 0)
-                    height += 30;
-                GUI.ModalWindow(1, new Rect(Screen.width/2 - width/2, modalY, width, height), DoMyWindow, _actionName);
+                windowRect3 = GUI.ModalWindow(0, windowRect3, DoMyWindow, _actionName);
             }
+
+            //windowRect2 = GUI.ModalWindow(0, windowRect2, DoMyWindow, "Title");
+        }
+
+        void EnableClicks()
+        {
+            ModalExecuting = false;
         }
 
         void DoMyWindow(int windowID)
@@ -491,6 +502,8 @@ cardScale = Math.Min(xScale, yScale);
             {
                 if (GUI.Button(new Rect(10, y, 300, 20), _actions[i]))
                 {
+                    ModalExecuting = true;
+                    Invoke("EnableClicks", 0.5f);
                     ClientSocket.SendPlayerChoice(_actions[i]);
                 }
                 y += 30;
@@ -503,6 +516,8 @@ cardScale = Math.Min(xScale, yScale);
                     NextPage();
                 }
             }
+
+            GUI.DragWindow(new Rect(0, 0, 10000, 20));
         }
 
         public void HidePlayerChoice(string playerid)

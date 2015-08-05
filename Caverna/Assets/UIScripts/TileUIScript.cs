@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Assets.UIScripts
@@ -313,7 +315,8 @@ namespace Assets.UIScripts
             }
             if (_actionEnabled)
             {
-                ClientSocket.Instance.GetTileAction("Player", new Vector2(X, Y), _tileType);
+                if (!CavernaGame.Instance.GetComponent<CavernaGame>().ModalExecuting)
+                    ClientSocket.Instance.GetTileAction("Player", new Vector2(X, Y), _tileType);
             }
         }
 
