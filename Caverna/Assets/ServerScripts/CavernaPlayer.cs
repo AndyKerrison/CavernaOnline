@@ -442,18 +442,25 @@ namespace Assets.ServerScripts
             }
         }
 
-        public List<string> GetFoodOptions()
+        public List<string> GetFoodOptions(bool isHarvest)
         {
             //return a list of all the feeding options. 'Feed' or 'begging cards' first
             List<string> foodActions = new List<string>();
 
-            if (Food >= _harvestFoodReq)
+            if (isHarvest)
             {
-                foodActions.Add(FoodActions.FeedAllDwarves);
+                if (Food >= _harvestFoodReq)
+                {
+                    foodActions.Add(FoodActions.FeedAllDwarves);
+                }
+                else
+                {
+                    foodActions.Add(FoodActions.FeedAndTakeBeggingCards);
+                }
             }
             else
             {
-                foodActions.Add(FoodActions.FeedAndTakeBeggingCards);
+                foodActions.Add(FoodActions.Cancel);
             }
 
             bool slaughteringCave = tilesManager.HasTile(BuildingTypes.SlaughteringCave);
@@ -504,6 +511,10 @@ namespace Assets.ServerScripts
         {
             switch (action)
             {
+                case (FoodActions.Cancel):
+                    {
+                        break;
+                    }
                 case (FoodActions.Convert2Gold):
                 {
                     Food++;

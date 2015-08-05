@@ -222,6 +222,11 @@ namespace Assets.ServerScripts
             CavernaManager.Instance.GetRubyActions(playerID);
         }
 
+        public void GetFoodActions(string playerID)
+        {
+            CavernaManager.Instance.GetFoodActions(playerID);
+        }
+
         public void GetTileAction(string playerID, Vector2 position, string tileType)
         {
             CavernaManager.Instance.GetTileAction(playerID, position, tileType);

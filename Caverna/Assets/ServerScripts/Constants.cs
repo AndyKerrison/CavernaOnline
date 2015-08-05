@@ -96,7 +96,7 @@ public static class RoundBonusTypes
 
 public static class BuildingTileActions
 {
-    public static string Cancel = "Cancel";
+    public static string Cancel = "Cancel building use";
     public static string Trade1RubyAnd1OreFor2GoldAnd1Food = "1 Ore and 1 Ruby for 2 Gold and 1 Food";
     public static string Invalid = "ERROR: Invalid tile action";
     public static string Trade2GrainFor3Gold = "Trade 2 Grain for 3 Gold";
@@ -108,7 +108,7 @@ public static class BuildingTileActions
 }
 public static class RubyTrades
 {
-    public static string Cancel = "Cancel";
+    public static string Cancel = "Cancel ruby conversion";
     public static string Wood = "Trade 1 Ruby for 1 Wood";
     public static string Stone = "Trade 1 Ruby for 1 Stone";
     public static string Ore = "Trade 1 Ruby for 1 Ore";
@@ -136,6 +136,7 @@ public static class DiscardActions
 
 public static class FoodActions
 {
+    public const string Cancel = "Cancel food conversion";
     public const string FeedAllDwarves = "Feed All Dwarves";
     public const string FeedAndTakeBeggingCards = "Partially feed dwarves and take begging cards";
     public const string ConvertSheep = "Convert 1 sheep to 1 food";

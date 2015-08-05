@@ -91,6 +91,15 @@ namespace Assets.UIScripts
             }
 
             InitTiles();
+
+            GameObject convertFood = (GameObject)Instantiate(Resources.Load("Clickable"));
+            convertFood.transform.SetParent(transform, true);
+            convertFood.transform.localScale = transform.localScale;
+            convertFood.transform.position = transform.position;
+            //spriteSize.y = (spriteSize.x / icon.GetComponent<RectTransform>().sizeDelta.x) *
+            //               icon.GetComponent<RectTransform>().sizeDelta.y;
+            convertFood.GetComponent<RectTransform>().sizeDelta = new Vector2(0.275f*parentWidth, 0.15f*parentHeight);
+            convertFood.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.7f*parentWidth, -0.85f*parentHeight);
         }
 
         private void InitTiles()

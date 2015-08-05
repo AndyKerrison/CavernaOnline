@@ -487,7 +487,7 @@ cardScale = Math.Min(xScale, yScale);
                 y += 30;
             }
 
-            for (int i=_firstActionIndex; i <= _lastActionIndex; i++)
+            for (int i=_firstActionIndex; i <= _lastActionIndex && _showModal; i++)
             {
                 if (GUI.Button(new Rect(10, y, 300, 20), _actions[i]))
                 {
@@ -626,6 +626,11 @@ cardScale = Math.Min(xScale, yScale);
         public void SetPlayerBuildingActive(string playerID, Vector2 position)
         {
             GameObject.Find("GameBoard").GetComponent<PlayerBoardScript>().SetTileActionActive(position);
+        }
+
+        public void GetFoodActions()
+        {
+            ClientSocket.GetFoodActions("playerID");
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Assets.UIScripts
         void SetTileClicked(string player, Vector2 position, string type, bool isCave, bool isBuilding);
         void SendPlayerChoice(string action);
         void GetRubyActions(string playerID);
+        void GetFoodActions(string playerID);
         void GetTileAction(string player, Vector2 position, string tileType);
     }
 
@@ -122,6 +123,11 @@ namespace Assets.UIScripts
         public void GetRubyActions(string playerID)
         {
             _serverSocket.GetRubyActions(playerID);
+        }
+
+        public void GetFoodActions(string playerID)
+        {
+            _serverSocket.GetFoodActions(playerID);
         }
 
         public void GetTileAction(string player, Vector2 position, string tileType)

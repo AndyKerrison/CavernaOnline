@@ -61,6 +61,7 @@
      <Compile Include="Assets\UIScripts\ActionBoardScript.cs" />
      <Compile Include="Assets\UIScripts\ActionSpace.cs" />
      <Compile Include="Assets\UIScripts\CavernaGame.cs" />
+     <Compile Include="Assets\UIScripts\ClickableScript.cs" />
      <Compile Include="Assets\UIScripts\ClientSocket.cs" />
      <Compile Include="Assets\UIScripts\DwarfGameObject.cs" />
      <Compile Include="Assets\UIScripts\DwarfIconUIScript.cs" />

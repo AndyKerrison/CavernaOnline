@@ -509,7 +509,7 @@ namespace Assets.ServerScripts
                         {
                             player.IsOneFoodPerDwarf = false;
                             player.SetHarvestFoodRequirement();
-                            _serverSocket.GetPlayerChoice("playerID", "Harvest Feeding", player.GetHarvestMessage(), player.GetFoodOptions());
+                            _serverSocket.GetPlayerChoice("playerID", "Harvest Feeding", player.GetHarvestMessage(), player.GetFoodOptions(true));
                             return;
                         }
 
@@ -532,7 +532,7 @@ namespace Assets.ServerScripts
                         {
                             player.IsOneFoodPerDwarf = true;
                             player.SetHarvestFoodRequirement();
-                            _serverSocket.GetPlayerChoice("playerID", "Feeding - 1 food per dwarf", player.GetHarvestMessage(), player.GetFoodOptions());
+                            _serverSocket.GetPlayerChoice("playerID", "Feeding - 1 food per dwarf", player.GetHarvestMessage(), player.GetFoodOptions(true));
                             return;
                         }
 
@@ -561,7 +561,7 @@ namespace Assets.ServerScripts
                         {
                             player.IsOneFoodPerDwarf = false;
                             player.SetHarvestFoodRequirement();
-                            _serverSocket.GetPlayerChoice("playerID", "Harvest Feeding", player.GetHarvestMessage(), player.GetFoodOptions());
+                            _serverSocket.GetPlayerChoice("playerID", "Harvest Feeding", player.GetHarvestMessage(), player.GetFoodOptions(true));
                             return;
                         }
 
@@ -1104,7 +1104,10 @@ namespace Assets.ServerScripts
                 _serverSocket.HidePlayerChoice("playerID");
 
                 if (action == BuildingTileActions.Cancel)
+                {
+                    ReturnControlToPlayer(_players[0]);
                     return;
+                }
 
                 if (action == BuildingTileActions.Trade1RubyAnd1OreFor2GoldAnd1Food)
                 {
@@ -1157,8 +1160,11 @@ namespace Assets.ServerScripts
                 _serverSocket.HidePlayerChoice("playerID");
 
                 if (action == RubyTrades.Cancel)
+                {
+                    ReturnControlToPlayer(_players[0]);
                     return;
-
+                }
+                    
                 player.Rubies--;
 
                 if (action == RubyTrades.Wood)
@@ -1487,6 +1493,11 @@ namespace Assets.ServerScripts
         public void GetRubyActions(string playerID)
         {
             _serverSocket.GetPlayerChoice("playerID", "Ruby Conversion", string.Empty, _players[0].GetRubyTradeOptions());
+        }
+
+        public void GetFoodActions(string playerID)
+        {
+            _serverSocket.GetPlayerChoice("playerID", "Food Conversion", string.Empty, _players[0].GetFoodOptions(false));
         }
 
         public void GetTileAction(string playerID, Vector2 position, string tileType)
