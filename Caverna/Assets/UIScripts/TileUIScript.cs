@@ -110,13 +110,13 @@ namespace Assets.UIScripts
             var parentWidth = transform.GetComponent<RectTransform>().rect.width;
             var parentHeight = transform.GetComponent<RectTransform>().rect.height;
             var spriteSize = new Vector2(parentWidth / 2f, parentHeight / 2f);
-            //var verticalOffset = transform.GetComponent<RectTransform>().anchoredPosition.y + 0*parentHeight;
-            //var horizontalOffset = transform.GetComponent<RectTransform>().anchoredPosition.x - 0*parentWidth;
+            var verticalOffset = transform.GetComponent<RectTransform>().anchoredPosition.y + 0*parentHeight;
+            var horizontalOffset = transform.GetComponent<RectTransform>().anchoredPosition.x - 0*parentWidth;
 
             _icon = ResourceIcon.Create(ResourceTypes.Grain, false);
             _icon.transform.SetParent(transform, true);
             _icon.transform.localScale = transform.localScale;
-            _icon.transform.position = new Vector3(transform.position.x + parentWidth/2f, transform.position.y + parentHeight/2f);
+            //_icon.transform.position = new Vector3(100, 0);//transform.position.x + parentWidth/2f, transform.position.y + parentHeight/2f);
             spriteSize.y = (spriteSize.x / _icon.GetComponent<RectTransform>().sizeDelta.x) *
                            _icon.GetComponent<RectTransform>().sizeDelta.y;
             _icon.GetComponent<RectTransform>().sizeDelta = spriteSize;
@@ -128,7 +128,8 @@ namespace Assets.UIScripts
             spriteSize.y = (spriteSize.x / _dogIcon.GetComponent<RectTransform>().sizeDelta.x) *
                            _dogIcon.GetComponent<RectTransform>().sizeDelta.y;
             _dogIcon.GetComponent<RectTransform>().sizeDelta = spriteSize;
-            //_icon.GetComponent<RectTransform>().anchoredPosition = new Vector2(horizontalOffset, verticalOffset);
+            
+            _icon.GetComponent<RectTransform>().anchoredPosition = new Vector2(horizontalOffset + 2.3f*parentWidth, verticalOffset + 1.6f*parentHeight);
         }
 
         public void SetIsCave()
@@ -260,9 +261,6 @@ namespace Assets.UIScripts
             {
                 _icon.GetComponent<ResourceIcon>().SetType(animalType);
                 _icon.GetComponent<ResourceIcon>().SetValue(count);
-                var parentWidth = transform.GetComponent<RectTransform>().rect.width;
-                var parentHeight = transform.GetComponent<RectTransform>().rect.height;
-                _icon.transform.position = new Vector3(transform.position.x +0.4f*parentWidth / 2f, transform.position.y + 1.6f*parentHeight / 2f);
             }
         }
 

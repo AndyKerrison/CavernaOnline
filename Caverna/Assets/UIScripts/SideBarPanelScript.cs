@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.UIScripts
 {
@@ -20,10 +21,11 @@ namespace Assets.UIScripts
         {
             var parentWidth = transform.GetComponent<RectTransform>().rect.width;
             var parentHeight = transform.GetComponent<RectTransform>().rect.height;
-            var spriteSize = new Vector2(parentWidth / 1.2f, parentHeight / 8f);
-            var verticalIncrement = parentHeight/11f;
-            var verticalOffset = transform.GetComponent<RectTransform>().anchoredPosition.y + parentHeight / 20f;
-            var horizontalOffset = transform.GetComponent<RectTransform>().anchoredPosition.x - parentWidth/10f;
+            var spriteHeight = Math.Min(0.8f*parentWidth, 0.08f*parentHeight);
+            var spriteSize = new Vector2(spriteHeight, spriteHeight);
+            var verticalIncrement = 0.1f*parentHeight;
+            var verticalOffset = transform.GetComponent<RectTransform>().anchoredPosition.y + 0.04f*parentHeight;
+            var horizontalOffset = transform.GetComponent<RectTransform>().anchoredPosition.x + 0.4f*parentWidth - 0.5f*spriteHeight;
 
             _woodCount = InitIcon(ResourceTypes.Wood, spriteSize);
             _oreCount = InitIcon(ResourceTypes.Ore, spriteSize);
@@ -54,7 +56,7 @@ namespace Assets.UIScripts
             GameObject icon = ResourceIcon.Create(resourceType, true);
             icon.transform.SetParent(transform, true);
             icon.transform.localScale = transform.localScale;
-            icon.transform.position = transform.position;
+            //icon.transform.position = transform.position;
             spriteSize.y = (spriteSize.x/icon.GetComponent<RectTransform>().sizeDelta.x)*
                            icon.GetComponent<RectTransform>().sizeDelta.y;
             icon.GetComponent<RectTransform>().sizeDelta = spriteSize;

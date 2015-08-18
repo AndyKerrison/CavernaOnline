@@ -285,16 +285,26 @@ namespace Assets.UIScripts
 
         private static GameObject InitSprite(string resourceType, bool isTopOfCard, Transform transform)
         {
-            var cardWidth = transform.GetComponent<RectTransform>().rect.width;
-            var cardHeight = transform.GetComponent<RectTransform>().rect.height;
+            var x1 = transform.position.x;
+            var x2 = transform.GetComponent<RectTransform>().anchoredPosition.x;
+            var y2 = transform.GetComponent<RectTransform>().anchoredPosition.y;
+
+            var cardWidth = transform.GetComponent<RectTransform>().sizeDelta.x;
+            var cardHeight = transform.GetComponent<RectTransform>().sizeDelta.y;
             GameObject sprite = (GameObject)Instantiate(Resources.Load("ResourceIconUI"));
             sprite.GetComponent<ResourceIcon>().SetType(resourceType);
-            sprite.transform.SetParent(transform, true);
+            sprite.transform.SetParent(transform.parent, true);
             sprite.transform.localScale = transform.localScale;
-            sprite.transform.position = new Vector3(transform.position.x + 0.9f*cardWidth, transform.position.y- 0.15f*cardHeight);
+            //sprite.transform.position = new Vector3(transform.position.x + 0.0f*cardWidth, transform.position.y- 0.0f*cardHeight);
             var spriteSize = new Vector2(cardWidth/4, cardHeight/4);
             sprite.GetComponent<RectTransform>().sizeDelta = spriteSize;
             //sprite.GetComponent<RectTransform>().anchoredPosition = new Vector2(sprite.GetComponent<RectTransform>().anchoredPosition.x + 3.5f * spriteSize.x, sprite.GetComponent<RectTransform>().anchoredPosition.y - CavernaGame.Instance.GetComponent<CavernaGame>().cardScale * 60);
+            sprite.GetComponent<RectTransform>().anchoredPosition = new Vector2(x2 + 0.6f*cardWidth, y2-0.15f*cardHeight);
+
+            var xNew = sprite.transform.position.x;
+            var x2New = sprite.GetComponent<RectTransform>().anchoredPosition.x;
+            var yNew = sprite.transform.position.y;
+            var y2New = sprite.GetComponent<RectTransform>().anchoredPosition.y;
             return sprite;
         }
 

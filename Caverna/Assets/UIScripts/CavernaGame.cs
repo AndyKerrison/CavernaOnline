@@ -257,7 +257,7 @@ cardScale = Math.Min(xScale, yScale);
             GameObject card2 = ActionSpace.Create(actionID, actionName);
             card2.transform.SetParent(ActionsPanel.transform);
             card2.transform.localScale = ActionsPanel.transform.localScale;
-            card2.transform.position = ActionsPanel.transform.position;
+            //card2.transform.position = ActionsPanel.transform.position;
             _actionSpaces.Add(card2);
 
             ResizeActionCards();
