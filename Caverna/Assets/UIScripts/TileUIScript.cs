@@ -107,8 +107,8 @@ namespace Assets.UIScripts
             _renderer = GetComponent<Image>().canvasRenderer;
             //_activeColor = _hiddenColor;
 
-            var parentWidth = transform.GetComponent<RectTransform>().rect.width;
-            var parentHeight = transform.GetComponent<RectTransform>().rect.height;
+            var parentWidth = transform.GetComponent<RectTransform>().sizeDelta.x;
+            var parentHeight = transform.GetComponent<RectTransform>().sizeDelta.y;
             var spriteSize = new Vector2(parentWidth / 2f, parentHeight / 2f);
             var verticalOffset = transform.GetComponent<RectTransform>().anchoredPosition.y + 0*parentHeight;
             var horizontalOffset = transform.GetComponent<RectTransform>().anchoredPosition.x - 0*parentWidth;
@@ -116,20 +116,20 @@ namespace Assets.UIScripts
             _icon = ResourceIcon.Create(ResourceTypes.Grain, false);
             _icon.transform.SetParent(transform, true);
             _icon.transform.localScale = transform.localScale;
-            //_icon.transform.position = new Vector3(100, 0);//transform.position.x + parentWidth/2f, transform.position.y + parentHeight/2f);
+            //_icon.transform.position = new Vector3(transform.position.x + 0.0f*parentWidth, transform.position.y + 0.5f*parentHeight);
             spriteSize.y = (spriteSize.x / _icon.GetComponent<RectTransform>().sizeDelta.x) *
                            _icon.GetComponent<RectTransform>().sizeDelta.y;
             _icon.GetComponent<RectTransform>().sizeDelta = spriteSize;
+            _icon.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.5f*parentWidth, 0.05f*parentHeight);
 
             _dogIcon = ResourceIcon.Create(ResourceTypes.Dogs, false);
             _dogIcon.transform.SetParent(transform, true);
             _dogIcon.transform.localScale = transform.localScale;
-            _dogIcon.transform.position = new Vector3(transform.position.x +  0*parentWidth, transform.position.y + 0*parentHeight);
+            //_dogIcon.transform.position = new Vector3(transform.position.x +  0*parentWidth, transform.position.y + 0*parentHeight);
             spriteSize.y = (spriteSize.x / _dogIcon.GetComponent<RectTransform>().sizeDelta.x) *
                            _dogIcon.GetComponent<RectTransform>().sizeDelta.y;
             _dogIcon.GetComponent<RectTransform>().sizeDelta = spriteSize;
-            
-            _icon.GetComponent<RectTransform>().anchoredPosition = new Vector2(horizontalOffset + 2.3f*parentWidth, verticalOffset + 1.6f*parentHeight);
+            _dogIcon.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.5f*parentWidth, -0.5f*parentHeight); //new Vector2(horizontalOffset + 0.5f * parentWidth, verticalOffset - 0.8f*parentHeight);
         }
 
         public void SetIsCave()
@@ -408,6 +408,8 @@ namespace Assets.UIScripts
             if (tileType == TileTypes.Stable)
             {
                 gameObject.transform.localScale = new Vector3(0.4f, 0.4f);//gameObject.GetComponent<RectTransform>().sizeDelta = gameObject.GetComponent<RectTransform>().sizeDelta * 0.5f;
+                var parentWidth = transform.GetComponent<RectTransform>().sizeDelta.x;
+                gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.3f*parentWidth, -0.3f*parentWidth);
                 return Stable;
             }
 

@@ -107,10 +107,11 @@ namespace Assets.UIScripts
             var parentWidth = transform.GetComponent<RectTransform>().rect.width;
             var parentHeight = transform.GetComponent<RectTransform>().rect.height;
 
-            var verticalOffset = transform.GetComponent<RectTransform>().anchoredPosition.y + -0.27f * parentHeight;
-            var horizontalOffset = transform.GetComponent<RectTransform>().anchoredPosition.x + 0.1f * parentWidth;
             var horizontalIncrement = 0.14f * parentWidth;
-            var verticalIncrement = 0.195f * parentHeight;
+            var verticalIncrement = 0.192f * parentHeight;
+
+            var verticalOffset = transform.GetComponent<RectTransform>().anchoredPosition.y + -0.1f * parentHeight - 3*verticalIncrement;
+            var horizontalOffset = transform.GetComponent<RectTransform>().anchoredPosition.x + 0.535f * parentWidth;
             var spriteSize = new Vector2(parentWidth / 7.5f, parentHeight / 7.5f);
 
             _caveTiles = new GameObject[3, 4];
@@ -121,7 +122,8 @@ namespace Assets.UIScripts
                     _caveTiles[x, y] = (GameObject)Instantiate(Resources.Load("TileUI"));
                     _caveTiles[x, y].transform.SetParent(transform, true);
                     _caveTiles[x, y].transform.localScale = transform.localScale;
-                    _caveTiles[x, y].transform.position = transform.position;// new Vector2(parentPosition.x + x * boardWidth / 7.4f, parentPosition.y + y * boardHeight / 5.2f);
+//                    _caveTiles[x, y].gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(100, 100);
+                    //_caveTiles[x, y].transform.position = transform.position;// new Vector2(parentPosition.x + x * boardWidth / 7.4f, parentPosition.y + y * boardHeight / 5.2f);
 
                     spriteSize.y = (spriteSize.x / _caveTiles[x, y].GetComponent<RectTransform>().sizeDelta.x) *
                         _caveTiles[x, y].GetComponent<RectTransform>().sizeDelta.y;
@@ -135,8 +137,8 @@ namespace Assets.UIScripts
                 }
             }
 
-            verticalOffset = transform.GetComponent<RectTransform>().anchoredPosition.y + -0.27f * parentHeight;
-            horizontalOffset = transform.GetComponent<RectTransform>().anchoredPosition.x - 0.38f * parentWidth;
+            verticalOffset = transform.GetComponent<RectTransform>().anchoredPosition.y + -0.105f * parentHeight - 3*verticalIncrement;
+            horizontalOffset = transform.GetComponent<RectTransform>().anchoredPosition.x + 0.060f * parentWidth;
             _forestTiles = new GameObject[3, 4];
             for (int x = 0; x < 3; x++)
             {
@@ -145,7 +147,7 @@ namespace Assets.UIScripts
                     _forestTiles[x, y] = (GameObject)Instantiate(Resources.Load("TileUI"));
                     _forestTiles[x, y].transform.SetParent(transform, true);
                     _forestTiles[x, y].transform.localScale = transform.localScale;
-                    _forestTiles[x, y].transform.position = transform.position;// new Vector2(parentPosition.x + x * boardWidth / 7.4f, parentPosition.y + y * boardHeight / 5.2f);
+                    //_forestTiles[x, y].transform.position = transform.position;// new Vector2(parentPosition.x + x * boardWidth / 7.4f, parentPosition.y + y * boardHeight / 5.2f);
 
                     spriteSize.y = (spriteSize.x / _forestTiles[x, y].GetComponent<RectTransform>().sizeDelta.x) *
                         _forestTiles[x, y].GetComponent<RectTransform>().sizeDelta.y;

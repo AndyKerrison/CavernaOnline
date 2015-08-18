@@ -225,8 +225,8 @@ namespace Assets.UIScripts
 
         private void InitialiseSprites()
         {
-            float x = gameObject.transform.position.x;
-            float y = gameObject.transform.position.y;
+            //float x = gameObject.transform.position.x;
+            //float y = gameObject.transform.position.y;
 		
             woodSprite = InitSprite(ResourceTypes.Wood, true, transform);
             _stoneSprite = InitSprite(ResourceTypes.Stone, true, transform);
@@ -285,7 +285,6 @@ namespace Assets.UIScripts
 
         private static GameObject InitSprite(string resourceType, bool isTopOfCard, Transform transform)
         {
-            var x1 = transform.position.x;
             var x2 = transform.GetComponent<RectTransform>().anchoredPosition.x;
             var y2 = transform.GetComponent<RectTransform>().anchoredPosition.y;
 
@@ -301,10 +300,10 @@ namespace Assets.UIScripts
             //sprite.GetComponent<RectTransform>().anchoredPosition = new Vector2(sprite.GetComponent<RectTransform>().anchoredPosition.x + 3.5f * spriteSize.x, sprite.GetComponent<RectTransform>().anchoredPosition.y - CavernaGame.Instance.GetComponent<CavernaGame>().cardScale * 60);
             sprite.GetComponent<RectTransform>().anchoredPosition = new Vector2(x2 + 0.6f*cardWidth, y2-0.15f*cardHeight);
 
-            var xNew = sprite.transform.position.x;
-            var x2New = sprite.GetComponent<RectTransform>().anchoredPosition.x;
-            var yNew = sprite.transform.position.y;
-            var y2New = sprite.GetComponent<RectTransform>().anchoredPosition.y;
+            //var xNew = sprite.transform.position.x;
+            //var x2New = sprite.GetComponent<RectTransform>().anchoredPosition.x;
+            //var yNew = sprite.transform.position.y;
+            //var y2New = sprite.GetComponent<RectTransform>().anchoredPosition.y;
             return sprite;
         }
 

@@ -125,13 +125,13 @@ namespace Assets.UIScripts
             {
                 for (int y = 0; y < 4; y++)
                 {
-                    var xPos = tileWidth / 2 - panelWidth / 2 + x*tileWidth;
-                    var yPos = panelHeight / 2 - tileWidth / 2 - y*tileWidth;
+                    var xPos = x*tileWidth;
+                    var yPos = -y*tileWidth;
 
                     if (x >= 3)
                         xPos += 0.047f*panelWidth;
                     if (x >= 9)
-                        xPos += 0.047f * panelWidth;
+                        xPos += 0.047f*panelWidth;
 
                     GameObject tile = CreateTile(BuildingTypes.Unavailable, tileWidth, xPos, yPos);
                     _buildingTiles[x, y] = tile;
@@ -144,7 +144,7 @@ namespace Assets.UIScripts
             GameObject tile = (GameObject)Instantiate(Resources.Load("TileUI"));
             tile.transform.SetParent(BuildingsPanel.transform);
             tile.transform.localScale = BuildingsPanel.transform.localScale;
-            tile.transform.position = BuildingsPanel.transform.position;
+            //tile.transform.position = BuildingsPanel.transform.position;
             tile.GetComponent<RectTransform>().sizeDelta = new Vector2(tileWidth, tileWidth);
             tile.GetComponent<RectTransform>().anchoredPosition = new Vector2(xPos, yPos);
             tile.GetComponent<TileUIScript>().SetType(new List<string>() { type });
@@ -405,12 +405,17 @@ cardScale = Math.Min(xScale, yScale);
             SetModalVars();
         }
 
+        private int buttonSize = 35;
+
         private void SetModalVars()
         {
             float modalY = 0.4f * Screen.height / 2f;
             float screenHeight = Screen.height;
-            int maxOptionsOnScreen = (int)(screenHeight - modalY) / 30 - 1;
-            maxOptionsOnScreen = Math.Min(maxOptionsOnScreen, _actions.Count);
+            int maxOptionsOnScreen = (int)(screenHeight - modalY) / (buttonSize+10) - 1;
+            int maxOptionsRequired = _actions.Count;
+            if (_helpText.Length > 0)
+                maxOptionsRequired++;
+            maxOptionsOnScreen = Math.Min(maxOptionsOnScreen, maxOptionsRequired);
 
             _maxPages = 0;
             int remainingActions = _actions.Count;
@@ -447,7 +452,7 @@ cardScale = Math.Min(xScale, yScale);
             if (_lastActionIndex > _actions.Count-1)
                 _lastActionIndex = _actions.Count-1;
 
-            maxOptionsOnScreen = (int)(screenHeight - modalY) / 30 - 1;
+            maxOptionsOnScreen = (int)(screenHeight - modalY) / buttonSize - 1;
             int numActionsToShow = _lastActionIndex - _firstActionIndex + 1;
             if (_currentActionPage > 0)
                 numActionsToShow++;
@@ -455,10 +460,10 @@ cardScale = Math.Min(xScale, yScale);
                 numActionsToShow++;
             maxOptionsOnScreen = Math.Min(maxOptionsOnScreen, numActionsToShow);
 
-            int width = 320;
-            int height = maxOptionsOnScreen * 30 + 25;
+            int width = 520;
+            int height = maxOptionsOnScreen * (buttonSize+10) + 40;
             if (_helpText.Length > 0)
-                height += 30;
+                height += buttonSize;
             windowRect3 = new Rect(Screen.width / 2 - width / 2, modalY, width, height);
         }
 
@@ -467,9 +472,12 @@ cardScale = Math.Min(xScale, yScale);
 
         void OnGUI()
         {
+            GUIStyle style = new GUIStyle(GUI.skin.window);
+            style.fontSize = 20;
+
             if (_showModal)
             {
-                windowRect3 = GUI.ModalWindow(0, windowRect3, DoMyWindow, _actionName);
+                windowRect3 = GUI.ModalWindow(0, windowRect3, DoMyWindow, _actionName, style);
             }
 
             //windowRect2 = GUI.ModalWindow(0, windowRect2, DoMyWindow, "Title");
@@ -482,36 +490,42 @@ cardScale = Math.Min(xScale, yScale);
 
         void DoMyWindow(int windowID)
         {
-            int y = 25;
+            GUIStyle style = new GUIStyle(GUI.skin.button);
+            style.fontSize = 20;
+
+            GUIStyle lblStyle = new GUIStyle(GUI.skin.label);
+            lblStyle.fontSize = 20;
+            
+            int y = 35;
             if (_helpText.Length > 0)
             {
-                GUI.Label(new Rect(10, y, 300, 20), _helpText);
-                y += 30;
+                GUI.Label(new Rect(10, y, 500, 30), _helpText, lblStyle);
+                y += buttonSize + 5;
             }    
 
             if (_currentActionPage > 0)
             {
-                if (GUI.Button(new Rect(10, y, 300, 20), "Back..."))
+                if (GUI.Button(new Rect(10, y, 500, 30), "Back...", style))
                 {
                     PrevPage();
                 }
-                y += 30;
+                y += buttonSize + 10;
             }
 
             for (int i=_firstActionIndex; i <= _lastActionIndex && _showModal; i++)
             {
-                if (GUI.Button(new Rect(10, y, 300, 20), _actions[i]))
+                if (GUI.Button(new Rect(10, y, 500, 30), _actions[i], style))
                 {
                     ModalExecuting = true;
                     Invoke("EnableClicks", 0.5f);
                     ClientSocket.SendPlayerChoice(_actions[i]);
                 }
-                y += 30;
+                y += buttonSize + 10;
             }
 
             if (_currentActionPage < _maxPages-1)
             {
-                if (GUI.Button(new Rect(10, y, 300, 20), "More..."))
+                if (GUI.Button(new Rect(10, y, 500, 30), "More...", style))
                 {
                     NextPage();
                 }
