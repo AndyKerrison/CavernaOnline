@@ -89,6 +89,7 @@ namespace Assets.UIScripts
         private CanvasRenderer _renderer;
         private Image _image;
         private readonly Color _hiddenColor = new Color(1f, 1f, 1f, 0f);
+        private int _rotation = 0;
 
 
         public void SetVector(int x, int y)
@@ -266,7 +267,29 @@ namespace Assets.UIScripts
 
         public void SetRotation(int degrees)
         {
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, degrees));
+            if (_rotation == degrees)
+                return;
+
+            _rotation = degrees;
+            
+            transform.GetComponent<RectTransform>().rotation = Quaternion.Euler(new Vector3(0, 0, degrees));
+
+            //also fix the position, since degrees will be 90, 180, 270
+            var x = transform.GetComponent<RectTransform>().anchoredPosition.x;
+            var y = transform.GetComponent<RectTransform>().anchoredPosition.y;
+            var size = transform.GetComponent<RectTransform>().sizeDelta.x;
+            if (degrees == 90)
+            {
+                transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y - size);
+            }
+            if (degrees == 180)
+            {
+                transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(x + size, y - size);
+            }
+            else if (degrees == 270)
+            {
+                transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(x + size, y);
+            }
         }
 
         private void InitChildTile(string tileType)
@@ -290,6 +313,10 @@ namespace Assets.UIScripts
             _childTile.GetComponent<TileUIScript>().SetClickable(tileType, false, false, false);
             if (_isCave)
                 _childTile.GetComponent<TileUIScript>().SetIsCave();
+
+            //if this tile is rotated, do the same to the child tile
+            if (_rotation > 0)
+                _childTile.GetComponent<TileUIScript>().SetRotation((int) transform.rotation.eulerAngles.magnitude);
         }
 
         private bool HasValue()

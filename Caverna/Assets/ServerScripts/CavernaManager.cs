@@ -1063,6 +1063,7 @@ namespace Assets.ServerScripts
             {
                 _serverSocket.HidePlayerChoice("playerID");
                 NextRound();
+                return;
             }
 
             //TODO needs playerID also
