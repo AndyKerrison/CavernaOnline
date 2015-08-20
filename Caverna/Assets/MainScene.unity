@@ -1378,7 +1378,7 @@ RectTransform:
   m_RootOrder: 4
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4.01672363, y: -26.6213989}
+  m_AnchoredPosition: {x: 0, y: -27.5}
   m_SizeDelta: {x: 60, y: -55}
   m_Pivot: {x: 1, y: .5}
 --- !u!114 &1009178014
@@ -1394,7 +1394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: fc7116841e2091748bc078f0c2139e16, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 57955405f89ff6c47b30c07477f53a95, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2075,6 +2075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoaderCanvas: {fileID: 118702060}
+  ModalExecuting: 0
   MainActionsDisplayBoard: {fileID: 1315945736}
   GameBoard: {fileID: 1999473578}
   ActionBoard: {fileID: 1913166322}
@@ -2087,6 +2088,18 @@ MonoBehaviour:
   BuildingPanelScrollbar: {fileID: 1521178568}
   MainCanvas: {fileID: 1183201588}
   Image: {fileID: 0}
+  windowRect2:
+    serializedVersion: 2
+    x: 20
+    y: 20
+    width: 210
+    height: 450
+  windowRect3:
+    serializedVersion: 2
+    x: 20
+    y: 20
+    width: 210
+    height: 450
 --- !u!1 &1811004255
 GameObject:
   m_ObjectHideFlags: 0

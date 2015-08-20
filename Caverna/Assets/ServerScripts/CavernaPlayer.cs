@@ -159,6 +159,7 @@ namespace Assets.ServerScripts
             {
                 animalManager.Sheep = value;
                 AutoArrangeAnimals(false, false);
+                _serverSocket.SetPlayerResources(ID, ResourceTypes.Sheep, Sheep);
                 CalculatePlayerScore();
             }
         }
@@ -170,6 +171,7 @@ namespace Assets.ServerScripts
             {
                 animalManager.Donkeys = value;
                 AutoArrangeAnimals(false, false);
+                _serverSocket.SetPlayerResources(ID, ResourceTypes.Donkeys, Donkeys);
                 CalculatePlayerScore();
             }
         }
@@ -181,6 +183,7 @@ namespace Assets.ServerScripts
             {
                 animalManager.Pigs = value;
                 AutoArrangeAnimals(false, false);
+                _serverSocket.SetPlayerResources(ID, ResourceTypes.Pigs, Pigs);
                 CalculatePlayerScore();
             }
         }
@@ -192,6 +195,7 @@ namespace Assets.ServerScripts
             {
                 animalManager.Cows = value;
                 AutoArrangeAnimals(false, false);
+                _serverSocket.SetPlayerResources(ID, ResourceTypes.Cows, Cows);
                 CalculatePlayerScore();
             }
         }

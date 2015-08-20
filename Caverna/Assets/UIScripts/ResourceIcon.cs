@@ -107,6 +107,8 @@ namespace Assets.UIScripts
             {
                 SetSprite(ScoreSprite);
             }
+
+            resourceText.transform.localScale = transform.localScale;
         }
 
         public void SetValue(int newValue)
