@@ -292,13 +292,13 @@ namespace Assets.UIScripts
             var cardHeight = transform.GetComponent<RectTransform>().sizeDelta.y;
             GameObject sprite = (GameObject)Instantiate(Resources.Load("ResourceIconUI"));
             sprite.GetComponent<ResourceIcon>().SetType(resourceType);
-            sprite.transform.SetParent(transform.parent, true);
+            sprite.transform.SetParent(transform, true);
             sprite.transform.localScale = transform.localScale;
             //sprite.transform.position = new Vector3(transform.position.x + 0.0f*cardWidth, transform.position.y- 0.0f*cardHeight);
             var spriteSize = new Vector2(cardWidth/4, cardHeight/4);
             sprite.GetComponent<RectTransform>().sizeDelta = spriteSize;
             //sprite.GetComponent<RectTransform>().anchoredPosition = new Vector2(sprite.GetComponent<RectTransform>().anchoredPosition.x + 3.5f * spriteSize.x, sprite.GetComponent<RectTransform>().anchoredPosition.y - CavernaGame.Instance.GetComponent<CavernaGame>().cardScale * 60);
-            sprite.GetComponent<RectTransform>().anchoredPosition = new Vector2(x2 + 0.6f*cardWidth, y2-0.15f*cardHeight);
+            sprite.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.6f*cardWidth, -0.15f*cardHeight);
 
             //var xNew = sprite.transform.position.x;
             //var x2New = sprite.GetComponent<RectTransform>().anchoredPosition.x;
