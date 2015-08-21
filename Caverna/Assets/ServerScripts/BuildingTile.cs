@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Assets.ServerScripts
+﻿namespace Assets.ServerScripts
 {
     public class BuildingTile {
 

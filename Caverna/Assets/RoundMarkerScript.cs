@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class RoundMarkerScript : MonoBehaviour
@@ -17,16 +16,6 @@ public class RoundMarkerScript : MonoBehaviour
     public Sprite Round10Sprite;
     public Sprite Round11Sprite;
     public Sprite Round12Sprite;
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     public void SetRound(int round)
     {

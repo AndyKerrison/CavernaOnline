@@ -997,7 +997,7 @@ namespace Assets.ServerScripts
             //points for. (Details on the Furnishing tiles can be found on page A3 of the appendix.)
             if (tilesManager.HasTile(BuildingTypes.TreasureChamber))
                 score += Rubies;
-            if (tilesManager.HasTile(BuildingTypes.FoodChamber))
+            if (tilesManager.HasTile(BuildingTypes.FoodChamber)) //should this inclue grain/veg on fields?
                 score += 2*Math.Min(Veg, Grain);
             if (tilesManager.HasTile(BuildingTypes.PrayerChamber) && !_dwarves.Exists(x => x.WeaponLevel > 0))
                 score += 8;

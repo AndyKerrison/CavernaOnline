@@ -874,7 +874,7 @@ GameObject:
   - 224: {fileID: 527878265}
   - 222: {fileID: 527878267}
   - 114: {fileID: 527878266}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: RoomBoard2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -911,7 +911,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 66deac35489a7b5418e6c4add139b718, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0807321707a964f4fadaed5cc426636d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1295,7 +1295,7 @@ GameObject:
   - 224: {fileID: 1003819189}
   - 222: {fileID: 1003819191}
   - 114: {fileID: 1003819190}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: RoomBoard1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1926,7 +1926,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 1702136925}
   - 114: {fileID: 1702136926}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BuildingCanvasScrollView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2225,7 +2225,7 @@ GameObject:
   - 224: {fileID: 1820498231}
   - 222: {fileID: 1820498233}
   - 114: {fileID: 1820498232}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BuildingsPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

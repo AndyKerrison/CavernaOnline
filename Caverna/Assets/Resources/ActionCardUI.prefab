@@ -32,15 +32,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActionID: 0
   SkipRound: {fileID: 21300000, guid: 4597d34ea37fcd2428ea9406d9de3387, type: 3}
-  DriftMining: {fileID: 21300000, guid: 2f8d79f8b060f84439596b7b1b58f708, type: 3}
-  Excavation: {fileID: 21300002, guid: 2f8d79f8b060f84439596b7b1b58f708, type: 3}
-  StartingPlayer: {fileID: 21300004, guid: 2f8d79f8b060f84439596b7b1b58f708, type: 3}
-  Logging: {fileID: 21300008, guid: 2f8d79f8b060f84439596b7b1b58f708, type: 3}
-  Supplies: {fileID: 21300010, guid: 2f8d79f8b060f84439596b7b1b58f708, type: 3}
-  OreMining: {fileID: 21300012, guid: 2f8d79f8b060f84439596b7b1b58f708, type: 3}
-  WoodGathering: {fileID: 21300016, guid: 2f8d79f8b060f84439596b7b1b58f708, type: 3}
-  Clearing: {fileID: 21300018, guid: 2f8d79f8b060f84439596b7b1b58f708, type: 3}
-  Sustenance: {fileID: 21300020, guid: 2f8d79f8b060f84439596b7b1b58f708, type: 3}
+  DriftMining: {fileID: 21300000, guid: c72ac580b21dde54eb2fce49716441e5, type: 3}
+  Excavation: {fileID: 21300002, guid: c72ac580b21dde54eb2fce49716441e5, type: 3}
+  StartingPlayer: {fileID: 21300004, guid: c72ac580b21dde54eb2fce49716441e5, type: 3}
+  Logging: {fileID: 21300008, guid: c72ac580b21dde54eb2fce49716441e5, type: 3}
+  Supplies: {fileID: 21300010, guid: c72ac580b21dde54eb2fce49716441e5, type: 3}
+  OreMining: {fileID: 21300012, guid: c72ac580b21dde54eb2fce49716441e5, type: 3}
+  WoodGathering: {fileID: 21300016, guid: c72ac580b21dde54eb2fce49716441e5, type: 3}
+  Clearing: {fileID: 21300018, guid: c72ac580b21dde54eb2fce49716441e5, type: 3}
+  Sustenance: {fileID: 21300020, guid: c72ac580b21dde54eb2fce49716441e5, type: 3}
   RubyMining: {fileID: 21300000, guid: 7eca3a0e43e255c47b9569a03023f2ce, type: 3}
   HouseWork: {fileID: 21300002, guid: 7eca3a0e43e255c47b9569a03023f2ce, type: 3}
   SlashAndBurn: {fileID: 21300004, guid: 7eca3a0e43e255c47b9569a03023f2ce, type: 3}
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delegates:
+  m_Delegates:
   - eventID: 0
     callback:
       m_PersistentCalls:
@@ -102,8 +102,7 @@ MonoBehaviour:
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-              Culture=neutral, PublicKeyToken=null
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -120,8 +119,7 @@ MonoBehaviour:
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-              Culture=neutral, PublicKeyToken=null
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -138,8 +136,59 @@ MonoBehaviour:
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-              Culture=neutral, PublicKeyToken=null
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11442942}
+          m_MethodName: OnMouseEnter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11442942}
+          m_MethodName: OnMouseExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11442942}
+          m_MethodName: OnMouseDown
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -176,7 +225,52 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: DriftMining
+      value: 
+      objectReference: {fileID: 21300000, guid: c72ac580b21dde54eb2fce49716441e5,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: Excavation
+      value: 
+      objectReference: {fileID: 21300002, guid: c72ac580b21dde54eb2fce49716441e5,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: StartingPlayer
+      value: 
+      objectReference: {fileID: 21300004, guid: c72ac580b21dde54eb2fce49716441e5,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: Logging
+      value: 
+      objectReference: {fileID: 21300008, guid: c72ac580b21dde54eb2fce49716441e5,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: Supplies
+      value: 
+      objectReference: {fileID: 21300010, guid: c72ac580b21dde54eb2fce49716441e5,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: OreMining
+      value: 
+      objectReference: {fileID: 21300012, guid: c72ac580b21dde54eb2fce49716441e5,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: WoodGathering
+      value: 
+      objectReference: {fileID: 21300016, guid: c72ac580b21dde54eb2fce49716441e5,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: Clearing
+      value: 
+      objectReference: {fileID: 21300018, guid: c72ac580b21dde54eb2fce49716441e5,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: Sustenance
+      value: 
+      objectReference: {fileID: 21300020, guid: c72ac580b21dde54eb2fce49716441e5,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 130438}
