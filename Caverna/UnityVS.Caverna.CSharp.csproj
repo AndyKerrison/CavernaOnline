@@ -66,29 +66,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\RoundMarkerScript.cs" />
-    <Compile Include="Assets\ServerScripts\AnimalHolder.cs" />
-    <Compile Include="Assets\ServerScripts\AnimalManager.cs" />
-    <Compile Include="Assets\ServerScripts\BuildingTile.cs" />
-    <Compile Include="Assets\ServerScripts\CavernaActionSpace.cs" />
-    <Compile Include="Assets\ServerScripts\CavernaManager.cs" />
-    <Compile Include="Assets\ServerScripts\CavernaPlayer.cs" />
-    <Compile Include="Assets\ServerScripts\CavernaPlayerTilesManager.cs" />
-    <Compile Include="Assets\ServerScripts\Constants.cs" />
-    <Compile Include="Assets\ServerScripts\Dwarf.cs" />
-    <Compile Include="Assets\ServerScripts\PlayerResources.cs" />
-    <Compile Include="Assets\ServerScripts\ServerSocket.cs" />
-    <Compile Include="Assets\UIScripts\ActionBoardScript.cs" />
-    <Compile Include="Assets\UIScripts\ActionSpace.cs" />
-    <Compile Include="Assets\UIScripts\CavernaGame.cs" />
-    <Compile Include="Assets\UIScripts\ClickableScript.cs" />
-    <Compile Include="Assets\UIScripts\ClientSocket.cs" />
-    <Compile Include="Assets\UIScripts\DwarfGameObject.cs" />
-    <Compile Include="Assets\UIScripts\DwarfIconUIScript.cs" />
-    <Compile Include="Assets\UIScripts\HarvestTokenScript.cs" />
-    <Compile Include="Assets\UIScripts\PlayerBoardScript.cs" />
-    <Compile Include="Assets\UIScripts\ResourceIcon.cs" />
-    <Compile Include="Assets\UIScripts\SideBarPanelScript.cs" />
-    <Compile Include="Assets\UIScripts\TileUIScript.cs" />
+    <Compile Include="Assets\Scripts\ServerScripts\AnimalHolder.cs" />
+    <Compile Include="Assets\Scripts\ServerScripts\AnimalManager.cs" />
+    <Compile Include="Assets\Scripts\ServerScripts\BuildingTile.cs" />
+    <Compile Include="Assets\Scripts\ServerScripts\CavernaActionSpace.cs" />
+    <Compile Include="Assets\Scripts\ServerScripts\CavernaManager.cs" />
+    <Compile Include="Assets\Scripts\ServerScripts\CavernaPlayer.cs" />
+    <Compile Include="Assets\Scripts\ServerScripts\CavernaPlayerTilesManager.cs" />
+    <Compile Include="Assets\Scripts\ServerScripts\Constants.cs" />
+    <Compile Include="Assets\Scripts\ServerScripts\Dwarf.cs" />
+    <Compile Include="Assets\Scripts\ServerScripts\PlayerResources.cs" />
+    <Compile Include="Assets\Scripts\ServerScripts\ServerSocket.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\ActionBoardScript.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\ActionSpace.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\CavernaGame.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\ClickableScript.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\ClientSocket.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\DwarfGameObject.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\DwarfIconUIScript.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\HarvestTokenScript.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\PlayerBoardScript.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\ResourceIcon.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\SideBarPanelScript.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\TileUIScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2012\UnityVS.CSharp.targets" />
 </Project>

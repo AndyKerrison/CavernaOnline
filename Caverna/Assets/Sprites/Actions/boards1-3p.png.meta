@@ -1,0 +1,187 @@
+fileFormatVersion: 2
+guid: 2f8d79f8b060f84439596b7b1b58f708
+timeCreated: 1429286250
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: boards1-3p_0
+    21300002: boards1-3p_1
+    21300004: boards1-3p_2
+    21300006: boards1-3p_3
+    21300008: boards1-3p_4
+    21300010: boards1-3p_5
+    21300012: boards1-3p_6
+    21300014: boards1-3p_7
+    21300016: boards1-3p_8
+    21300018: boards1-3p_9
+    21300020: boards1-3p_10
+    21300022: boards1-3p_11
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: boards1-3p_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 806
+        width: 298
+        height: 389
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: boards1-3p_1
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 814
+        width: 274
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: boards1-3p_2
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 816
+        width: 280
+        height: 377
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: boards1-3p_3
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 806
+        width: 270
+        height: 385
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: boards1-3p_4
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 422
+        width: 282
+        height: 376
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: boards1-3p_5
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 434
+        width: 268
+        height: 372
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: boards1-3p_6
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 432
+        width: 280
+        height: 376
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: boards1-3p_7
+      rect:
+        serializedVersion: 2
+        x: 1002
+        y: 426
+        width: 270
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: boards1-3p_8
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 22
+        width: 282
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: boards1-3p_9
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 18
+        width: 268
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: boards1-3p_10
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 12
+        width: 280
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: boards1-3p_11
+      rect:
+        serializedVersion: 2
+        x: 1004
+        y: 16
+        width: 270
+        height: 394
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
