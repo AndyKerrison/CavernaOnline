@@ -79,7 +79,7 @@ MonoBehaviour:
   RubySprite: {fileID: 21300000, guid: c6b77c4a0a988dc4e8fb3a91ec80b523, type: 3}
   DogSprite: {fileID: 21300000, guid: 902d3912afa12d948b8c8390671d693a, type: 3}
   SheepSprite: {fileID: 21300000, guid: d9ae91c0bf3998c4bb3a6db814832023, type: 3}
-  DonkeySprite: {fileID: 21300000, guid: dc0e9829a42d76a4db2abd332daef558, type: 3}
+  DonkeySprite: {fileID: 21300000, guid: 591aaab2f056dda44b692f0650fa708f, type: 3}
   PigSprite: {fileID: 21300000, guid: a68daeae2cb2ce441981df9f2551e2f0, type: 3}
   CowSprite: {fileID: 21300000, guid: 7f08e9094b0cd5e4d974172b1081077b, type: 3}
   BeggingSprite: {fileID: 21300000, guid: 6460d214c45042744bfe0ad7ce58d498, type: 3}
@@ -262,7 +262,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: DonkeySprite
       value: 
-      objectReference: {fileID: 21300000, guid: dc0e9829a42d76a4db2abd332daef558,
+      objectReference: {fileID: 21300000, guid: 591aaab2f056dda44b692f0650fa708f,
         type: 3}
     - target: {fileID: 0}
       propertyPath: CowSprite

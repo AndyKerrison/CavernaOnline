@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: c72ac580b21dde54eb2fce49716441e5
-timeCreated: 1440165574
+timeCreated: 1440490136
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -64,120 +64,120 @@ TextureImporter:
     - name: boards1-3p_0
       rect:
         serializedVersion: 2
-        x: 20
-        y: 806
-        width: 298
-        height: 389
+        x: 10
+        y: 403
+        width: 149
+        height: 194
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: boards1-3p_1
       rect:
         serializedVersion: 2
-        x: 394
-        y: 814
-        width: 274
-        height: 380
+        x: 197
+        y: 407
+        width: 137
+        height: 190
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: boards1-3p_2
       rect:
         serializedVersion: 2
-        x: 698
-        y: 816
-        width: 280
-        height: 377
+        x: 349
+        y: 408
+        width: 140
+        height: 188
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: boards1-3p_3
       rect:
         serializedVersion: 2
-        x: 1000
-        y: 806
-        width: 270
-        height: 385
+        x: 500
+        y: 403
+        width: 135
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: boards1-3p_4
       rect:
         serializedVersion: 2
-        x: 36
-        y: 422
-        width: 282
-        height: 376
+        x: 18
+        y: 211
+        width: 141
+        height: 188
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: boards1-3p_5
       rect:
         serializedVersion: 2
-        x: 394
-        y: 434
-        width: 268
-        height: 372
+        x: 197
+        y: 217
+        width: 134
+        height: 186
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: boards1-3p_6
       rect:
         serializedVersion: 2
-        x: 698
-        y: 432
-        width: 280
-        height: 376
+        x: 349
+        y: 216
+        width: 140
+        height: 188
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: boards1-3p_7
       rect:
         serializedVersion: 2
-        x: 1002
-        y: 426
-        width: 270
-        height: 368
+        x: 501
+        y: 213
+        width: 135
+        height: 184
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: boards1-3p_8
       rect:
         serializedVersion: 2
-        x: 36
-        y: 22
-        width: 282
-        height: 382
+        x: 18
+        y: 11
+        width: 141
+        height: 191
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: boards1-3p_9
       rect:
         serializedVersion: 2
-        x: 396
-        y: 18
-        width: 268
-        height: 400
+        x: 198
+        y: 9
+        width: 134
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: boards1-3p_10
       rect:
         serializedVersion: 2
-        x: 698
-        y: 12
-        width: 280
-        height: 400
+        x: 349
+        y: 6
+        width: 140
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: boards1-3p_11
       rect:
         serializedVersion: 2
-        x: 1004
-        y: 16
-        width: 270
-        height: 394
+        x: 502
+        y: 8
+        width: 135
+        height: 197
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

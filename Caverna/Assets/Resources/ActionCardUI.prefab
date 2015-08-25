@@ -41,23 +41,23 @@ MonoBehaviour:
   WoodGathering: {fileID: 21300016, guid: c72ac580b21dde54eb2fce49716441e5, type: 3}
   Clearing: {fileID: 21300018, guid: c72ac580b21dde54eb2fce49716441e5, type: 3}
   Sustenance: {fileID: 21300020, guid: c72ac580b21dde54eb2fce49716441e5, type: 3}
-  RubyMining: {fileID: 21300000, guid: 7eca3a0e43e255c47b9569a03023f2ce, type: 3}
-  HouseWork: {fileID: 21300002, guid: 7eca3a0e43e255c47b9569a03023f2ce, type: 3}
-  SlashAndBurn: {fileID: 21300004, guid: 7eca3a0e43e255c47b9569a03023f2ce, type: 3}
+  RubyMining: {fileID: 21300000, guid: 31cc84d767a2d4141b1b295c494e89cc, type: 3}
+  HouseWork: {fileID: 21300002, guid: 31cc84d767a2d4141b1b295c494e89cc, type: 3}
+  SlashAndBurn: {fileID: 21300004, guid: 31cc84d767a2d4141b1b295c494e89cc, type: 3}
   Blacksmithing: {fileID: 21300000, guid: b0c009c6dcf2d6741a834a7424eac9fe, type: 3}
   OreMineConstruction: {fileID: 21300002, guid: b0c009c6dcf2d6741a834a7424eac9fe,
     type: 3}
   SheepFarming: {fileID: 21300004, guid: b0c009c6dcf2d6741a834a7424eac9fe, type: 3}
   DonkeyFarming: {fileID: 21300002, guid: a67f21d8033f32d47a72ad82166081b0, type: 3}
-  RubyMine: {fileID: 21300004, guid: f75db53c9e6e21640993962114dbcc55, type: 3}
+  RubyMine: {fileID: 21300004, guid: 231d88ad4881ca242b5cde597228b5c8, type: 3}
   WishForChildren: {fileID: 21300000, guid: a67f21d8033f32d47a72ad82166081b0, type: 3}
-  UrgentWish: {fileID: 21300000, guid: f75db53c9e6e21640993962114dbcc55, type: 3}
-  Exploration: {fileID: 21300002, guid: f75db53c9e6e21640993962114dbcc55, type: 3}
-  FamilyLife: {fileID: 21300008, guid: f75db53c9e6e21640993962114dbcc55, type: 3}
-  OreDelivery: {fileID: 21300006, guid: f75db53c9e6e21640993962114dbcc55, type: 3}
-  Adventure: {fileID: 21300002, guid: 99b08ad9f1ac611418b5b087ddbb02e7, type: 3}
-  OreTrading: {fileID: 21300000, guid: 99b08ad9f1ac611418b5b087ddbb02e7, type: 3}
-  RubyDelivery: {fileID: 21300004, guid: 99b08ad9f1ac611418b5b087ddbb02e7, type: 3}
+  UrgentWish: {fileID: 21300000, guid: 231d88ad4881ca242b5cde597228b5c8, type: 3}
+  Exploration: {fileID: 21300002, guid: 231d88ad4881ca242b5cde597228b5c8, type: 3}
+  FamilyLife: {fileID: 21300008, guid: 231d88ad4881ca242b5cde597228b5c8, type: 3}
+  OreDelivery: {fileID: 21300006, guid: 231d88ad4881ca242b5cde597228b5c8, type: 3}
+  Adventure: {fileID: 21300002, guid: 9b5030b95a052424cbb08f9979f2a47b, type: 3}
+  OreTrading: {fileID: 21300000, guid: 9b5030b95a052424cbb08f9979f2a47b, type: 3}
+  RubyDelivery: {fileID: 21300004, guid: 9b5030b95a052424cbb08f9979f2a47b, type: 3}
   woodSprite: {fileID: 0}
   _type: 
 --- !u!114 &11476948
@@ -270,6 +270,61 @@ Prefab:
       propertyPath: Sustenance
       value: 
       objectReference: {fileID: 21300020, guid: c72ac580b21dde54eb2fce49716441e5,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: UrgentWish
+      value: 
+      objectReference: {fileID: 21300000, guid: 231d88ad4881ca242b5cde597228b5c8,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: Exploration
+      value: 
+      objectReference: {fileID: 21300002, guid: 231d88ad4881ca242b5cde597228b5c8,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: RubyMine
+      value: 
+      objectReference: {fileID: 21300004, guid: 231d88ad4881ca242b5cde597228b5c8,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: OreDelivery
+      value: 
+      objectReference: {fileID: 21300006, guid: 231d88ad4881ca242b5cde597228b5c8,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: FamilyLife
+      value: 
+      objectReference: {fileID: 21300008, guid: 231d88ad4881ca242b5cde597228b5c8,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: RubyMining
+      value: 
+      objectReference: {fileID: 21300000, guid: 31cc84d767a2d4141b1b295c494e89cc,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: HouseWork
+      value: 
+      objectReference: {fileID: 21300002, guid: 31cc84d767a2d4141b1b295c494e89cc,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: SlashAndBurn
+      value: 
+      objectReference: {fileID: 21300004, guid: 31cc84d767a2d4141b1b295c494e89cc,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: OreTrading
+      value: 
+      objectReference: {fileID: 21300000, guid: 9b5030b95a052424cbb08f9979f2a47b,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: Adventure
+      value: 
+      objectReference: {fileID: 21300002, guid: 9b5030b95a052424cbb08f9979f2a47b,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: RubyDelivery
+      value: 
+      objectReference: {fileID: 21300004, guid: 9b5030b95a052424cbb08f9979f2a47b,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
