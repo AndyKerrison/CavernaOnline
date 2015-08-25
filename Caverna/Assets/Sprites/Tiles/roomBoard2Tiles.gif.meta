@@ -1,0 +1,319 @@
+fileFormatVersion: 2
+guid: 5533ba0d96e32694ba99658d9b9f0bda
+timeCreated: 1440491673
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: roomBoard2Tiles_0
+    21300002: roomBoard2Tiles_1
+    21300004: roomBoard2Tiles_2
+    21300006: roomBoard2Tiles_3
+    21300008: roomBoard2Tiles_4
+    21300010: roomBoard2Tiles_5
+    21300012: roomBoard2Tiles_6
+    21300014: roomBoard2Tiles_7
+    21300016: roomBoard2Tiles_8
+    21300018: roomBoard2Tiles_9
+    21300020: roomBoard2Tiles_10
+    21300022: roomBoard2Tiles_11
+    21300024: roomBoard2Tiles_12
+    21300026: roomBoard2Tiles_13
+    21300028: roomBoard2Tiles_14
+    21300030: roomBoard2Tiles_15
+    21300032: roomBoard2Tiles_16
+    21300034: roomBoard2Tiles_17
+    21300036: roomBoard2Tiles_18
+    21300038: roomBoard2Tiles_19
+    21300040: roomBoard2Tiles_20
+    21300042: roomBoard2Tiles_21
+    21300044: roomBoard2Tiles_22
+    21300046: roomBoard2Tiles_23
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: roomBoard2Tiles_0
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 690
+        width: 200
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_1
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 692
+        width: 211
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_2
+      rect:
+        serializedVersion: 2
+        x: 494
+        y: 691
+        width: 207
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_3
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 684
+        width: 209
+        height: 208
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_4
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 683
+        width: 222
+        height: 208
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_5
+      rect:
+        serializedVersion: 2
+        x: 1266
+        y: 681
+        width: 212
+        height: 201
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_6
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 443
+        width: 203
+        height: 205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_7
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 445
+        width: 211
+        height: 205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_8
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 444
+        width: 212
+        height: 205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_9
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 446
+        width: 209
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_10
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 445
+        width: 222
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_11
+      rect:
+        serializedVersion: 2
+        x: 1266
+        y: 443
+        width: 212
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_12
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 228
+        width: 203
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_13
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 230
+        width: 211
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_14
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 229
+        width: 212
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_15
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 223
+        width: 209
+        height: 214
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_16
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 222
+        width: 215
+        height: 214
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_17
+      rect:
+        serializedVersion: 2
+        x: 1266
+        y: 220
+        width: 212
+        height: 214
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_18
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 12
+        width: 203
+        height: 201
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_19
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 14
+        width: 211
+        height: 201
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_20
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 12
+        width: 207
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_21
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 7
+        width: 209
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_22
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 6
+        width: 215
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: roomBoard2Tiles_23
+      rect:
+        serializedVersion: 2
+        x: 1266
+        y: 4
+        width: 212
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -42,55 +42,55 @@ MonoBehaviour:
   BigFence1: {fileID: 21300000, guid: 16b47e9f095a9cb4e8886ebb2f1fac90, type: 3}
   BigFence2: {fileID: 21300002, guid: 16b47e9f095a9cb4e8886ebb2f1fac90, type: 3}
   Stable: {fileID: 21300000, guid: 9022249cf7b725647ab97570453c9ccb, type: 3}
-  Dwelling: {fileID: 21300000, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  SimpleDwelling1: {fileID: 21300002, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  SimpleDwelling2: {fileID: 21300004, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  MixedDwelling: {fileID: 21300012, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  CoupleDwelling: {fileID: 21300014, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  AdditionalDwelling: {fileID: 21300016, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  Carpenter: {fileID: 21300024, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  StoneCarver: {fileID: 21300026, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  Miner: {fileID: 21300036, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  Builder: {fileID: 21300038, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  Blacksmith: {fileID: 21300028, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  Trader: {fileID: 21300040, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  CuddleRoom: {fileID: 21300006, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  WorkRoom: {fileID: 21300018, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  WoodSupplier: {fileID: 21300030, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  DogSchool: {fileID: 21300042, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  BreakfastRoom: {fileID: 21300008, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  GuestRoom: {fileID: 21300020, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  StoneSupplier: {fileID: 21300032, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  Quarry: {fileID: 21300044, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  StubbleRoom: {fileID: 21300010, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  OfficeRoom: {fileID: 21300022, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  RubySupplier: {fileID: 21300034, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  Seam: {fileID: 21300046, guid: 2db230539eac57b4db42c7004bae2505, type: 3}
-  SlaughteringCave: {fileID: 21300000, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  MiningCave: {fileID: 21300012, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  StoneStorage: {fileID: 21300024, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  MainStorage: {fileID: 21300036, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  CookingCave: {fileID: 21300002, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  BreedingCave: {fileID: 21300014, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  OreStorage: {fileID: 21300026, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  WeaponStorage: {fileID: 21300038, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  WorkingCave: {fileID: 21300004, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  PeacefulCave: {fileID: 21300016, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  SparePartStorage: {fileID: 21300028, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  SuppliesStorage: {fileID: 21300040, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  WeavingParlour: {fileID: 21300006, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  HuntingParlour: {fileID: 21300018, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  BroomChamber: {fileID: 21300030, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  PrayerChamber: {fileID: 21300042, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  MilkingParlour: {fileID: 21300008, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  BeerParlour: {fileID: 21300020, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  TreasureChamber: {fileID: 21300032, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  WritingChamber: {fileID: 21300044, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  StateParlour: {fileID: 21300010, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  BlacksmithingParlour: {fileID: 21300022, guid: d6f9ad4ce3870374ba455b4e437e6086,
+  Dwelling: {fileID: 21300000, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  SimpleDwelling1: {fileID: 21300002, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  SimpleDwelling2: {fileID: 21300004, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  MixedDwelling: {fileID: 21300012, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  CoupleDwelling: {fileID: 21300014, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  AdditionalDwelling: {fileID: 21300016, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  Carpenter: {fileID: 21300024, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  StoneCarver: {fileID: 21300026, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  Miner: {fileID: 21300036, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  Builder: {fileID: 21300038, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  Blacksmith: {fileID: 21300028, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  Trader: {fileID: 21300040, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  CuddleRoom: {fileID: 21300006, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  WorkRoom: {fileID: 21300018, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  WoodSupplier: {fileID: 21300030, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  DogSchool: {fileID: 21300042, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  BreakfastRoom: {fileID: 21300008, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  GuestRoom: {fileID: 21300020, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  StoneSupplier: {fileID: 21300032, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  Quarry: {fileID: 21300044, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  StubbleRoom: {fileID: 21300010, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  OfficeRoom: {fileID: 21300022, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  RubySupplier: {fileID: 21300034, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  Seam: {fileID: 21300046, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9, type: 3}
+  SlaughteringCave: {fileID: 21300000, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  MiningCave: {fileID: 21300012, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  StoneStorage: {fileID: 21300024, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  MainStorage: {fileID: 21300036, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  CookingCave: {fileID: 21300002, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  BreedingCave: {fileID: 21300014, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  OreStorage: {fileID: 21300026, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  WeaponStorage: {fileID: 21300038, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  WorkingCave: {fileID: 21300004, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  PeacefulCave: {fileID: 21300016, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  SparePartStorage: {fileID: 21300028, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  SuppliesStorage: {fileID: 21300040, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  WeavingParlour: {fileID: 21300006, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  HuntingParlour: {fileID: 21300018, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  BroomChamber: {fileID: 21300030, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  PrayerChamber: {fileID: 21300042, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  MilkingParlour: {fileID: 21300008, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  BeerParlour: {fileID: 21300020, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  TreasureChamber: {fileID: 21300032, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  WritingChamber: {fileID: 21300044, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  StateParlour: {fileID: 21300010, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  BlacksmithingParlour: {fileID: 21300022, guid: 5533ba0d96e32694ba99658d9b9f0bda,
     type: 3}
-  FoodChamber: {fileID: 21300034, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
-  FodderChamber: {fileID: 21300046, guid: d6f9ad4ce3870374ba455b4e437e6086, type: 3}
+  FoodChamber: {fileID: 21300034, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
+  FodderChamber: {fileID: 21300046, guid: 5533ba0d96e32694ba99658d9b9f0bda, type: 3}
   Unavailable: {fileID: 21300000, guid: f5f4ee35771199e4c9509d40e1cd9d80, type: 3}
   X: 0
   Y: 0
@@ -303,6 +303,246 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: SlaughteringCave
+      value: 
+      objectReference: {fileID: 21300000, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: CookingCave
+      value: 
+      objectReference: {fileID: 21300002, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: WorkingCave
+      value: 
+      objectReference: {fileID: 21300004, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: WeavingParlour
+      value: 
+      objectReference: {fileID: 21300006, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: MilkingParlour
+      value: 
+      objectReference: {fileID: 21300008, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: StateParlour
+      value: 
+      objectReference: {fileID: 21300010, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: MiningCave
+      value: 
+      objectReference: {fileID: 21300012, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: BreedingCave
+      value: 
+      objectReference: {fileID: 21300014, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: PeacefulCave
+      value: 
+      objectReference: {fileID: 21300016, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: HuntingParlour
+      value: 
+      objectReference: {fileID: 21300018, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: BeerParlour
+      value: 
+      objectReference: {fileID: 21300020, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: BlacksmithingParlour
+      value: 
+      objectReference: {fileID: 21300022, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: StoneStorage
+      value: 
+      objectReference: {fileID: 21300024, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: OreStorage
+      value: 
+      objectReference: {fileID: 21300026, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: SparePartStorage
+      value: 
+      objectReference: {fileID: 21300028, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: BroomChamber
+      value: 
+      objectReference: {fileID: 21300030, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: TreasureChamber
+      value: 
+      objectReference: {fileID: 21300032, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: FoodChamber
+      value: 
+      objectReference: {fileID: 21300034, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: MainStorage
+      value: 
+      objectReference: {fileID: 21300036, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: WeaponStorage
+      value: 
+      objectReference: {fileID: 21300038, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: SuppliesStorage
+      value: 
+      objectReference: {fileID: 21300040, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: PrayerChamber
+      value: 
+      objectReference: {fileID: 21300042, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: WritingChamber
+      value: 
+      objectReference: {fileID: 21300044, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: FodderChamber
+      value: 
+      objectReference: {fileID: 21300046, guid: 5533ba0d96e32694ba99658d9b9f0bda,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: Dwelling
+      value: 
+      objectReference: {fileID: 21300000, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: SimpleDwelling1
+      value: 
+      objectReference: {fileID: 21300002, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: SimpleDwelling2
+      value: 
+      objectReference: {fileID: 21300004, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: CuddleRoom
+      value: 
+      objectReference: {fileID: 21300006, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: BreakfastRoom
+      value: 
+      objectReference: {fileID: 21300008, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: StubbleRoom
+      value: 
+      objectReference: {fileID: 21300010, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: MixedDwelling
+      value: 
+      objectReference: {fileID: 21300012, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: CoupleDwelling
+      value: 
+      objectReference: {fileID: 21300014, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: AdditionalDwelling
+      value: 
+      objectReference: {fileID: 21300016, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: WorkRoom
+      value: 
+      objectReference: {fileID: 21300018, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: GuestRoom
+      value: 
+      objectReference: {fileID: 21300020, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: OfficeRoom
+      value: 
+      objectReference: {fileID: 21300022, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: Carpenter
+      value: 
+      objectReference: {fileID: 21300024, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: StoneCarver
+      value: 
+      objectReference: {fileID: 21300026, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: Blacksmith
+      value: 
+      objectReference: {fileID: 21300028, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: WoodSupplier
+      value: 
+      objectReference: {fileID: 21300030, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: StoneSupplier
+      value: 
+      objectReference: {fileID: 21300032, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: RubySupplier
+      value: 
+      objectReference: {fileID: 21300034, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: Miner
+      value: 
+      objectReference: {fileID: 21300036, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: Builder
+      value: 
+      objectReference: {fileID: 21300038, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: Trader
+      value: 
+      objectReference: {fileID: 21300040, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: DogSchool
+      value: 
+      objectReference: {fileID: 21300042, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: Quarry
+      value: 
+      objectReference: {fileID: 21300044, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: Seam
+      value: 
+      objectReference: {fileID: 21300046, guid: 449a0a93ec8c3dc4fa8e97cc4a20c0a9,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 125056}
